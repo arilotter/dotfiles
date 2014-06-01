@@ -1,0 +1,38 @@
+#! /bin/sh
+
+#background jazz
+
+xset b off
+xset r rate 250 40
+xsetroot -cursor_name left_ptr
+
+# bspwm config
+
+bspc config border_width        2
+bspc config window_gap          4
+bspc config top_padding         15 # tint2 height
+
+bspc config split_ratio         0.52
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config focus_follows_pointer true
+bspc monitor -d chat www code etc
+
+bspc config border_width 2
+bspc config normal_border_color "#f5f2df"
+bspc config active_border_color "#cccc3d"
+bspc config focused_border_color "#cccc3d"
+bspc config urgent_border_color "#eb0c4f"
+
+
+
+#rules
+bspc rule -a irssi desktop=chat
+
+# i need more rules doe
+
+compton --config ~/dotfiles/.compton.conf -b &
+feh --bg-scale ~/images/wallpapers/montana.jpg
+sleep 1s
+tint2 &
+conky &
