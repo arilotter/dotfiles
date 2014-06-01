@@ -1,0 +1,60 @@
+! FG/BG
+
+URxvt*foreground: White
+#URxvt*background: Black
+
+
+! Fonts 
+
+URxvt*font: xft:Terminus:pixelsize=12
+URxvt*boldFont: xft:Terminus:bold:pixelsize=12
+
+
+! Extensions
+
+URxvt.perl-ext-common:  default,matcher,tabbedex,clipboard
+
+
+! Clickable Links
+
+URxvt.urlLauncher:      /usr/bin/firefox
+URxvt.matcher.button:   1 
+
+
+! Scrolling & Cursor
+
+URxvt*saveLines: 12000
+URxvt*scrollstyle:plain
+URxvt*scrollBar: false
+URxvt*cursorBlink: true
+URxvt*cursorUnderline: true
+
+
+! Tabs
+
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 2
+URxvt.tabbed.tab-bg: 8
+URxvt.tabbed.autohide:  yes
+URxvt.tabbed.new-button:  no
+URxvt.tabbed.title: no
+
+
+! Transparency (optional)
+
+URxvt*depth: 32
+#URxvt*background: [90]#0b0d22
+
+
+! Various GFX settings
+
+URxvt.internalBorder: 4
+URxvt.urgentOnBell: true
+URxvt.termName: xterm-256color
+URxvt*.fading: 0
+
+! Pasting
+
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
