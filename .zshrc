@@ -218,6 +218,10 @@
 	function google {
 		w3m "http://www.google.com/search?q=`echo "${(j: :)@}" | urlencode`"
 	}
+	# quick n easy git commit
+	function commit {
+		git commit -am "$(curl -s "http://whatthecommit.com/index.txt")"
+	}
 
 #}}}
 #{{{ aliases
