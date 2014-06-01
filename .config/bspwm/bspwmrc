@@ -32,7 +32,7 @@ bspc rule -a irssi desktop=chat
 # i need more rules doe
 
 compton --config ~/dotfiles/.compton.conf -b &
-feh --bg-scale ~/images/wallpapers/montana.jpg
+feh --bg-scale ~/dotfiles/img/bg.jpg
 sleep 1s
 tint2 &
 conky &
