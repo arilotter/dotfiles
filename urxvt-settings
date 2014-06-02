@@ -1,9 +1,3 @@
-! FG/BG
-
-URxvt*foreground: White
-#URxvt*background: Black
-
-
 ! Fonts 
 
 URxvt*font: xft:Terminus:pixelsize=12

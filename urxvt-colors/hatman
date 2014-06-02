@@ -29,3 +29,8 @@
 !white                      WHITE
 *color7 :            #f5f2df
 *color15 :           #FFFFFF
+
+
+!fg/bg                      FOREGROUND/BACKGROUND
+*foreground:         #f5f2df
+*background:         #0b0d22

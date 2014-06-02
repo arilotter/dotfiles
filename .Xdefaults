@@ -1,5 +1,3 @@
 # include "dotfiles/urxvt-settings"
 # include "dotfiles/urxvt-colors/hatman"
 Xcursor.theme:    Vanilla-DMZ-AA
-URxvt*background:         #0b0d22
-URxvt*foreground:         #f5f2df

@@ -248,7 +248,11 @@
 
 
 #{{{ Welcome yourself ;P
-	digdug
-	toilet "Welcome, $(whoami)." -w 120 -f future --gay;
+	toilet "Welcome, $(whoami)." -w 120 -f future
 	ls
 #}}}
+
+######################################
+# REMOVE THIS BEFORE YOU CLOSE SHELL #
+######################################
+#exit
