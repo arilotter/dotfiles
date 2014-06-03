@@ -1,1 +1,1 @@
-scrot tmp.png && pomf tmp.png | copy && rm tmp.png
+scrot tmp.png && pomf tmp.png && rm tmp.png
