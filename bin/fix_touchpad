@@ -1,2 +1,0 @@
-sudo modprobe -r chromeos_laptop
-sudo modprobe chromeos_laptop

@@ -41,11 +41,13 @@ color1 f5f2df
 
 TEXT
 $alignr${offset -5}${voffset 2}\
-${color1}music * ${execi 10 lastfm}\
+${color1}music*${execi 10 lastfm}\
 ${color0} // \
-${color1}batt *${execi 10 sh /home/ari/conky_scripts/get_batt_percent.sh}\
+${color1}vol*{$exci 2 getvolume}\
 ${color0} // \
-${color1}wlan * ${wireless_essid wlan0}\
+${color1}batt*${execi 10 getbattery}\
+${color0} // \
+${color1}wlan*${wireless_essid wlan0}\
 ${color0} // \
 ${color1}${time %I:%M%P}\
 ${voffset -2}

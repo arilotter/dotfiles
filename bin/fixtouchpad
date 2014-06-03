@@ -1,0 +1,4 @@
+#!/bin/bash
+# This script fixes my goddamn cr710's touchpad when it decides not to work.
+sudo modprobe -r chromeos_laptop
+sudo modprobe chromeos_laptop
