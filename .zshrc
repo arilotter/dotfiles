@@ -182,13 +182,6 @@
 	    ls
 	}
 
-	function imgur() { # upload to imgur man
-	    for i in "$@";do
-	    curl -# -F "image"=@"$i" -F "key"="4907fcd89e761c6b07eeb8292d5a9b2a" imgur.com/api/upload.xml|\
-	    grep -Eo 'http[^/\x1B[0;34m\1:\x1B[0m /'
-	    done
-	}
-	
 	function getip() {
 		echo $(ip route get 8.8.8.8 | awk '/8.8.8.8/ {print $NF}')
 	}
