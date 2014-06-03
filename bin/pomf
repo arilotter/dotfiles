@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# Author: Aman Hanjrah
+# Date: 31 March, 2014
+# License: GPL
+# Purpose: This is a simple script that will upload a file (text or image) depending upon the file extension to either 'sprunge' or 'pomf.se' and provide you with the direct link.
+#
+# Feel free to tinker with it as per your liking. Happy scripting <img src="http://techlinux.net/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley">
+#
+#
+# START
+#
+DST_URL="http://pomf.se/upload.php"
+RTRN_URL="http://a.pomf.se"
+ 
+if [ $# -lt 1 ]; then
+    echo "File does not exist."
+    echo "Usage: $(basename $0) [file1] [file2] ... [n]"
+    echo "Hit 'ENTER' to exit."
+    echo " "
+    read
+    exit 1
+fi
+
+function upload() {
+    if [[ "$i" = *.@(jpg|png|svg|jpeg|gif|bmp|tif|tiff|JPG|PNG|SVG|JPEG|GIF|BMP|TIF|TIFF) ]]; then
+        echo "Uploading of $i in progress..."
+        OUTPUT=`curl -sS -F files[]=@"$i" "$DST_URL" | cut -d "," -f5 | cut -d":" -f 2 | tr '"' " " | cut -d" " -f2`
+        echo "$RTRN_URL/$OUTPUT" # so you can |copy
+    elif [[ "$i" = *.@(txt|csv|html|xhtml|php|sh|xml|rtf|conf|sql) ]]; then
+        echo "Uploading of $i in progress..."
+        OUTPUT=`cat "$i" | curl -sS -F 'sprunge=<-' http://sprunge.us`
+        echo "$i: $OUTPUT"
+        echo " "
+    else
+        echo "File is of unknown extension, please let me know should I upload it to 'SPRUNGE' (text files), or 'POMF' (image files). Select one of the numbers below corresponding to the type of the file"
+        echo "1. Image file"
+        echo "2. Text file"
+        read "TYPE"
+        if (( "$TYPE" == 1 )); then
+            echo "Uploading $i in progress..."
+            OUTPUT1=`curl -sS -F files[]=@"$i" "$DST_URL" | cut -d "," -f5 | cut -d":" -f 2 | tr '"' " " | cut -d" " -f2`
+            echo "$i: $RTRN_URL/$OUTPUT"
+            echo " "
+        elif (( "$TYPE" == 2 )); then
+            echo "Uploading $i in progress..."
+            OUTPUT1=`cat "$i" | curl -F 'sprunge=<-' http://sprunge.us`
+            echo " "
+        fi
+    fi
+}
+
+for i in "$@"; do
+upload
+done
+

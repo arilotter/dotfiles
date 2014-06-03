@@ -109,3 +109,12 @@ super + F6
 
 super + F7
 	crbacklight -inc
+
+super + F8
+	amixer set Master toggle
+
+super + F9
+	amixer set Master 8%-
+
+super + F10
+	amixer set Master 8%+
