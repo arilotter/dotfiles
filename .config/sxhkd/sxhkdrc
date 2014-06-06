@@ -114,7 +114,7 @@ super + F8
 	amixer set Master toggle
 
 super + F9
-	amixer set Master 8%-
+	amixer set Master 2%-
 
 super + F10
-	amixer set Master 8%+
+	amixer set Master 2%+

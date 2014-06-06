@@ -43,7 +43,7 @@ TEXT
 $alignr${offset -5}${voffset 2}\
 ${color1}music * ${execi 10 lastfm}\
 ${color0} // \
-${color1}vol * ${execi 2 getvolume}\
+${color1}vol * ${execi 1 getvolume}\
 ${color0} // \
 ${color1}batt * ${execi 10 getbattery}\
 ${color0} // \

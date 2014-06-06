@@ -241,6 +241,7 @@
 
 
 #{{{ Welcome yourself ;P
+	clear # we clear so if you type out of bordedom it doesn't break shit
 	toilet "Welcome, $(whoami)." -w 120 -f future
 	ls
 #}}}
