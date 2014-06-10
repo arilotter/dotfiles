@@ -7,5 +7,8 @@ url="http://ws.audioscrobbler.com/1.0/user/$username/recenttracks.rss"
 curl --silent "$url" | grep -E '(title>|description>)' | \
 sed -n '3,$p' | \
 grep '<title>' | sed -e 's/<[/]title>//' | sed -e 's/<title>//' | \
-head -n 1 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | \
-sed 's/–/-/'
+head -n 1 | \
+sed -e 's/^[[:space:]]*//' \
+-e 's/[[:space:]]*$//' \
+-e 's/–/-/g' \
+-e "s/&quot;/'/g"
