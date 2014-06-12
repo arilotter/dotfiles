@@ -30,3 +30,6 @@ URxvt*color14:       #84d0c5
 !White
 URxvt*color7:        #ababab
 URxvt*color15:       #cdcecf
+
+*background:         #ababab
+*foreground:         #444546

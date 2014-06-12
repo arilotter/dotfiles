@@ -22,3 +22,6 @@
 !white
 *color7 :            #C0C0C0
 *color15:            #FFFFFF
+
+*background:         #FFFFFF
+*foreground:         #222222

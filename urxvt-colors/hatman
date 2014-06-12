@@ -32,5 +32,5 @@
 
 
 !fg/bg                      FOREGROUND/BACKGROUND
-*foreground:         #f5f2df
-*background:         #0b0d22
+*background:         #ffffff
+*foreground:         #0b0d22

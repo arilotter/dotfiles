@@ -1,8 +1,7 @@
+
 ! Fonts 
-
-URxvt*font: xft:Terminus:pixelsize=12
-URxvt*boldFont: xft:Terminus:bold:pixelsize=12
-
+URxvt*font: xft:Tewi
+URxvt*boldFont: xft:Tewi:bold
 
 ! Extensions
 

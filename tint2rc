@@ -14,32 +14,32 @@
 # BACKGROUND DEFINITIONS ID 1
 rounded = 0
 border_width = 0
-background_color = #0b0d22 100
-border_color = #979797 100
+background_color = #f5f2df 100
+border_color = #f5f2df 100
 
 # ID 2
 rounded = 0
-background_color = #0b0d22 100
+background_color = #f5f2df 100
 border_width = 1
-border_color = #6D6D6D 100
+border_color = #f5f2df 100
 
 # ID 3
 rounded = 6
-background_color = #D4D4D4 100
+background_color = #f5f2df 100
 border_width = 0
-border_color = #6D6D6D 100
+border_color = #f5f2df 100
 
 # ID 4
 rounded = 5
-background_color = #D27A7A 100
+background_color = #f5f2df 100
 border_width = 0
-border_color = #D27A7A 100
+border_color = #f5f2df 100
 
 # ID 5
 rounded = 0
 border_width = 1
-background_color = #ECEDEE 100
-border_color = #606060 100
+background_color = #f5f2df 100
+border_color = #f5f2df 100
 
 # PANEL
 panel_background_id = 1
@@ -64,8 +64,8 @@ taskbar_background_id = 0 taskbar_active_background_id = 0
 taskbar_name = 1
 taskbar_name_font = Terminus 8
 taskbar_name_padding = 0 0 
-taskbar_name_font_color = #FFFFFF 70
-taskbar_name_active_font_color = #44aacc 100
+taskbar_name_font_color = #222222 100
+taskbar_name_active_font_color = #8f1a00 100
 taskbar_name_background_id = 0
 taskbar_name_active_background_id = 0
 
