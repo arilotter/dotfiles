@@ -1,0 +1,4 @@
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+textbox-prompt-colon {
+  str: "";
+}

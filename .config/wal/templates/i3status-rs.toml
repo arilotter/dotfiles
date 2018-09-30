@@ -1,0 +1,60 @@
+icons = "awesome"
+
+[theme]
+name = "plain"
+[theme.overrides]
+separator = "┊"
+separator_bg = "{background}"
+separator_fg = "{foreground}"
+idle_bg = "{background}"
+idle_fg = "{foreground}"
+info_bg = "{background}"
+info_fg = "{foreground}"
+good_bg = "{background}"
+good_fg = "{foreground}"
+warning_bg = "{background}"
+warning_fg = "{color2}"
+critical_bg = "{color2}"
+critical_fg = "{background}"
+
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
+format = "{{min}}° min, {{max}}° max, {{average}}° avg"
+
+[[block]]
+block = "backlight"
+device = "intel_backlight"
+step_width = 1
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{{Mup}}%"
+clickable = false
+
+[[block]]
+block = "cpu"
+interval = 1
+
+# [[block]]
+# block = "sound"
+
+[[block]]
+block = "battery"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %r"

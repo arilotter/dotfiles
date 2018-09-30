@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+wal -g -i ~/.config/wallpapers
+~/.config/wal/post-switch
