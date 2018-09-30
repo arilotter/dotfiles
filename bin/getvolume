@@ -1,2 +1,0 @@
-#!/bin/sh
-amixer get Master | grep "Front Left:" | cut -d "[" -f2 | cut -d "]" -f1
