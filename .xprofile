@@ -1,0 +1,6 @@
+xset r rate 300 30
+xrdb -merge ~/.xresources
+autorandr -c
+wal -R
+indicator-kdeconnect &
+#blueman-manager
