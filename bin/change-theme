@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 THEME_NAME=$(ls ~/dotfiles/wallpapers/ | sed 's/\.[^.]*$//' | rofi -dmenu -p 'theme:')
 [[ -z "$THEME_NAME" ]] && exit 1
-wal -ngi ~/dotfiles/wallpapers/$THEME_NAME*
+wal -ni ~/dotfiles/wallpapers/$THEME_NAME*
 
 home-manager switch
 # restart i3 so the bar colors update
