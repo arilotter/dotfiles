@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# restart i3 so the bar colors update
-i3-msg restart
-
-# update discord colors
-wal-discord
-
-notify-send "Theme Changed"

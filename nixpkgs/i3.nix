@@ -25,6 +25,7 @@ in
       "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound";
       "XF86MonBrightnessUp" = "exec --no-startup-id light -A 10";
       "XF86MonBrightnessDown" = "exec --no-startup-id light -U 10";
+      "XF86Tools" = "exec --no-startup-id change-theme";
       "${mod}+Return" = "exec kitty";
 
       "${mod}+Shift+q" = "kill";
@@ -151,7 +152,8 @@ in
     startup = [
       { command = "xset r rate 300 30"; always = true; notification = false; }
       { command = "autorandr -c"; always = true; notification = false; }
-      { command = "wal -R"; always = true; notification = false; }
+      { command = "wal -nR"; always = true; notification = false; }
+      { command = "feh --bg-max ${theme.wallpaper}"; always = true; notification = false; }
     ];
     bars = [{
       fonts = [ "FuraCode Nerd Font 12" ];

@@ -2,7 +2,7 @@
 {
   enable = true;
   hooks.postswitch = {
-    "reload theme" = "${pkgs.pywal}/bin/wal -R";
+    "reload theme" = "${pkgs.i3}/bin/i3-msg reload";
   };
   profiles = {
     "home-4k" = {

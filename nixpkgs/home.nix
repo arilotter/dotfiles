@@ -35,6 +35,8 @@ in
     maim
     pavucontrol
     oomox
+    feh
+    libnotify
 
     # apps
     google-chrome
