@@ -1,6 +1,0 @@
-# Dark theme.
-rofi.theme: theme.rasi
-rofi.font: Fura Code Nerd Font 18
-
-# Light theme.
-# rofi.theme: ~/.cache/wal/colors-rofi-light.rasi

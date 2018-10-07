@@ -1,0 +1,1 @@
+if builtins.pathExists ../../.cache/wal/theme.nix then import ../../.cache/wal/theme.nix else import ./defaultTheme.nix

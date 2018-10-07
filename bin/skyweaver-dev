@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-concurrently -n "state,game,assets" "cd SkyWeaver/state && yarn build:watch --preserveWatchOutput" "cd SkyWeaver/game && yarn dev:bot" "cd SkyWeaver-assets && make serve &> /dev/null"
