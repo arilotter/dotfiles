@@ -148,6 +148,11 @@ in
         childBorder = hex.background;
       };
     };
+    startup = [
+      { command = "xset r rate 300 30"; always = true; notification = false; }
+      { command = "autorandr -c"; always = true; notification = false; }
+      { command = "wal -R"; always = true; notification = false; }
+    ];
     bars = [{
       fonts = [ "FuraCode Nerd Font 12" ];
       position = "bottom";
