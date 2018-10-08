@@ -152,7 +152,7 @@ in
     startup = [
       { command = "xset r rate 300 30"; always = true; notification = false; }
       { command = "autorandr -c"; always = true; notification = false; }
-      { command = "wal -nR"; always = true; notification = false; }
+      { command = "wal -nR"; notification = false; }
       { command = "feh --bg-max ${theme.wallpaper}"; always = true; notification = false; }
     ];
     bars = [{

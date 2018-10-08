@@ -1,11 +1,9 @@
 icons = "awesome"
 
 [theme]
-name = "plain"
+name = "slick"
+
 [theme.overrides]
-separator = "┊"
-separator_bg = "{background}"
-separator_fg = "{foreground}"
 idle_bg = "{background}"
 idle_fg = "{foreground}"
 info_bg = "{background}"
@@ -21,7 +19,7 @@ critical_fg = "{background}"
 block = "temperature"
 collapsed = false
 interval = 10
-format = "{{min}}° min, {{max}}° max, {{average}}° avg"
+format = "{{min}}°  {{max}}°  {{average}}°"
 
 [[block]]
 block = "backlight"
@@ -48,13 +46,13 @@ clickable = false
 block = "cpu"
 interval = 1
 
-# [[block]]
-# block = "sound"
+[[block]]
+block = "sound"
 
 [[block]]
 block = "battery"
 
 [[block]]
 block = "time"
-interval = 60
+interval = 1
 format = "%a %d/%m %r"
