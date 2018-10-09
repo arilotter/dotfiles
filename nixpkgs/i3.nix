@@ -156,7 +156,7 @@ in
       { command = "feh --bg-max ${theme.wallpaper}"; always = true; notification = false; }
     ];
     bars = [{
-      fonts = [ "FuraCode Nerd Font 12" ];
+      fonts = [ "FuraCode Nerd Font 11" ];
       position = "bottom";
       statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.cache/wal/i3status-rs.toml";
       colors = with theme; {
