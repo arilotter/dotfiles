@@ -154,6 +154,7 @@ in
       { command = "autorandr -c"; always = true; notification = false; }
       { command = "wal -nR"; notification = false; }
       { command = "feh --bg-max ${theme.wallpaper}"; always = true; notification = false; }
+      { command = "i3-msg workspace 1"; notification = false; }
     ];
     bars = [{
       fonts = [ "FuraCode Nerd Font 11" ];
