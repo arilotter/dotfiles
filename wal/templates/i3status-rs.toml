@@ -47,6 +47,13 @@ block = "cpu"
 interval = 1
 
 [[block]]
+block = "net"
+device = "wlp2s0"
+ip = true
+speed_up = false
+speed_down = false
+
+[[block]]
 block = "sound"
 
 [[block]]
