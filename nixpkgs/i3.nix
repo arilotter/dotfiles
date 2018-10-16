@@ -170,6 +170,9 @@ in
         urgentWorkspace = { border = hex.red; background = hex.red; text = hex.black; };
       };
     }];
+    focus = {
+      newWindow = "urgent";
+    };
     window = {
       border = 4;
     };
