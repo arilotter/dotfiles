@@ -16,6 +16,7 @@ in
     acpi
     sysstat
     lm_sensors
+    fwupd
     
     # languages & build tools
     go
@@ -24,6 +25,7 @@ in
     tokei
     python
     python3
+    cmake
     yarn
     nodejs-10_x
     ms-sys
@@ -31,6 +33,7 @@ in
     # desktop env
     pywal
     i3status-rust
+    i3lock
     gnome3.dconf
     maim
     pavucontrol
@@ -48,6 +51,7 @@ in
     neofetch
     woeusb
     neovim
+    simplescreenrecorder
 
     # chat
     weechat
@@ -104,6 +108,7 @@ in
     userEmail = "arilotter@gmail.com";
     userName = "Ari Lotter";
     extraConfig.pull.rebase = true;
+    extraConfig.diff.tool = "default-difftool";
   };
 
 }
