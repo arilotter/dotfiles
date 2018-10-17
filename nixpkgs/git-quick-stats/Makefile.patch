@@ -1,0 +1,17 @@
+--- Makefile	2018-10-17 09:41:20.909233990 -0400
++++ Makefile	2018-10-17 09:41:45.496433962 -0400
+@@ -18,14 +18,12 @@
+ install:
+ 	mkdir -p $(PREFIX)/bin
+ 	install -m 0755 $(EXEC_FILES) $(PREFIX)/bin/$(EXEC_FILES)
+-	git config --global alias.quick-stats '! $(PREFIX)/bin/$(EXEC_FILES)'
+ 	@$(TASK_DONE)
+ 
+ uninstall:
+ 	test -d $(PREFIX)/bin && \
+ 	cd $(PREFIX)/bin && \
+ 	rm -f $(EXEC_FILES) && \
+-	git config --global --unset alias.quick-stats
+ 	@$(TASK_DONE)
+ 
+ reinstall:

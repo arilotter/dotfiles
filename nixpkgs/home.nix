@@ -4,6 +4,7 @@ let
   theme = import ./theme.nix;
   i3blocks-git = import ./i3blocks;
   oomox = import ./oomox;
+  git-quick-stats = import ./git-quick-stats;
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -29,6 +30,7 @@ in
     yarn
     nodejs-10_x
     ms-sys
+    git-quick-stats
 
     # desktop env
     pywal
