@@ -1,7 +1,29 @@
 #!/usr/bin/env bash
-THEME_NAME=$(ls ~/dotfiles/wallpapers/ | sed 's/\.[^.]*$//' | rofi -dmenu -p 'theme:')
-[[ -z "$THEME_NAME" ]] && exit 1
-wal -ni ~/dotfiles/wallpapers/$THEME_NAME*
+builtin_themes() {
+  # turns the wal theme list into something usable
+  wal --theme | node -e "const i = require('fs').readFileSync(0, 'utf8'); const sections = i.split(/.*:/g); console.log(sections.slice(1).map((section, i) =>  section.split('- ').map(x => x.trim()).filter(x => x).map(t => 'builtin: ' + ['dark', 'light', 'extra'][i] + ': ' + t).join('\n')).join('\n'))"
+}
+
+automatic_themes() {
+  ls ~/dotfiles/wallpapers/ | sed 's/\.[^.]*$//' | sed -e 's/^/automatic: /'
+}
+
+THEME_NAME=$({ automatic_themes; builtin_themes; } | rofi -dmenu -p 'theme:')
+if [[ $THEME_NAME == automatic* ]]; then
+  wal -ni  ~/dotfiles/wallpapers/$(echo $THEME_NAME | sed 's/automatic: //')*
+elif [[ $THEME_NAME == builtin* ]]; then
+  THEME=$(echo $THEME_NAME | grep -oP '(dark|light|extra): ([\w-]+)')
+  TYPE=$(echo $THEME | cut -d ' ' -f1)
+  NAME=$(echo $THEME | cut -d ' ' -f2)
+  if [[ $TYPE == "light: " ]]; then
+    wal -nl --theme $NAME
+  else
+    wal -n --theme $NAME
+  fi
+else
+  echo "no theme selected"
+  exit 1
+fi
 
 home-manager switch
 # restart i3 so the bar colors update
