@@ -36,11 +36,13 @@ in
     pywal
     i3status-rust
     i3lock
+    i3lock-pixeled
     gnome3.dconf
     maim
     pavucontrol
     feh
     libnotify
+
 
     # apps
     google-chrome
