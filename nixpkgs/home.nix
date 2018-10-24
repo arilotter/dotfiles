@@ -39,7 +39,6 @@ in
     gnome3.dconf
     maim
     pavucontrol
-    oomox
     feh
     libnotify
 
@@ -52,8 +51,8 @@ in
     gnome3.gucharmap
     neofetch
     woeusb
-    neovim
     simplescreenrecorder
+    kicad
 
     # chat
     weechat
