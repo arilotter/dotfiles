@@ -31,7 +31,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget nano fish git unzip mkpasswd ntfs3g p7zip
+    wget nano fish git unzip mkpasswd ntfs3g p7zip dmidecode
   ];
 
   fonts.fonts = with pkgs; [
