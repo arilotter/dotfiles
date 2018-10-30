@@ -45,6 +45,7 @@ in
 
 
     # apps
+    appimage-run
     google-chrome
     vscode
     kitty
@@ -74,6 +75,7 @@ in
 
   programs.rofi = import ./rofi.nix pkgs;
   services.dunst = import ./dunst.nix pkgs;
+  services.compton = import ./compton.nix pkgs;
   
   programs.fish = {
     enable = true;

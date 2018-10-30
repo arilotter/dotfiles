@@ -16,7 +16,6 @@
 in
 {
   enable = true;
-  package = pkgs.i3-gaps;
   config = {
     modifier = mod;
     keybindings = {
@@ -174,7 +173,8 @@ in
       newWindow = "urgent";
     };
     window = {
-      border = 4;
+      border = 0;
+      titlebar = false;
     };
     floating = {
       criteria = [ {"window_type"="dialog"; } { "window_type"="menu"; } ];
