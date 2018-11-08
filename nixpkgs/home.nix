@@ -17,8 +17,9 @@ in
     acpi
     sysstat
     lm_sensors
-    fwupd
-    
+    file
+    smartmontools
+
     # languages & build tools
     go
     gnumake
@@ -31,6 +32,7 @@ in
     nodejs-10_x
     ms-sys
     git-quick-stats
+    androidsdk
 
     # desktop env
     pywal
@@ -56,6 +58,7 @@ in
     woeusb
     simplescreenrecorder
     kicad
+    gimp
 
     # chat
     weechat
