@@ -4,7 +4,6 @@
 { config, pkgs, ... }:
 {
   system.copySystemConfiguration = true;
-  boot.blacklistedKernelModules = [ "mei_me" ];
   imports = [
     <nixos-hardware/lenovo/thinkpad/x1/6th-gen/QHD>
     ./hardware-configuration.nix
@@ -12,8 +11,14 @@
 
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    blacklistedKernelModules = [ "mei_me" ];
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    plymouth.enable = true;
+  };
 
   networking.hostName = "sol"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -48,22 +53,28 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 4001 3001 8000 ];
   networking.firewall.allowedUDPPorts = [];
-  services.avahi.enable = true;
-  services.avahi.nssmdns = true;
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services = {
+    avahi = {
+      enable = true;
+      nssmdns = true;
+    };
+    printing.enable = true;
+    xserver = {
+      enable = true;
+      layout = "us";
+      # Enable touchpad support.
+      libinput.enable = true;
+
+      displayManager.lightdm = {
+        enable = true;
+        autoLogin.enable = true;
+        autoLogin.user = "ari";
+      };
+    };
+  };
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    layout = "us";
-  };
-
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
 
   # Enable brightness control.
   programs.light.enable = true;
@@ -74,18 +85,12 @@
       isNormalUser = true;
       home = "/home/ari";
       description = "Ari Lotter";
-      extraGroups = [ "wheel" "sudoers" "audio" "video" "disk" "networkmanager"];
+      extraGroups = [ "wheel" "sudoers" "audio" "video" "disk" "networkmanager" ];
       uid = 1000;
       shell = pkgs.fish;
       hashedPassword = let hashedPassword = import ./hashedPassword.nix; in hashedPassword;
     };
     mutableUsers = false;
   };
-
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "18.03"; # Did you read the comment?
-
+  system.stateVersion = "18.09";
 }
