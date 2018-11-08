@@ -152,7 +152,7 @@ in
       { command = "xset r rate 300 30"; always = true; notification = false; }
       { command = "autorandr -c"; always = true; notification = false; }
       { command = "wal -nR"; notification = false; }
-      { command = "feh --bg-max ${theme.wallpaper}"; always = true; notification = false; }
+      { command = "feh --bg-fill ${theme.wallpaper}"; always = true; notification = false; }
       { command = "i3-msg workspace 1"; notification = false; }
     ];
     bars = [{
@@ -177,7 +177,11 @@ in
       titlebar = false;
     };
     floating = {
-      criteria = [ {"window_type"="dialog"; } { "window_type"="menu"; } ];
+      criteria = [
+        {"window_type"="dialog"; }
+        { "window_type"="menu"; }
+        { "window_role"="pop-up"; } # how to disable pop for chrome devtools?  "title"="^(?!DevTools - .*$))";
+      ];
     };
   };
 }
