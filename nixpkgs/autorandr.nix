@@ -2,7 +2,8 @@
 {
   enable = true;
   hooks.postswitch = {
-    "reload theme" = "${pkgs.i3}/bin/i3-msg reload";
+    "set wallpaper" = "${pkgs.i3}/bin/i3-msg reload";
+    "restart compton" = "killall compton"; 
   };
   profiles = {
     "home-4k" = {
