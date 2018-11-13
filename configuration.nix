@@ -51,8 +51,8 @@
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 4001 3001 8000 ];
-  networking.firewall.allowedUDPPorts = [];
+  networking.firewall.allowedTCPPorts = [ 4001 3001 8000 12345 ];
+  networking.firewall.allowedUDPPorts = [ ];
   services = {
     avahi = {
       enable = true;
