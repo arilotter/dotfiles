@@ -19,6 +19,8 @@ in
     lm_sensors
     file
     smartmontools
+    graphviz
+    toilet
 
     # languages & build tools
     go
@@ -33,6 +35,7 @@ in
     ms-sys
     git-quick-stats
     androidsdk
+    awscli
 
     # desktop env
     pywal
