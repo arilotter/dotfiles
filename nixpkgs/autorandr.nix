@@ -47,14 +47,15 @@
           enable = true;
           primary = true;
           mode = "2560x1440";
-          position = "0x2160";
+          position = "0x0";
           rate = "60.01";
         };
         DP2 = {
           enable = true;
           mode = "3840x2160";
-          position = "0x0";
+          position = "2560x0";
           rate = "60.00";
+          rotate = "left";
         };
       };
     };  };
