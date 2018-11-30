@@ -21,6 +21,7 @@ in
     smartmontools
     graphviz
     toilet
+    xorg.xev
 
     # languages & build tools
     go
@@ -36,6 +37,7 @@ in
     git-quick-stats
     androidsdk
     awscli
+    ansible
 
     # desktop env
     pywal
@@ -62,6 +64,7 @@ in
     simplescreenrecorder
     kicad
     gimp
+    minecraft
 
     # chat
     weechat
