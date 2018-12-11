@@ -18,6 +18,7 @@
       efi.canTouchEfiVariables = true;
     };
     plymouth.enable = true;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   networking.hostName = "sol"; # Define your hostname.
@@ -92,5 +93,13 @@
     };
     mutableUsers = false;
   };
+
+  services.tlp.extraConfig = ''
+    START_CHARGE_THRESH_BAT0=70
+    STOP_CHARGE_THRESH_BAT0=100
+    CPU_SCALING_GOVERNOR_ON_BAT=powersave
+    ENERGY_PERF_POLICY_ON_BAT=powersave
+  '';
   system.stateVersion = "18.09";
+  
 }
