@@ -22,6 +22,7 @@ in
     graphviz
     toilet
     xorg.xev
+    openssl
 
     # languages & build tools
     go
@@ -122,6 +123,7 @@ in
     userEmail = "arilotter@gmail.com";
     userName = "Ari Lotter";
     extraConfig.pull.rebase = true;
+    extraConfig.pull.autoStash = true;
     extraConfig.diff.tool = "default-difftool";
   };
 
