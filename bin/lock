@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-systemctl --user stop compton.service && i3lock-pixeled && systemctl --user start compton.service
+maim /tmp/screen.png  
+xwobf -s 11 /tmp/screen.png  
+i3lock -i /tmp/screen.png  
+rm /tmp/screen.png  
