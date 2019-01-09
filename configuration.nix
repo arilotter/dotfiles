@@ -37,7 +37,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget nano fish git unzip mkpasswd ntfs3g p7zip dmidecode
+    wget nano fish git unzip mkpasswd ntfs3g p7zip dmidecode thinkfan fwupd
   ];
 
   fonts.fonts = with pkgs; [
@@ -55,11 +55,17 @@
   networking.firewall.allowedTCPPorts = [ 4001 3001 8000 12345 ];
   networking.firewall.allowedUDPPorts = [ ];
   services = {
+    fwupd.enable = true;
     avahi = {
       enable = true;
       nssmdns = true;
     };
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        gutenprint gutenprintBin brlaser
+      ];
+    };
     xserver = {
       enable = true;
       layout = "us";
@@ -100,6 +106,27 @@
     CPU_SCALING_GOVERNOR_ON_BAT=powersave
     ENERGY_PERF_POLICY_ON_BAT=powersave
   '';
+  services.thinkfan = {
+    enable = true;
+    sensors = ''
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp3_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp4_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp5_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input
+      hwmon /sys/devices/virtual/thermal/thermal_zone2/hwmon0/temp1_input
+      hwmon /sys/devices/virtual/thermal/thermal_zone6/hwmon4/temp1_input
+      hwmon /sys/devices/virtual/thermal/thermal_zone4/hwmon2/temp1_input
+    '';
+    levels = ''
+      (0,	0,	55)
+      (1,	48,	60)
+      (2,	50,	61)
+      (3,	52,	63)
+      (4,	56,	65)
+      (5,	59,	66)
+      (7,	63,	32767)
+    '';
+  };
   system.stateVersion = "18.09";
-  
 }
