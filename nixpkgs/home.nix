@@ -5,8 +5,10 @@ let
   i3blocks-git = import ./i3blocks;
   oomox = import ./oomox;
   git-quick-stats = import ./git-quick-stats;
+  xwobf = import ./xwobf;
 in
 {
+  imports = [ ./vs-code-live-share.nix ];
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     # system utils
@@ -23,6 +25,7 @@ in
     toilet
     xorg.xev
     openssl
+    rename
 
     # languages & build tools
     go
@@ -39,18 +42,19 @@ in
     androidsdk
     awscli
     ansible
+    swiProlog
 
     # desktop env
     pywal
     i3status-rust
     i3lock
-    i3lock-pixeled
     gnome3.dconf
     maim
     pavucontrol
     feh
     libnotify
-
+    inotify-tools
+    xwobf
 
     # apps
     appimage-run
@@ -66,6 +70,9 @@ in
     kicad
     gimp
     minecraft
+    atom
+    arduino
+    xoscope
 
     # chat
     weechat
@@ -86,6 +93,11 @@ in
   programs.rofi = import ./rofi.nix pkgs;
   services.dunst = import ./dunst.nix pkgs;
   services.compton = import ./compton.nix pkgs;
+  services.vsliveshare = {
+    enable = true;
+    enableWritableWorkaround = true;
+    enableDiagnosticsWorkaround = true;
+  };
   
   programs.fish = {
     enable = true;
@@ -103,12 +115,8 @@ in
     };
     shellInit = "
       fundle plugin 'tuvistavie/fish-ssh-agent'
-      fundle plugin 'rafaelrinaldi/pure'
+      fundle plugin 'MaxMilton/pure'
       fundle plugin 'fisherman/z'
-
-      function draw_line --on-event fish_postexec
-        set_color brblack; stty size | perl -ale 'print \"─\"x$F[1]'
-      end
 
       set -gx VISUAL \"code --wait\"
       set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
@@ -125,6 +133,21 @@ in
     extraConfig.pull.rebase = true;
     extraConfig.pull.autoStash = true;
     extraConfig.diff.tool = "default-difftool";
+  };
+
+  systemd.user.services.lock = {
+    Unit = {
+      Description = "Lock Screen When Sleeping";
+      Before = [ "sleep.target" ];
+    };
+    Service = {
+      Type = "forking";
+      ExecStart = "${pkgs.maim} /tmp/screen.png && ${xwobf}/bin/xwobf -s 11 /tmp/screen.png && ${pkgs.i3lock}/bin/i3lock -i /tmp/screen.png && rm /tmp/screen.png";
+      # ExecStartPost = "/run/current-system/sw/bin/sleep 1";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
   };
 
 }
