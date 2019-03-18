@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+#
+# Copyright (C) 2018 BarbUk <barbarisme@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+# List your chrome history.
+# You can use it in rofi to open a link
+# Exemple: rofi -combi-modi "clipboard:greenclip print,chrome:chrome_history,window,drun" -show combi -modi combi -lines 25  -display-combi '> '
+
+set -o errexit -o pipefail -o nounset
+
+sep='<>'
+chrome_history_files=(
+  "$HOME/.config/google-chrome/Default/History"
+  #"$HOME/.config/google-chrome/Profil/e 1/History"
+)
+open=xdg-open
+
+# If we have an input, extract the url and open it in the default browser
+if [ ! -z ${1+x} ]; then
+    $open "${1##*$sep}" > /dev/null 2>&1
+    exit 0
+fi
+
+extract_chrome_history() {
+  local history_file=$1
+  cp -f "$history_file" /tmp/h
+  # shellcheck disable=2086
+  sqlite3 -separator $sep /tmp/h \
+      "SELECT substr(title, 1, 50) as label, url
+       FROM urls
+       GROUP BY label
+       ORDER BY last_visit_time DESC
+       LIMIT 50"
+}
+
+for chrome_history_file in "${chrome_history_files[@]}"; do
+  extract_chrome_history "$chrome_history_file"
+done

@@ -16,7 +16,12 @@
 in
 {
   enable = true;
+  package = pkgs.i3-gaps;
   config = {
+    gaps = {
+      inner = 0;
+      outer = 8;
+    };
     modifier = mod;
     keybindings = {
       "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3%";
@@ -25,6 +30,7 @@ in
       "XF86MonBrightnessUp" = "exec --no-startup-id light -A 10";
       "XF86MonBrightnessDown" = "exec --no-startup-id light -U 10";
       "XF86Tools" = "exec --no-startup-id change-theme";
+      "XF86Favorites" = "exec /home/ari/bin/lock";
       "${mod}+Return" = "exec kitty";
 
       "${mod}+Shift+q" = "kill";
@@ -157,7 +163,7 @@ in
     ];
     bars = [{
       fonts = [ "FuraCode Nerd Font 11" ];
-      position = "bottom";
+      position = "top";
       statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.cache/wal/i3status-rs.toml";
       colors = with theme; {
         background = hex.background;
@@ -173,7 +179,7 @@ in
       newWindow = "urgent";
     };
     window = {
-      border = 0;
+      border = 8;
       titlebar = false;
     };
     floating = {

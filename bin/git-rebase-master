@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+echo $CURR_BRANCH
+
+git checkout master && git pull && git checkout $CURR_BRANCH && git rebase master
