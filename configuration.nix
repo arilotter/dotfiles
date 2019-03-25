@@ -69,6 +69,7 @@
     thinkfan
     fwupd
     xorg.xinit
+    (import (fetchGit "https://github.com/haslersn/fish-nix-shell"))
  ];
 
   fonts.fonts = with pkgs; [
