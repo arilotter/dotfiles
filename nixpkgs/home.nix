@@ -6,9 +6,36 @@ let
   oomox = import ./oomox;
   git-quick-stats = import ./git-quick-stats;
   xwobf = import ./xwobf;
+  mozilla = import (builtins.fetchGit {
+    url = "https://github.com/mozilla/nixpkgs-mozilla.git";
+    ref = "master";
+    rev = "cebceca52d54c3df371c2265903f008c7a72980b";
+  });
+  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
+  nixpkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
 in
 {
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.overlays = [
+    mozilla
+    (self: super: {
+      latest = {
+        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-03-23"; channel = "nightly"; }).rust.override {
+          targets = [
+            "wasm32-unknown-unknown"
+          ];
+
+          extensions = [
+            "rustfmt-preview"
+            "rls-preview"
+            "rustfmt-preview"
+          ];
+        };
+      };
+    })
+  ];
+  
   home.packages = with pkgs; [
     # system utils
     htop
@@ -44,7 +71,8 @@ in
     ansible
     swiProlog
     glslang
-    rustup
+    cargo-edit
+    latest.rustChannels.nightly.rust
     libimobiledevice
 
     # desktop env
@@ -61,6 +89,7 @@ in
     blueman
     exa
     gitAndTools.git-extras
+    git-lfs
 
     # apps
     appimage-run
@@ -114,6 +143,7 @@ in
       fix-bluetooth-audio = "pacmd set-card-profile (pacmd list-sinks | sed -n \"s/card: \\([0-9]*\\) <bluez.*/\\1/p\" | xargs) a2dp_sink";
     };
     shellInit = ''
+      fish-nix-shell --info-right | source
       fundle plugin 'tuvistavie/fish-ssh-agent'
       fundle plugin 'MaxMilton/pure'
 
