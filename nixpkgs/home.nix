@@ -11,8 +11,7 @@ let
     ref = "master";
     rev = "cebceca52d54c3df371c2265903f008c7a72980b";
   });
-  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
-  nixpkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
+  nixpkgs = import <nixpkgs> { overlays = [ mozilla ]; };
 in
 {
   nixpkgs.config.allowUnfree = true;
