@@ -156,7 +156,8 @@ in
     };
     startup = [
       { command = "xset r rate 300 30"; always = true; notification = false; }
-      { command = "autorandr -c"; always = true; notification = false; }
+      { command = "srandrd autorandr -c"; notification = false; }
+      { command = "autorandr -c"; notification = false; }
       { command = "wal -nR"; notification = false; }
       { command = "feh --bg-fill ${theme.wallpaper}"; always = true; notification = false; }
       { command = "i3-msg workspace 1"; notification = false; }

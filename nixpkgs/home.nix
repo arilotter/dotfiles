@@ -2,10 +2,11 @@
 
 let
   theme = import ./theme.nix;
-  i3blocks-git = import ./i3blocks;
-  oomox = import ./oomox;
+  # i3blocks-git = import ./i3blocks;
+  # oomox = import ./oomox;
   git-quick-stats = import ./git-quick-stats;
   xwobf = import ./xwobf;
+  srandrd = import ./srandrd;
   mozilla = import (builtins.fetchGit {
     url = "https://github.com/mozilla/nixpkgs-mozilla.git";
     ref = "master";
@@ -73,6 +74,7 @@ in
     cargo-edit
     latest.rustChannels.nightly.rust
     libimobiledevice
+    gitAndTools.git-extras
 
     # desktop env
     pywal
@@ -85,10 +87,9 @@ in
     libnotify
     inotify-tools
     xwobf
+    srandrd
     blueman
     exa
-    gitAndTools.git-extras
-    git-lfs
 
     # apps
     appimage-run
@@ -115,7 +116,7 @@ in
   
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/rycee/home-manager/archive/release-18.03.tar.gz";
+    path = "https://github.com/rycee/home-manager/archive/release-18.09.tar.gz";
   };
 
   xsession = {
@@ -166,6 +167,7 @@ in
     extraConfig.rebase.autoStash = true;
     extraConfig.diff.tool = "default-difftool";
     extraConfig.push.default = "simple";
+    lfs.enable = true;
   };
 
   systemd.user.services.lock = {
