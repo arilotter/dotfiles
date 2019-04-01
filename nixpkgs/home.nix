@@ -54,6 +54,7 @@ in
     usbutils
     ffmpeg
     pciutils
+    wine
 
     # languages & build tools
     go
