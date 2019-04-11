@@ -1,0 +1,13 @@
+diff --git a/pywal/backends/wal.py b/pywal/backends/wal.py
+index a75fdc5..0fa1ccb 100644
+--- a/pywal/backends/wal.py
++++ b/pywal/backends/wal.py
+@@ -64,7 +64,7 @@ def adjust(colors, light):
+         for color in raw_colors:
+             color = util.saturate_color(color, 0.5)
+ 
+-        raw_colors[0] = util.lighten_color(colors[-1], 0.85)
++        raw_colors[0] = util.lighten_color(raw_colors[1], 0.70)
+         raw_colors[7] = colors[0]
+         raw_colors[8] = util.darken_color(colors[-1], 0.4)
+         raw_colors[15] = colors[0]

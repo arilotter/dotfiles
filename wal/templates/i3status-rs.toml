@@ -1,9 +1,12 @@
 icons = "awesome"
 
 [theme]
-name = "slick"
+name = "plain"
 
 [theme.overrides]
+separator = "║"
+separator_bg = "{background}"
+separator_fg = "{foreground}"
 idle_bg = "{background}"
 idle_fg = "{foreground}"
 info_bg = "{background}"

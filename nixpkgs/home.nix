@@ -21,18 +21,22 @@ in
     mozilla
     (self: super: {
       latest = {
-        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-03-23"; channel = "nightly"; }).rust.override {
+        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-04-08"; channel = "nightly"; }).rust.override {
           targets = [
             "wasm32-unknown-unknown"
           ];
 
           extensions = [
             "rustfmt-preview"
-            "rls-preview"
-            "rustfmt-preview"
+            # "rls-preview"
           ];
         };
       };
+    })
+    (self: super: {
+      pywal = super.pywal.overrideAttrs(oldAttrs: {
+        patches = oldAttrs.patches ++ [ ./pywal_colored_light_theme_backgrounds.patch ];
+      });
     })
   ];
   
@@ -96,7 +100,7 @@ in
     appimage-run
     google-chrome
     vscode
-    kitty
+    alacritty
     pcmanfm
     gnome3.eog
     gnome3.gucharmap
@@ -135,7 +139,6 @@ in
       pbpaste = "xclip -selection clipboard -o";
       pbcopy = "xclip -selection clipboard -i";
       netcopy = "nc -q 0 tcp.st 7777 | grep URL | cut -d \" \" -f 2 | pbcopy";
-      icat ="kitty +kitten icat";
 
       google-chrome  ="google-chrome-stable";
       chrome = "google-chrome";
@@ -151,7 +154,7 @@ in
       set -gx VISUAL \"nano\"
       set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
 
-      set -gx PATH ~/.yarn/bin ~/bin ~/go/bin $PATH
+      set -gx PATH ~/.yarn/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
 
       fundle init
 

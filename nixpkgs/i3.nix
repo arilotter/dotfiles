@@ -31,7 +31,7 @@ in
       "XF86MonBrightnessDown" = "exec --no-startup-id light -U 10";
       "XF86Tools" = "exec --no-startup-id change-theme";
       "XF86Favorites" = "exec /home/ari/bin/lock";
-      "${mod}+Return" = "exec kitty";
+      "${mod}+Return" = "exec alacritty";
 
       "${mod}+Shift+q" = "kill";
 
@@ -180,7 +180,7 @@ in
       newWindow = "urgent";
     };
     window = {
-      border = 8;
+      border = 4;
       titlebar = false;
     };
     floating = {
