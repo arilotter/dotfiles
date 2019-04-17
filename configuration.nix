@@ -117,7 +117,7 @@
     };
     openssh = {
       enable = false;
-      forwardX11 = true;
+      forwardX11 = false;
     };
     usbmuxd.enable = true;
   };
