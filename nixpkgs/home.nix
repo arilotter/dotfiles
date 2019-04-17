@@ -9,8 +9,7 @@ let
   srandrd = import ./srandrd;
   mozilla = import (builtins.fetchGit {
     url = "https://github.com/mozilla/nixpkgs-mozilla.git";
-    ref = "master";
-    rev = "cebceca52d54c3df371c2265903f008c7a72980b";
+    rev = "50bae918794d3c283aeb335b209efd71e75e3954";
   });
   nixpkgs = import <nixpkgs> { overlays = [ mozilla ]; };
 in
@@ -21,14 +20,15 @@ in
     mozilla
     (self: super: {
       latest = {
-        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-04-08"; channel = "nightly"; }).rust.override {
+        firefox-nightly-bin = super.latest.firefox-nightly-bin;
+        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-04-11"; channel = "nightly"; }).rust.override {
           targets = [
             "wasm32-unknown-unknown"
           ];
 
           extensions = [
             "rustfmt-preview"
-            # "rls-preview"
+            "rls-preview"
           ];
         };
       };
@@ -95,10 +95,12 @@ in
     srandrd
     blueman
     exa
+    lsof
 
     # apps
     appimage-run
     google-chrome
+    latest.firefox-nightly-bin
     vscode
     alacritty
     pcmanfm
