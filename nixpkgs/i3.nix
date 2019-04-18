@@ -40,6 +40,7 @@ in
       "${mod}+d" = "exec rofi -modi drun -show drun -display-drun \"\" -show-icons ";
       "${mod}+Shift+d" = "exec rofi -show window";
       "${mod}+Shift+f" = "exec rofi -show emoji -modi emoji";
+      "${mod}+Shift+s" = "exec screenshot";
 
       "${mod}+j" = "focus left";
       "${mod}+k" = "focus down";
