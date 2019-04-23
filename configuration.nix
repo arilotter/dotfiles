@@ -162,5 +162,5 @@
     CPU_SCALING_GOVERNOR_ON_BAT=powersave
     ENERGY_PERF_POLICY_ON_BAT=powersave
   '';
-  system.stateVersion = "18.09";
+  system.stateVersion = "19.03";
 }

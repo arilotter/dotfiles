@@ -19,8 +19,8 @@ in
   package = pkgs.i3-gaps;
   config = {
     gaps = {
-      inner = 0;
-      outer = 8;
+      inner = 2;
+      outer = 0;
     };
     modifier = mod;
     keybindings = {

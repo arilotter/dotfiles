@@ -29,6 +29,7 @@ in
           extensions = [
             "rustfmt-preview"
             "rls-preview"
+            "clippy-preview"
           ];
         };
       };
@@ -99,7 +100,6 @@ in
 
     # apps
     appimage-run
-    google-chrome
     latest.firefox-nightly-bin
     vscode
     alacritty
@@ -123,7 +123,7 @@ in
   
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/rycee/home-manager/archive/release-18.09.tar.gz";
+    path = "https://github.com/rycee/home-manager/archive/release-19.03.tar.gz";
   };
 
   xsession = {
@@ -141,10 +141,6 @@ in
       pbpaste = "xclip -selection clipboard -o";
       pbcopy = "xclip -selection clipboard -i";
       netcopy = "nc -q 0 tcp.st 7777 | grep URL | cut -d \" \" -f 2 | pbcopy";
-
-      google-chrome  ="google-chrome-stable";
-      chrome = "google-chrome";
-
       reload-fish = "exec fish";
       fix-bluetooth-audio = "pacmd set-card-profile (pacmd list-sinks | sed -n \"s/card: \\([0-9]*\\) <bluez.*/\\1/p\" | xargs) a2dp_sink";
     };
