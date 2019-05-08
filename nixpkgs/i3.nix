@@ -19,7 +19,7 @@ in
   package = pkgs.i3-gaps;
   config = {
     gaps = {
-      inner = 2;
+      inner = 0;
       outer = 0;
     };
     modifier = mod;
