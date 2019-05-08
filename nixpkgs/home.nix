@@ -21,7 +21,7 @@ in
     (self: super: {
       latest = {
         firefox-nightly-bin = super.latest.firefox-nightly-bin;
-        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-04-11"; channel = "nightly"; }).rust.override {
+        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-05-07"; channel = "nightly"; }).rust.override {
           targets = [
             "wasm32-unknown-unknown"
           ];
@@ -30,6 +30,7 @@ in
             "rustfmt-preview"
             "rls-preview"
             "clippy-preview"
+            "rust-src"
           ];
         };
       };
@@ -81,6 +82,7 @@ in
     latest.rustChannels.nightly.rust
     libimobiledevice
     gitAndTools.git-extras
+    google-chrome
 
     # desktop env
     pywal
