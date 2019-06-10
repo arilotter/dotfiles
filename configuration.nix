@@ -61,6 +61,7 @@
     nano
     fish
     git
+    zip
     unzip
     mkpasswd
     ntfs3g
@@ -115,10 +116,6 @@
         '';
       };
     };
-    openssh = {
-      enable = false;
-      forwardX11 = false;
-    };
     usbmuxd.enable = true;
   };
   # Enable sound.
@@ -156,11 +153,20 @@
     mutableUsers = false;
   };
 
-  services.tlp.extraConfig = ''
-    START_CHARGE_THRESH_BAT0=70
-    STOP_CHARGE_THRESH_BAT0=100
-    CPU_SCALING_GOVERNOR_ON_BAT=powersave
-    ENERGY_PERF_POLICY_ON_BAT=powersave
-  '';
+  services.tlp = {
+    enable = true;
+    extraConfig = ''
+      START_CHARGE_THRESH_BAT0=90
+      STOP_CHARGE_THRESH_BAT0=100
+      CPU_SCALING_GOVERNOR_ON_BAT=powersave
+      ENERGY_PERF_POLICY_ON_BAT=powersave
+      CPU_SCALING_GOVERNOR_ON_AC=performance
+      ENERGY_PERF_POLICY_ON_AC=performance
+    '';
+  };
+
+  # Disable the "throttling bug fix" -_- https://github.com/NixOS/nixos-hardware/blob/master/common/pc/laptop/cpu-throttling-bug.nix
+  systemd.timers.cpu-throttling.enable = lib.mkForce false;
+  systemd.services.cpu-throttling.enable = lib.mkForce false;
   system.stateVersion = "19.03";
 }
