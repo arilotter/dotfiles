@@ -38,6 +38,8 @@ in
       "${mod}+z" = "exec --no-startup-id exec i3zen";
 
       "${mod}+d" = "exec rofi -modi drun -show drun -display-drun \"\" -show-icons ";
+      "${mod}+g" = "exec rofi -dmenu -p \"\" | sed \"s%^%https://duckduckgo.com/search?q=%\" | xargs firefox";
+      
       "${mod}+Shift+d" = "exec rofi -show window";
       "${mod}+Shift+f" = "exec rofi -show emoji -modi emoji";
       "${mod}+Shift+s" = "exec screenshot";
@@ -165,7 +167,7 @@ in
     ];
     bars = [{
       fonts = [ "FuraCode Nerd Font 11" ];
-      position = "top";
+      position = "bottom";
       statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.cache/wal/i3status-rs.toml";
       colors = with theme; {
         background = hex.background;

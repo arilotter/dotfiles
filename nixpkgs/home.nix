@@ -4,14 +4,10 @@ let
   theme = import ./theme.nix;
   # i3blocks-git = import ./i3blocks;
   # oomox = import ./oomox;
-  git-quick-stats = import ./git-quick-stats;
-  xwobf = import ./xwobf;
-  srandrd = import ./srandrd;
   mozilla = import (builtins.fetchGit {
     url = "https://github.com/mozilla/nixpkgs-mozilla.git";
     rev = "50bae918794d3c283aeb335b209efd71e75e3954";
   });
-  nixpkgs = import <nixpkgs> { overlays = [ mozilla ]; };
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -21,14 +17,13 @@ in
     (self: super: {
       latest = {
         firefox-nightly-bin = super.latest.firefox-nightly-bin;
-        rustChannels.nightly.rust = (nixpkgs.rustChannelOf { date = "2019-05-07"; channel = "nightly"; }).rust.override {
+        rustChannels.nightly.rust = (super.rustChannelOf { date = "2019-06-07"; channel = "nightly"; }).rust.override {
           targets = [
             "wasm32-unknown-unknown"
           ];
 
           extensions = [
             "rustfmt-preview"
-            "rls-preview"
             "clippy-preview"
             "rust-src"
           ];
@@ -61,6 +56,8 @@ in
     ffmpeg
     pciutils
     wine
+    imagemagickBig
+    poppler_utils
 
     # languages & build tools
     go
@@ -73,7 +70,7 @@ in
     yarn
     nodejs-10_x
     ms-sys
-    git-quick-stats
+    (import ./git-quick-stats)
     awscli
     ansible
     swiProlog
@@ -83,6 +80,12 @@ in
     libimobiledevice
     gitAndTools.git-extras
     google-chrome
+    wasm-gc
+    lldb
+    gdb
+    valgrind
+    # (import ./wasmtime {})
+
 
     # desktop env
     pywal
@@ -94,8 +97,9 @@ in
     feh
     libnotify
     inotify-tools
-    xwobf
-    srandrd
+    (import ./xwobf)
+    (import ./srandrd)
+    
     blueman
     exa
     lsof
@@ -150,15 +154,14 @@ in
       fish-nix-shell --info-right | source
       fundle plugin 'tuvistavie/fish-ssh-agent'
       fundle plugin 'MaxMilton/pure'
-
+      fundle plugin 'jethrokuan/z'
       set -gx VISUAL \"nano\"
       set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
 
-      set -gx PATH ~/.yarn/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
+      set -gx PATH ~/.yarn/bin ~/.npm/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
 
       fundle init
 
-      source (lua ~/bin/z.lua --init fish | psub)
       alias ls "exa"
     '';
   };
@@ -172,21 +175,6 @@ in
     extraConfig.diff.tool = "default-difftool";
     extraConfig.push.default = "simple";
     lfs.enable = true;
-  };
-
-  systemd.user.services.lock = {
-    Unit = {
-      Description = "Lock Screen When Sleeping";
-      Before = [ "sleep.target" ];
-    };
-    Service = {
-      Type = "forking";
-      ExecStart = "${pkgs.maim} /tmp/screen.png && ${xwobf}/bin/xwobf -s 11 /tmp/screen.png && ${pkgs.i3lock}/bin/i3lock -i /tmp/screen.png && rm /tmp/screen.png";
-      # ExecStartPost = "/run/current-system/sw/bin/sleep 1";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
   };
 
 }
