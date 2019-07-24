@@ -55,7 +55,6 @@ in
     usbutils
     ffmpeg
     pciutils
-    wine
     imagemagickBig
     poppler_utils
     wabt
