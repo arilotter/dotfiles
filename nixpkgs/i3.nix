@@ -123,8 +123,8 @@ in
       background = hex.background;
       focused = {
         border = hex.background;
-        background = hex.background;
-        text = hex.foreground;
+        background = hex.foreground;
+        text = hex.background;
         indicator = hex.background;
         childBorder = hex.foreground;
       };
@@ -185,6 +185,7 @@ in
     window = {
       border = 4;
       titlebar = false;
+      hideEdgeBorders = "smart";
     };
     floating = {
       criteria = [

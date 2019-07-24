@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, options, ... }:
+{ config, pkgs, options, lib, ... }:
 {
   system.copySystemConfiguration = true;
   imports = [
@@ -29,6 +29,7 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
   
+  
   # Use the systemd-boot EFI boot loader.
   boot = {
     blacklistedKernelModules = [ "mei_me" ];
@@ -38,7 +39,10 @@
     };
     plymouth.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = ["ec_sys.write_support=1"];
   };
+
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   networking.hostName = "sol"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -70,6 +74,7 @@
     thinkfan
     fwupd
     xorg.xinit
+    libfido2
     (import (fetchGit "https://github.com/haslersn/fish-nix-shell"))
  ];
 
@@ -90,6 +95,7 @@
   networking.firewall.allowedUDPPorts = [ ];
   services = {
     fwupd.enable = true;
+    pcscd.enable = true; # yubikey
     avahi = {
       enable = true;
       nssmdns = true;
@@ -128,14 +134,17 @@
     ];
   };
 
-  # Enable brightness control.
   programs.light.enable = true;
-
-  programs.ssh.forwardX11 = true;
 
   programs.adb.enable = true;
 
   virtualisation.lxd.enable = true;
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+  programs.ssh.startAgent = false;
 
   # powerManagement.powerDownCommands = ''echo "`id` $SHELL AAAAAA I WENT TO SLEEP" > /dev/kmsg'';
 
@@ -166,7 +175,7 @@
   };
 
   # Disable the "throttling bug fix" -_- https://github.com/NixOS/nixos-hardware/blob/master/common/pc/laptop/cpu-throttling-bug.nix
-  systemd.timers.cpu-throttling.enable = lib.mkForce false;
-  systemd.services.cpu-throttling.enable = lib.mkForce false;
+  # systemd.timers.cpu-throttling.enable = lib.mkForce false;
+  # systemd.services.cpu-throttling.enable = lib.mkForce false;
   system.stateVersion = "19.03";
 }

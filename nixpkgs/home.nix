@@ -6,7 +6,7 @@ let
   # oomox = import ./oomox;
   mozilla = import (builtins.fetchGit {
     url = "https://github.com/mozilla/nixpkgs-mozilla.git";
-    rev = "50bae918794d3c283aeb335b209efd71e75e3954";
+    rev = "200cf0640fd8fdff0e1a342db98c9e31e6f13cd7";
   });
 in
 {
@@ -17,7 +17,7 @@ in
     (self: super: {
       latest = {
         firefox-nightly-bin = super.latest.firefox-nightly-bin;
-        rustChannels.nightly.rust = (super.rustChannelOf { date = "2019-06-07"; channel = "nightly"; }).rust.override {
+        rustChannels.nightly.rust = (super.rustChannelOf { date = "2019-07-19"; channel = "nightly"; }).rust.override {
           targets = [
             "wasm32-unknown-unknown"
           ];
@@ -39,7 +39,7 @@ in
   
   home.packages = with pkgs; [
     # system utils
-    htop
+    gotop
     xclip
     psmisc
     acpi
@@ -58,6 +58,11 @@ in
     wine
     imagemagickBig
     poppler_utils
+    wabt
+    cowsay
+    gnupg
+
+    yubikey-manager
 
     # languages & build tools
     go
@@ -68,7 +73,7 @@ in
     python3Full
     cmake
     yarn
-    nodejs-10_x
+    nodejs-12_x
     ms-sys
     (import ./git-quick-stats)
     awscli
@@ -84,6 +89,8 @@ in
     lldb
     gdb
     valgrind
+
+    iodine
     # (import ./wasmtime {})
 
 
@@ -97,6 +104,7 @@ in
     feh
     libnotify
     inotify-tools
+    s-tui
     (import ./xwobf)
     (import ./srandrd)
     
@@ -152,7 +160,6 @@ in
     };
     shellInit = ''
       fish-nix-shell --info-right | source
-      fundle plugin 'tuvistavie/fish-ssh-agent'
       fundle plugin 'MaxMilton/pure'
       fundle plugin 'jethrokuan/z'
       set -gx VISUAL \"nano\"
@@ -163,6 +170,8 @@ in
       fundle init
 
       alias ls "exa"
+      gpg-connect-agent /bye
+      set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
     '';
   };
   programs.git = {
