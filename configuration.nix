@@ -91,7 +91,7 @@
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 4001 3001 8000 12345 ];
+  networking.firewall.allowedTCPPorts = [ 4001 3001 8000 12345 8080 ];
   networking.firewall.allowedUDPPorts = [ ];
   services = {
     fwupd.enable = true;
