@@ -5,8 +5,8 @@ let
   # i3blocks-git = import ./i3blocks;
   # oomox = import ./oomox;
   mozilla = import (builtins.fetchGit {
-    url = "https://github.com/mozilla/nixpkgs-mozilla.git";
-    rev = "200cf0640fd8fdff0e1a342db98c9e31e6f13cd7";
+    url = "https://github.com/arilotter/nixpkgs-mozilla.git";
+    ref = "please_work_4";
   });
 in
 {
@@ -16,8 +16,13 @@ in
     mozilla
     (self: super: {
       latest = {
-        firefox-nightly-bin = super.latest.firefox-nightly-bin;
-        rustChannels.nightly.rust = (super.rustChannelOf { date = "2019-07-19"; channel = "nightly"; }).rust.override {
+        firefox-nightly-bin = super.lib.firefoxOverlay.firefoxVersion {
+          version = "72.0a1";
+          timestamp = "2019-11-29-09-42-47"; 
+
+          release = false;
+        };
+        rustChannels.nightly.rust = (super.rustChannelOf { date = "2019-11-24"; channel = "nightly"; }).rust.override {
           targets = [
             "wasm32-unknown-unknown"
           ];
@@ -26,6 +31,7 @@ in
             "rustfmt-preview"
             "clippy-preview"
             "rust-src"
+            "rustc-dev"
           ];
         };
       };
@@ -60,8 +66,11 @@ in
     wabt
     cowsay
     gnupg
-
+    ripgrep
+    starship
+    jq
     yubikey-manager
+    grc
 
     # languages & build tools
     go
@@ -79,7 +88,6 @@ in
     ansible
     swiProlog
     glslang
-    cargo-edit
     latest.rustChannels.nightly.rust
     libimobiledevice
     gitAndTools.git-extras
@@ -88,9 +96,17 @@ in
     lldb
     gdb
     valgrind
-
+    geckodriver
     iodine
-    # (import ./wasmtime {})
+    linuxPackages.perf
+    ripgrep
+    pkg-config
+    openssl
+    clang
+    binutils
+    gnuradio
+    gr-limesdr
+    # (import ./drone-cli)
 
 
     # desktop env
@@ -110,6 +126,7 @@ in
     blueman
     exa
     lsof
+    wine
 
     # apps
     appimage-run
@@ -128,6 +145,11 @@ in
     arduino
     xoscope
     vlc
+    spotify
+    transmission-gtk
+    prusa-slicer
+    meshlab
+    dolphinEmu
     
     # chat
     weechat
@@ -136,9 +158,9 @@ in
   
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/rycee/home-manager/archive/release-19.03.tar.gz";
+    path = "https://github.com/rycee/home-manager/archive/master.tar.gz";
   };
-
+  
   xsession = {
     enable = true;
     windowManager.i3 = import ./i3.nix pkgs;
@@ -146,8 +168,14 @@ in
   programs.autorandr = import ./autorandr.nix pkgs;
 
   programs.rofi = import ./rofi.nix pkgs;
-  services.dunst = import ./dunst.nix pkgs;
-  services.compton = import ./compton.nix pkgs;
+  services = {
+    dunst = import ./dunst.nix pkgs;
+
+    compton = import ./compton.nix pkgs;
+    network-manager-applet = {
+      enable = true;
+    };
+  };
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -158,19 +186,16 @@ in
       fix-bluetooth-audio = "pacmd set-card-profile (pacmd list-sinks | sed -n \"s/card: \\([0-9]*\\) <bluez.*/\\1/p\" | xargs) a2dp_sink";
     };
     shellInit = ''
-      fish-nix-shell --info-right | source
-      fundle plugin 'MaxMilton/pure'
-      fundle plugin 'jethrokuan/z'
-      set -gx VISUAL \"nano\"
-      set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
+      starship init fish | source
+      set -gx VISUAL code
+      # set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
 
-      set -gx PATH ~/.yarn/bin ~/.npm/bin ~/bin ~/go/bin ~/.cargo/bin $PATH
-
-      fundle init
+      set -gx PATH $PATH ~/.yarn/bin ~/.npm/bin ~/bin ~/go/bin ~/.cargo/bin
 
       alias ls "exa"
       gpg-connect-agent /bye
       set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+      sh ~/dotfiles/secrets
     '';
   };
   programs.git = {
@@ -182,6 +207,7 @@ in
     extraConfig.rebase.autoStash = true;
     extraConfig.diff.tool = "default-difftool";
     extraConfig.push.default = "simple";
+    extraConfig.url."git@github.com:".insteadOf = "https://github.com/";
     lfs.enable = true;
   };
 

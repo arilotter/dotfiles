@@ -16,12 +16,7 @@
 in
 {
   enable = true;
-  package = pkgs.i3-gaps;
   config = {
-    gaps = {
-      inner = 0;
-      outer = 0;
-    };
     modifier = mod;
     keybindings = {
       "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3%";
@@ -184,7 +179,7 @@ in
     };
     window = {
       border = 4;
-      titlebar = false;
+      titlebar = true;
       hideEdgeBorders = "smart";
     };
     floating = {
