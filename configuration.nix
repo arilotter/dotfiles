@@ -126,8 +126,9 @@
       videoDrivers = [ "intel" ];
       deviceSection = ''
         Option "TearFree" "true"
-        Option "DRI" "2"
+        Option "DRI" "3"
         Option "Backlight" "intel_backlight"
+        Option "AccelMethod" "UXA"
       '';
       displayManager.startx.enable = true;
     };

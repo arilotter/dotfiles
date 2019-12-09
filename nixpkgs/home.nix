@@ -17,8 +17,8 @@ in
     (self: super: {
       latest = {
         firefox-nightly-bin = super.lib.firefoxOverlay.firefoxVersion {
-          version = "72.0a1";
-          timestamp = "2019-11-29-09-42-47"; 
+          version = "73.0a1";
+          timestamp = "2019-12-04-09-56-40"; 
 
           release = false;
         };
@@ -56,10 +56,7 @@ in
     graphviz
     toilet
     xorg.xev
-    openssl
-    rename
-    usbutils
-    ffmpeg
+
     pciutils
     imagemagickBig
     poppler_utils
@@ -69,7 +66,7 @@ in
     ripgrep
     starship
     jq
-    yubikey-manager
+    # yubikey-manager
     grc
 
     # languages & build tools
@@ -176,6 +173,8 @@ in
       enable = true;
     };
   };
+
+  xdg.configFile."alacritty/alacritty.yml".text = import ./alacritty.nix theme;
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -210,5 +209,4 @@ in
     extraConfig.url."git@github.com:".insteadOf = "https://github.com/";
     lfs.enable = true;
   };
-
 }
