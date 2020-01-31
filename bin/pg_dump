@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-if [ -t 0 ]; then
-  sudo docker exec -it postgresql pg_dump "$@"
-else
-  sudo docker exec -i postgresql pg_dump "$@"
-fi

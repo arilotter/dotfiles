@@ -77,7 +77,10 @@ in
     python
     python3Full
     cmake
-    yarn
+    (yarn.override {
+      nodejs = nodejs_latest;
+    })
+    redis
     nodejs-12_x
     ms-sys
     (import ./git-quick-stats)
@@ -103,6 +106,8 @@ in
     binutils
     gnuradio
     gr-limesdr
+    cargo-flamegraph
+    docker-compose
     # (import ./drone-cli)
 
 
@@ -137,7 +142,6 @@ in
     woeusb
     simplescreenrecorder
     kicad
-    gimp
     atom
     arduino
     xoscope
@@ -183,6 +187,12 @@ in
       netcopy = "nc -q 0 tcp.st 7777 | grep URL | cut -d \" \" -f 2 | pbcopy";
       reload-fish = "exec fish";
       fix-bluetooth-audio = "pacmd set-card-profile (pacmd list-sinks | sed -n \"s/card: \\([0-9]*\\) <bluez.*/\\1/p\" | xargs) a2dp_sink";
+      gs = "git status";
+      gp = "git pull";
+      gc = "git commit -m";
+      gl = "git log";
+      gf = "git fetch -p";
+      ls = "exa";
     };
     shellInit = ''
       starship init fish | source
@@ -191,10 +201,14 @@ in
 
       set -gx PATH $PATH ~/.yarn/bin ~/.npm/bin ~/bin ~/go/bin ~/.cargo/bin
 
-      alias ls "exa"
       gpg-connect-agent /bye
       set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
       sh ~/dotfiles/secrets
+
+      function checkout-last-version
+        set card $argv[1]
+        git checkout (git rev-list -n 1 HEAD -- "$card")^ -- "$card"
+      end
     '';
   };
   programs.git = {

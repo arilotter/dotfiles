@@ -28,7 +28,8 @@
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
-  
+  hardware.cpu.intel.updateMicrocode = true;
+  hardware.enableRedistributableFirmware = true;
   
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -40,6 +41,12 @@
     plymouth.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = ["ec_sys.write_support=1"];
+    extraModprobeConfig = ''
+      options i915 modeset=1
+      options i915 verbose_state_checks=1
+      options i915 enable_guc=0
+      options i915 enable_fbc=0
+    '';
   };
 
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
@@ -51,9 +58,12 @@
   };
   # Select internationalisation properties.
   i18n = {
-    consoleFont = "Fira Code";
-    consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
+  };
+  
+  console = {
+    font = "Fira Code";
+    keyMap = "us";
   };
 
   # Set your time zone.
@@ -92,13 +102,13 @@
       withFont = "--complete FiraCode";
     })
   ];
-  fonts.fontconfig.dpi = 140;
+  fonts.fontconfig.dpi = 210;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 1337 4001 3000 3001 8000 12345 8080 ];
+  networking.firewall.allowedTCPPorts = [ 1337 4001 3000 3001 8000 12345 8080 6379 ];
 
   # For Chromecast :|
-  networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
+  networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } {from = 6379; to = 6380;} ];
 
   services = {
     fwupd.enable = true;
@@ -174,6 +184,10 @@
   };
   programs.ssh.startAgent = false;
 
+  security.sudo.configFile = ''
+    Defaults	insults
+  '';
+
   # powerManagement.powerDownCommands = ''echo "`id` $SHELL AAAAAA I WENT TO SLEEP" > /dev/kmsg'';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -197,8 +211,8 @@
       STOP_CHARGE_THRESH_BAT0=100
       CPU_SCALING_GOVERNOR_ON_BAT=powersave
       ENERGY_PERF_POLICY_ON_BAT=powersave
-      CPU_SCALING_GOVERNOR_ON_AC=balance-performance
-      ENERGY_PERF_POLICY_ON_AC=balance-performance
+      CPU_SCALING_GOVERNOR_ON_AC=ondemand
+      ENERGY_PERF_POLICY_ON_AC=ondemand
     '';
   };
 

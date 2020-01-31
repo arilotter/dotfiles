@@ -26,6 +26,7 @@ in
       "XF86MonBrightnessDown" = "exec --no-startup-id light -U 10";
       "XF86Tools" = "exec --no-startup-id change-theme";
       "XF86Favorites" = "exec /home/ari/bin/lock";
+      "XF86Display" = "exec --no-startup-id xrandr --auto";
       "${mod}+Return" = "exec alacritty";
 
       "${mod}+Shift+q" = "kill";
@@ -165,12 +166,10 @@ in
       position = "bottom";
       statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.cache/wal/i3status-rs.toml";
       colors = with theme; {
-        background = hex.background;
-        statusline = hex.foreground;
         separator = hex.foreground;
         focusedWorkspace = { border = hex.color4; background = hex.foreground; text = hex.background; };
         activeWorkspace = { border = hex.color4; background = hex.background; text = hex.foreground; };
-        inactiveWorkspace = { border = hex.black; background = hex.black; text = hex.foreground; };
+        inactiveWorkspace = { border = hex.blue; background = hex.black; text = hex.foreground; };
         urgentWorkspace = { border = hex.red; background = hex.red; text = hex.black; };
       };
     }];
@@ -178,7 +177,7 @@ in
       newWindow = "urgent";
     };
     window = {
-      border = 4;
+      border = 2;
       titlebar = true;
       hideEdgeBorders = "smart";
     };
