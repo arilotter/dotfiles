@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+git stash
+git fetch -p
+git checkout origin/master
+git branch -D merge-release-into-master
+git checkout -b merge-release-into-master
+git merge origin/release
+git push --set-upstream origin merge-release-into-master --force

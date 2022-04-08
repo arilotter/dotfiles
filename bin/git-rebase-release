@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+git fetch -p && git rebase origin/release
