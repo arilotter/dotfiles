@@ -1,66 +1,73 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, options, lib, ... }:
+let
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
+in
 {
   system.copySystemConfiguration = true;
-  imports = [
-    <nixos-hardware/lenovo/thinkpad/x1/6th-gen>
-    ./hardware-configuration.nix
-  ];
-  nix.nixPath =
-    options.nix.nixPath.default ++ 
-    # Add the overlays file to read from 'nixpkgs.overlays' in this file
-    [ "nixpkgs-overlays=/etc/nixos/overlays-compat/" ]
-  ;
-  nixpkgs.overlays = [
-    (self: super: {
-      libplist = self.callPackage /home/ari/src/nixpkgs/pkgs/development/libraries/libplist { };
-      libusbmuxd = self.callPackage /home/ari/src/nixpkgs/pkgs/development/libraries/libusbmuxd { };
-      libimobiledevice = self.callPackage /home/ari/src/nixpkgs/pkgs/development/libraries/libimobiledevice { };
-      usbmuxd = self.callPackage /home/ari/src/nixpkgs/pkgs/tools/misc/usbmuxd { };
-      ios-webkit-debug-proxy = self.callPackage /home/ari/src/nixpkgs/pkgs/development/mobile/ios-webkit-debug-proxy { };
-    })
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;
+  nixpkgs.config.packageOverrides = pkgs: {
+    stable = import <nixos-stable> { config = config.nixpkgs.config; };
+  };
+  hardware.nvidia = {
+    # package = config.boot.kernelPackages.nvidiaPackages.beta.override ({
+    #   patches = [
+    #     lib.fetchurl
+    #     "https://gist.githubusercontent.com/joanbm/144a965c36fc1dc0d1f1b9be3438a368/raw/73c41bc2910e1df24fcc34c6ebb9945ba7677fee/nvidia-fix-linux-5.14.patch"
+    #   ];
+    # });
+    prime = {
+      offload.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    driSupport = true;
+    driSupport32Bit = true;
+  };
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
-  
+  environment.variables.XCURSOR_SIZE = "32";
+  environment.variables.XCURSOR_THEME = "Adwaita";
   # Use the systemd-boot EFI boot loader.
   boot = {
-    blacklistedKernelModules = [ "mei_me" ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
     plymouth.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = ["ec_sys.write_support=1"];
-    extraModprobeConfig = ''
-      options i915 modeset=1
-      options i915 verbose_state_checks=1
-      options i915 enable_guc=0
-      options i915 enable_fbc=0
-    '';
+    kernelParams = [ "ec_sys.write_support=1" ];
   };
 
-  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   networking = {
     hostName = "sol"; # Define your hostname.
     networkmanager.enable = true;
     networkmanager.appendNameservers = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" ];
   };
+
   # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
-  
+  i18n = { defaultLocale = "en_US.UTF-8"; };
+
   console = {
     font = "Fira Code";
     keyMap = "us";
@@ -81,15 +88,16 @@
     unzip
     mkpasswd
     ntfs3g
-    p7zip
     dmidecode
     thinkfan
     fwupd
     xorg.xinit
     libfido2
     limesuite
-
- ];
+    linuxPackages.v4l2loopback
+    nixfmt
+    gnome3.adwaita-icon-theme
+  ];
 
   fonts.fonts = with pkgs; [
     noto-fonts
@@ -98,30 +106,41 @@
     liberation_ttf
     fira-code
     tewi-font
-    (nerdfonts.override {
-      withFont = "--complete FiraCode";
-    })
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
-  fonts.fontconfig.dpi = 210;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 1337 4001 3000 3001 8000 12345 8080 6379 ];
+  networking.firewall.allowedTCPPortRanges = [{
+    from = 0;
+    to = 60999;
+  }
+    { from = 2999; to = 3001; }
+    { from = 8079; to = 8081; }];
 
   # For Chromecast :|
-  networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } {from = 6379; to = 6380;} ];
+  networking.firewall.allowedUDPPortRanges = [{
+    from = 0;
+    to = 60999;
+  }];
 
   services = {
+    sshd = {
+      enable = true;
+    };
+    openssh = {
+      enable = true;
+      forwardX11 = true;
+    };
     fwupd.enable = true;
     pcscd.enable = true; # yubikey
+    gnome3.gnome-keyring.enable = true;
     avahi = {
       enable = true;
       nssmdns = true;
     };
     printing = {
       enable = true;
-      drivers = with pkgs; [
-        gutenprint gutenprintBin brlaser
-      ];
+      drivers = with pkgs; [ gutenprint gutenprintBin brlaser ];
     };
     xserver = {
       enable = true;
@@ -129,18 +148,16 @@
       # Enable touchpad support.
       libinput.enable = true;
 
-      dpi = 210;
+      dpi = 282;
       monitorSection = ''
-          DisplaySize 310 174   # In millimeters
+        DisplaySize 345 194 # In millimeters
       '';
-      videoDrivers = [ "intel" ];
       deviceSection = ''
-        Option "TearFree" "true"
-        Option "DRI" "3"
-        Option "Backlight" "intel_backlight"
-        Option "AccelMethod" "UXA"
+        Option  "RegistryDwords"  "EnableBrightnessControl=1"
       '';
       displayManager.startx.enable = true;
+
+      videoDrivers = [ "nvidia" ];
     };
     usbmuxd.enable = true;
     udev = {
@@ -169,24 +186,23 @@
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
-    extraModules = [
-      pkgs.pulseaudio-modules-bt
-    ];
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
   };
+
 
   programs.light.enable = true;
 
   programs.adb.enable = true;
-  
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-  programs.ssh.startAgent = false;
 
-  security.sudo.configFile = ''
-    Defaults	insults
-  '';
+  programs.system-config-printer.enable = true;
+
+  security.sudo = {
+    enable = true;
+    configFile = ''
+      Defaults  insults
+    '';
+  };
+
 
   # powerManagement.powerDownCommands = ''echo "`id` $SHELL AAAAAA I WENT TO SLEEP" > /dev/kmsg'';
 
@@ -196,28 +212,40 @@
       isNormalUser = true;
       home = "/home/ari";
       description = "Ari Lotter";
-      extraGroups = [ "wheel" "sudoers" "audio" "video" "disk" "networkmanager" "adbusers" "docker"];
+      extraGroups = [
+        "wheel"
+        "sudoers"
+        "audio"
+        "video"
+        "disk"
+        "networkmanager"
+        "adbusers"
+        "docker"
+      ];
       uid = 1000;
       shell = pkgs.fish;
-      hashedPassword = let hashedPassword = import ./hashedPassword.nix; in hashedPassword;
+      hashedPassword =
+        let hashedPassword = import ./hashedPassword.nix;
+        in hashedPassword;
     };
     mutableUsers = false;
   };
 
   services.tlp = {
     enable = true;
-    extraConfig = ''
-      START_CHARGE_THRESH_BAT0=90
-      STOP_CHARGE_THRESH_BAT0=100
-      CPU_SCALING_GOVERNOR_ON_BAT=powersave
-      ENERGY_PERF_POLICY_ON_BAT=powersave
-      CPU_SCALING_GOVERNOR_ON_AC=ondemand
-      ENERGY_PERF_POLICY_ON_AC=ondemand
-    '';
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+    };
   };
-
   # Disable the "throttling bug fix" -_- https://github.com/NixOS/nixos-hardware/blob/master/common/pc/laptop/cpu-throttling-bug.nix
   systemd.timers.cpu-throttling.enable = lib.mkForce false;
   systemd.services.cpu-throttling.enable = lib.mkForce false;
+  services.logind.extraConfig = ''
+    RuntimeDirectorySize=25%
+    IdleActionSec=10000000
+  '';
   system.stateVersion = "19.09";
 }

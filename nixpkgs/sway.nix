@@ -2,7 +2,7 @@
 let
   theme = import ./theme.nix;
   ws = {
-    _1 = "home";
+    _1 = "1";
     _2 = "2";
     _3 = "3";
     _4 = "4";
@@ -14,19 +14,10 @@ let
     _10 = "10";
   };
   mod = "Mod4";
-in
-{
+in {
   enable = true;
+  package = pkgs.sway;
   config = {
-    gaps = {
-      inner = 0;
-      outer = 0;
-    };
-    window = {
-      border = 3;
-      titlebar = false;
-      hideEdgeBorders = "smart";
-    };
     modifier = mod;
     keybindings = {
       "XF86AudioRaiseVolume" =
@@ -134,7 +125,7 @@ in
     colors = with theme; {
       background = hex.background;
       focused = {
-        border = "#ff0000";
+        border = hex.background;
         background = hex.foreground;
         text = hex.background;
         indicator = hex.background;
@@ -193,30 +184,12 @@ in
         notification = false;
       }
       {
-        command = "i3-msg workspace home";
+        command = "i3-msg workspace 1";
         notification = false;
-      }
-      {
-        command = ''xmodmap -e "clear lock"'';
-        notification = false;
-        always = true;
-      }
-      {
-        command = ''xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"'';
-        notification = false;
-        always = true;
-      }
-      {
-        command = ''xmodmap -e "keycode 66 = Escape NoSymbol Escape"'';
-        notification = false;
-        always = true;
       }
     ];
     bars = [{
-      fonts = {
-        names = [ "FiraCode Nerd Font" ];
-        size = 10.0;
-      };
+      fonts = [ "FiraCode Nerd Font 11" ];
       position = "bottom";
       statusCommand =
         "${pkgs.i3status-rust}/bin/i3status-rs ~/.cache/wal/i3status-rs.toml";
@@ -245,6 +218,11 @@ in
       };
     }];
     focus = { newWindow = "urgent"; };
+    window = {
+      border = 2;
+      titlebar = true;
+      hideEdgeBorders = "smart";
+    };
     floating = {
       criteria = [
         { "window_type" = "dialog"; }
