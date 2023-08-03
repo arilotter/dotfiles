@@ -7,8 +7,38 @@ let
     url = "https://github.com/mozilla/nixpkgs-mozilla.git";
     ref = "master";
   });
-in
-{
+  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+
+  hyprland = (import flake-compat {
+    src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
+  }).defaultNix;
+  nix-colors = (import flake-compat {
+    src = builtins.fetchTarball "https://github.com/misterio77/nix-colors/archive/master.tar.gz";
+  }).defaultNix;
+  ags = (import flake-compat {
+    src = builtins.fetchTarball "https://github.com/Aylur/ags/archive/master.tar.gz";
+  }).defaultNix
+    in
+    {
+    imports = [
+    hyprland.homeManagerModules.default
+    nix-colors.homeManagerModules.default
+    ];
+
+  colorScheme = nix-colors.colorSchemes.paraiso;
+
+  wayland.windowManager.hyprland =
+    {
+      enable = true;
+      xwayland =
+        { enable = true; hidpi = true; };
+      nvidiaPatches = true;
+      extraConfig = import ./hyprland.nix;
+    };
+  home.file.".config/hypr/hyprpaper.conf".text = ''
+    preload = /home/ari/dotfiles/wallpapers/future_funk_4k.jpg
+    wallpaper = ,/home/ari/dotfiles/wallpapers/future_funk_4k.jpg
+  '';
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [ "openssl-1.0.2u" ];
   nixpkgs.overlays = [
@@ -18,12 +48,12 @@ in
         firefox-nightly-bin = super.latest.firefox-nightly-bin;
         rustChannels.nightly.rust = (super.rustChannelOf {
           channel = "nightly";
-          date = "2021-12-05";
+          date = "2023-06-23";
         }).rust.override {
           targets = [ "wasm32-unknown-unknown" ];
 
           extensions =
-            [ "rustfmt-preview" "clippy-preview" "rust-src" ];
+            [ "rustfmt-preview" "rust-src" ];
         };
       };
     })
@@ -47,6 +77,7 @@ in
 
   home.packages = with pkgs; [
     # system utils
+    yubioath-flutter
     bottom
     xclip
     psmisc
@@ -71,12 +102,13 @@ in
     # yubikey-manager
     grc
 
+    hyprpaper
+    ags
     # languages & build tools
     go
     gnumake
     lua
     tokei
-    python
     python3Full
     cmake
     yarn
@@ -86,7 +118,6 @@ in
     (import ./git-quick-stats)
     awscli
     ansible
-    blender
     libuuid
     swiProlog
     glslang
@@ -117,6 +148,7 @@ in
     pngquant
     # (import ./drone-cli)
 
+    wezterm
     # desktop env
     pywal
     flite
@@ -131,15 +163,12 @@ in
     s-tui
     clang
     lld
-    inkscape
     # (import ./xwobf)
     (import ./srandrd)
-    yubikey-touch-detector
 
     blueman
     exa
     lsof
-    wine
     barrier
     pfetch
 
@@ -147,12 +176,8 @@ in
     # apps
     appimage-run
     # firefox
-    steam
-    minecraft
-    android-studio
     jdk11
     latest.firefox-nightly-bin
-    replay-browser
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
         vscode-extensions.vadimcn.vscode-lldb
@@ -163,6 +188,7 @@ in
         dbaeumer.vscode-eslint
         svelte.svelte-vscode
         usernamehw.errorlens
+        github.copilot
         (import ./skyweaver-vscode)
       ]
       ++ vscode-utils.extensionsFromVscodeMarketplace [
@@ -233,21 +259,17 @@ in
     neofetch
     woeusb
     simplescreenrecorder
-    arduino
-    xoscope
     vlc
     spotify
-    transmission-gtk
-    meshlab
     bitwarden
+    arduino
 
     # chat
-    weechat
     discord
 
 
     #remote desktop shit
-    xpra
+    teamviewer
   ];
 
   programs.home-manager = {
@@ -264,7 +286,7 @@ in
   services = {
     dunst = import ./dunst.nix pkgs;
 
-    picom = import ./compton.nix pkgs;
+    # picom = import ./compton.nix pkgs;
     network-manager-applet = { enable = true; };
     gpg-agent = {
       enable = true;
@@ -290,12 +312,14 @@ in
       gs = "git status";
       gp = "git pull";
       gc = "git commit -m";
+      gca = "git commit --amend";
       gl = "git log";
       gf = "git fetch -p";
       ls = "exa";
       lg = "lazygit";
       ld = "lazydocker";
       gcm = "git checkout master";
+      p = "pnpm";
     };
     shellInit = ''
       starship init fish | source
@@ -335,4 +359,6 @@ in
     lfs.enable = true;
     delta.enable = true;
   };
-}
+  home.stateVersion = "19.09";
+
+  }

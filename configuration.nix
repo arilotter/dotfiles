@@ -115,7 +115,8 @@ in
     to = 60999;
   }
     { from = 2999; to = 3001; }
-    { from = 8079; to = 8081; }];
+    { from = 8079; to = 8081; }
+    { from = 4002; to = 4002; }];
 
   # For Chromecast :|
   networking.firewall.allowedUDPPortRanges = [{
@@ -186,7 +187,6 @@ in
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
   };
 
 
@@ -221,6 +221,7 @@ in
         "networkmanager"
         "adbusers"
         "docker"
+        "dialout"
       ];
       uid = 1000;
       shell = pkgs.fish;
