@@ -85,7 +85,7 @@ theme: ''
     #
     # This is a global setting and will require a log out or restart to take
     # effect.
-    use_thin_strokes: true
+    # use_thin_strokes: true
 
   # Display the time it takes to redraw each frame.
   # render_timer: false
