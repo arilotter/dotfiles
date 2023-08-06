@@ -8,7 +8,7 @@ automatic_themes() {
     ls ~/dotfiles/wallpapers/ | sed 's/\.[^.]*$//' | sed -e 's/.*/automatic: dark: \0\nautomatic: light: \0/'
 }
 
-THEME_NAME=$({ automatic_themes; builtin_themes; } | rofi -dmenu -p 'theme:')
+THEME_NAME=$({ automatic_themes; builtin_themes; } | wofi -dmenu -p 'theme:')
 THEME=$(echo $THEME_NAME | grep -oP '(dark|light|extra): ([\w-]+)')
 TYPE=$(echo $THEME | cut -d ' ' -f1)
 NAME=$(echo $THEME | cut -d ' ' -f2)
@@ -26,7 +26,7 @@ else
     echo "no theme selected"
     exit 1
 fi
-
+echo $WAL_COMMAND
 $WAL_COMMAND
 
 home-manager switch

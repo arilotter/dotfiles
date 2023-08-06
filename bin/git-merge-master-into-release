@@ -4,5 +4,5 @@ git fetch -p
 git checkout origin/release
 git branch -D merge-master-into-release
 git checkout -b merge-master-into-release
-git merge origin/master
+git merge origin/master --no-edit
 git push --set-upstream origin merge-master-into-release --force
