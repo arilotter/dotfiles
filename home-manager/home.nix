@@ -1,30 +1,31 @@
-{ config, pkgs, nix-colors, e, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
-  mozilla = import (builtins.fetchGit {
-    url = "https://github.com/mozilla/nixpkgs-mozilla.git";
-    ref = "master";
-  });
-
+  vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
 in
 {
-  home.username = "ari";
-  home.homeDirectory = "/home/ari";
-  home.stateVersion = "23.05"; # Don't change unless instructed
+  home = {
+    username = "ari";
+    homeDirectory = "/home/ari";
+    stateVersion = "23.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  };
 
-  colorScheme = nix-colors.colorSchemes.paraiso;
+  programs.home-manager.enable = true;
+
+  # systemd.user.startServices = "sd-switch";
+
+  colorScheme = inputs.nix-colors.colorSchemes.paraiso;
 
   home.packages = with pkgs; [
     # shell config
     starship # prompt
     exa # ls replacement
-    sudoedit # edit files as root w/o ur editor being root
 
     # desktop env
     hyprpaper # wallpaper manager
     gnome3.nautilus # file manager
     pamixer # audio control shell for gbar
-    e.packages.x86_64-linux.grimblast # screenshot tool
+    inputs.hypr-contrib.packages.${pkgs.system}.grimblast # screenshot tool
     upower # battery
     wezterm # terminal emulator
     pavucontrol # audio control
@@ -35,7 +36,7 @@ in
 
     vlc # video player
     spotify # music player
-    firefox # web browser
+    inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin # web browser
     google-chrome # web browser
     discord
     slack
@@ -57,94 +58,25 @@ in
 
 
     (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions; [
-        ms-python.python
-        vscode-extensions.vadimcn.vscode-lldb
-        ms-vsliveshare.vsliveshare
-        golang.go
-        matklad.rust-analyzer
-        ms-azuretools.vscode-docker
-        dbaeumer.vscode-eslint
-        svelte.svelte-vscode
-        usernamehw.errorlens
-        github.copilot
-        ms-vscode.cpptools
-        (import ./skyweaver-vscode)
-      ]
-      ++ vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "platformio-ide";
-          publisher = "platformio";
-          version = "2.5.2";
-          sha256 = "sha256-4Ukoj+gjDnKtIuKaaeiTQJooTeQEzeRfxJOg6E72mi8=";
-        }
-        {
-          name = "vitest-explorer";
-          publisher = "ZixuanChen";
-          version = "0.2.39";
-          sha256 = "sha256-W5u493ubJ/qjEnPt7qUTIriHOvfpqSheYjaC5MSXlTQ=";
-        }
-
-        {
-          name = "tsl-problem-matcher";
-          publisher = "amodio";
-          version = "0.6.2";
-          sha256 = "sha256-o+kYuC4bmY7OQJDv32Kpp21p2j/wiNPcVB8vjzOMl+s=";
-        }
-        {
-          name = "shader";
-          publisher = "slevesque";
-          version = "1.1.5";
-          sha256 = "sha256-Pf37FeQMNlv74f7LMz9+CKscF6UjTZ7ZpcaZFKtX2ZM=";
-        }
-        {
-          name = "blockman";
-          publisher = "leodevbro";
-          version = "1.2.0";
-          sha256 = "1gpq717r002h3w4238rc57y0fvnwrhrc2a7rpdayw79ar7ahqaiv";
-        }
-        {
-          name = "nix-ide";
-          publisher = "jnoortheen";
-          version = "0.1.3";
-          sha256 = "1c2yljzjka17hr213hiqad58spk93c6q6xcxvbnahhrdfvggy8al";
-        }
-        {
-          name = "vetur";
-          publisher = "octref";
-          version = "0.33.1";
-          sha256 = "1iq2h87j7dr4vf9zgzihd5q4d95grc0iirz68az5dnvy19nvfv57";
-        }
-        {
-          name = "even-better-toml";
-          publisher = "tamasfe";
-          version = "0.19.2";
-          sha256 = "sha256-JKj6noi2dTe02PxX/kS117ZhW8u7Bhj4QowZQiJKP2E=";
-        }
-        {
-          name = "horizon-theme-vscode";
-          publisher = "jolaleye";
-          version = "2.0.2";
-          sha256 = "1ch8m9h6zxn8xj92ml5294637ygabnyird3f6vbh1djzwwz5rykc";
-        }
-        {
-          name = "prettier-vscode";
-          publisher = "esbenp";
-          version = "5.8.0";
-          sha256 = "0h7wc4pffyq1i8vpj4a5az02g2x04y7y1chilmcfmzg2w42xpby7";
-        }
-        {
-          name = "gitlens";
-          publisher = "eamodio";
-          version = "11.0.6";
-          sha256 = "0qlaq7hn3m73rx9bmbzz3rc7khg0kw948z2j4rd8gdmmryy217yw";
-        }
-        {
-          name = "vs-code-prettier-eslint";
-          publisher = "rvest";
-          version = "0.4.1";
-          sha256 = "0inqkn574zjzg52qcnmpfhsbzbi6vxnr2lrqqff9mh5vvvqsm6v0";
-        }
+      vscode = vscodium;
+      vscodeExtensions = [
+        vsc-ext.ms-python.python
+        vsc-ext.vadimcn.vscode-lldb
+        vsc-ext.ms-vsliveshare.vsliveshare
+        vsc-ext.golang.go
+        vsc-ext.rust-lang.rust-analyzer
+        vsc-ext.ms-azuretools.vscode-docker
+        vsc-ext.dbaeumer.vscode-eslint
+        vsc-ext.svelte.svelte-vscode
+        vsc-ext.usernamehw.errorlens
+        vsc-ext.github.copilot
+        vsc-ext.ms-vscode.cpptools
+        vsc-ext.jnoortheen.nix-ide
+        # (import ./skyweaver-vscode)
+        vsc-ext.tamasfe.even-better-toml
+        # vsc-ext.jolaleye.horizon-theme-vscode
+        vsc-ext.esbenp.prettier-vscode
+        vsc-ext.rvest.vs-code-prettier-eslint
       ];
     })
 
@@ -190,7 +122,6 @@ in
     ".config/gBar/style.scss".source = ./gBar/style.scss;
   };
   home.sessionVariables = { };
-  programs.home-manager.enable = true;
 
   wayland.windowManager.hyprland =
     {
@@ -282,13 +213,7 @@ in
   };
 
   nixpkgs = {
-    # bug workaround
+    # workaround for https://github.com/nix-community/home-manager/issues/2942
     config.allowUnfreePredicate = (pkg: true);
-    overlays = [
-      mozilla
-      (self: super: {
-        firefox-nightly-bin = super.latest.firefox-nightly-bin;
-      })
-    ];
   };
 }
