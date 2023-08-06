@@ -20,7 +20,6 @@ critical_fg = "{background}"
 
 [[block]]
 block = "temperature"
-collapsed = false
 interval = 10
 format = "{{min}}  {{max}}  {{average}}"
 
@@ -53,7 +52,6 @@ interval = 1
 
 [[block]]
 block = "net"
-device = "wlp82s0"
 format = "{{ssid}} {{signal_strength}} {{ip}} {{speed_up;K*b}} {{speed_down;K*b}}"
 interval = 5
 
@@ -62,6 +60,8 @@ block = "sound"
 
 [[block]]
 block = "battery"
+allow_missing = true
+hide_missing = true
 
 [[block]]
 block = "time"

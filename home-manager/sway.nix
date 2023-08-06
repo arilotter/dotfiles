@@ -14,10 +14,23 @@ let
     _10 = "10";
   };
   mod = "Mod4";
-in {
+in
+{
   enable = true;
-  package = pkgs.sway;
+  wrapperFeatures.gtk = true;
   config = {
+    output = {
+      DP-3 = {
+        scale = "2";
+        transform = "90";
+        pos = "0,0";
+      };
+
+      DP-2 = {
+        scale = "2";
+        pos = "1080,0";
+      };
+    };
     modifier = mod;
     keybindings = {
       "XF86AudioRaiseVolume" =
@@ -30,7 +43,6 @@ in {
       "XF86MonBrightnessDown" = "exec --no-startup-id light -U 10";
       "XF86Tools" = "exec --no-startup-id change-theme";
       "XF86Favorites" = "exec /home/ari/bin/lock";
-      "XF86Display" = "exec --no-startup-id xrandr --auto";
       "${mod}+Return" = "exec alacritty";
 
       "${mod}+Shift+q" = "kill";
@@ -38,12 +50,10 @@ in {
       "${mod}+z" = "exec --no-startup-id exec i3zen";
 
       "${mod}+d" =
-        ''exec rofi -modi drun -show drun -display-drun "" -show-icons '';
-      "${mod}+g" = ''
-        exec rofi -dmenu -p "" | sed "s%^%https://duckduckgo.com/search?q=%" | xargs firefox'';
+        ''exec wofi --show drun --allow-images'';
 
-      "${mod}+Shift+d" = "exec rofi -show window";
-      "${mod}+Shift+f" = "exec rofi -show emoji -modi emoji";
+      "${mod}+Shift+d" = "exec wofi -show window";
+      "${mod}+Shift+f" = "exec wofi -show emoji -modi emoji";
       "${mod}+Shift+s" = "exec screenshot";
 
       "${mod}+j" = "focus left";
@@ -117,7 +127,7 @@ in {
 
       # exit i3 (logs you out of your X session)
       "${mod}+Shift+e" = ''
-        exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"'';
+        exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your wayland session.' -b 'Yes, exit sway' 'sway exit'"'';
 
       "${mod}+r" = "mode resize";
 
@@ -164,35 +174,23 @@ in {
       {
         command = "xset r rate 300 30";
         always = true;
-        notification = false;
-      }
-      {
-        command = "srandrd autorandr -c";
-        notification = false;
-      }
-      {
-        command = "autorandr -c";
-        notification = false;
       }
       {
         command = "wal -nR";
-        notification = false;
       }
       {
         command = "feh --bg-fill ${theme.wallpaper}";
         always = true;
-        notification = false;
       }
       {
         command = "i3-msg workspace 1";
-        notification = false;
       }
     ];
     bars = [{
       fonts = [ "FiraCode Nerd Font 11" ];
       position = "bottom";
       statusCommand =
-        "${pkgs.i3status-rust}/bin/i3status-rs ~/.cache/wal/i3status-rs.toml";
+        "${pkgs.i3status-rust}/bin/i3status-rs ~/dotfiles/nixpkgs/i3status-rs.toml";
       colors = with theme; {
         separator = hex.foreground;
         focusedWorkspace = {
@@ -230,6 +228,9 @@ in {
         {
           "window_role" = "pop-up";
         } # how to disable pop for chrome devtools?  "title"="^(?!DevTools - .*$))";
+        {
+          "title" = "Firefox — Sharing Indicator";
+        }
       ];
     };
   };

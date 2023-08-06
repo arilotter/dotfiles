@@ -29,6 +29,7 @@ in
     };
     modifier = mod;
     keybindings = {
+      "XF86AudioPlay" = "exec --no-startup-id playerctl play-pause";
       "XF86AudioRaiseVolume" =
         "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3%";
       "XF86AudioLowerVolume" =
@@ -44,7 +45,6 @@ in
 
       "${mod}+Shift+q" = "kill";
 
-      "${mod}+z" = "exec --no-startup-id exec i3zen";
 
       "${mod}+d" =
         ''exec rofi -modi drun -show drun -display-drun "" -show-icons '';
@@ -176,40 +176,20 @@ in
         notification = false;
       }
       {
-        command = "srandrd autorandr -c";
-        notification = false;
-      }
-      {
-        command = "autorandr -c";
-        notification = false;
-      }
-      {
-        command = "wal -nR";
-        notification = false;
-      }
-      {
-        command = "feh --bg-fill ${theme.wallpaper}";
-        always = true;
-        notification = false;
-      }
-      {
         command = "i3-msg workspace home";
         notification = false;
       }
       {
-        command = ''xmodmap -e "clear lock"'';
+        command = "setxkbmap -option caps:super";
         notification = false;
-        always = true;
       }
       {
-        command = ''xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"'';
+        command = "xcape -e 'Super_L=Escape'";
         notification = false;
-        always = true;
       }
       {
-        command = ''xmodmap -e "keycode 66 = Escape NoSymbol Escape"'';
+        command = "~/dotfiles/wallpapers/future_funk_4k.jpg";
         notification = false;
-        always = true;
       }
     ];
     bars = [{
@@ -219,7 +199,7 @@ in
       };
       position = "bottom";
       statusCommand =
-        "${pkgs.i3status-rust}/bin/i3status-rs ~/.cache/wal/i3status-rs.toml";
+        "${pkgs.i3status-rust}/bin/i3status-rs ~/dotfiles/nixpkgs/i3status-rs.toml";
       colors = with theme; {
         separator = hex.foreground;
         focusedWorkspace = {
@@ -251,7 +231,8 @@ in
         { "window_type" = "menu"; }
         {
           "window_role" = "pop-up";
-        } # how to disable pop for chrome devtools?  "title"="^(?!DevTools - .*$))";
+        }
+        # how to disable pop for chrome devtools?  "title"="^(?!DevTools - .*$))";
       ];
     };
   };
