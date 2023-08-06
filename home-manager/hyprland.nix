@@ -1,7 +1,8 @@
-''
+{ pkgs, ... }: ''
   # Startup 
   exec-once = hyprpaper
   exec-once = ags
+  exec-once = gBar bar 0
   # todo lockscreen
 
   input {
@@ -70,13 +71,13 @@
 
   animations {
       enabled = true
-      bezier=myBezier,0.05,0.9,0.1,1.1
-      animation = windows, 1, 5, myBezier
-      animation = windowsOut, 1, 5, myBezier, popin 80%
-      animation = border, 1, 10, default
-      animation = borderangle, 1, 8, default
-      animation = fade, 1, 5, myBezier
-      animation = workspaces, 1, 6, myBezier
+      bezier=myBezier,0.48,0.46,0,1
+      animation = windows, 1, 1, myBezier
+      animation = windowsOut, 1, 1, myBezier, popin 80%
+      animation = border, 1, 1, default
+      animation = borderangle, 1, 1, default
+      animation = fade, 1, 1, myBezier
+      animation = workspaces, 1, 1, myBezier
   }
 
   dwindle {
@@ -109,7 +110,7 @@
   # Keybinds! 
   $mod = SUPER
   bind = $mod, Return, exec, wezterm
-  bind = $mod, D, togglesplit
+  bind = $mod, R, togglesplit
   bind = $mod, F, fullscreen
   bind = $mod, D, exec, rofi -show drun
   bind = $mod Shift, Q, killactive
@@ -122,12 +123,11 @@
   bind = $mod, C, exec, ags toggle-window notificationsCenter
   bind = $mod, N, exec, ags toggle-window quicksettings
   bind = , Print, exec, grimblast copysave output # screenshot
-  binde = , XF86MonBrightnessUp, exec, ags run-js 'ags.Service.Brightness.screen = ags.Service.Brightness.screen + 0.03' & ags run-js "ags.Service.Indicator.display()" # volume down
-  binde = , XF86MonBrightnessDown, exec, ags run-js 'ags.Service.Brightness.screen = ags.Service.Brightness.screen - 0.03' & ags run-js "ags.Service.Indicator.display()" # volume down
-  bind = , XF86AudioMute, exec, amixer -q sset Master toggle # volume mute
-  binde = , XF86AudioLowerVolume, exec, amixer -q sset Master 3%- & ags run-js "ags.Service.Indicator.speaker()" # volume down
-  binde = , XF86AudioRaiseVolume, exec, amixer -q sset Master 3%+ & ags run-js "ags.Service.Indicator.speaker()" # volume up
-  bind = , XF86AudioMute, exec, amixer -q sset Master toggle # volume mute
+  binde = , XF86MonBrightnessUp, exec, ${pkgs.light}/bin/light -A 5
+  binde = , XF86MonBrightnessDown, exec, ${pkgs.light}/bin/light -U 5
+  binde = , XF86AudioRaiseVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +3%
+  binde = , XF86AudioLowerVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -3%
+  bind = , XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
   bind = SHIFT, Print, exec, grimblast copysave area # screenshot area
   
   bind = SUPER_SHIFT,S,movetoworkspace,special
@@ -139,6 +139,13 @@
   bind = $mod, Right, movefocus, r
   bind = $mod, Up, movefocus, u
   bind = $mod, Down, movefocus, d
+
+
+  # Move windows with mod + arrow keys
+  bind = $mod Shift, Left, movewindow, l
+  bind = $mod Shift, Right, movewindow, r
+  bind = $mod Shift, Up, movewindow, u
+  bind = $mod Shift, Down, movewindow, d
 
   # Switch workspaces with mod + [0-9]
   bind = $mod, 1, workspace, 1
