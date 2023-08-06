@@ -213,7 +213,6 @@ in
     };
   };
   programs.direnv.enable = true;
-  programs.rofi = import ./rofi.nix pkgs;
   services =
     {
       dunst = import ./dunst.nix pkgs;
