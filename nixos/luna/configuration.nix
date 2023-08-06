@@ -37,8 +37,6 @@
 
   time.timeZone = "America/Toronto";
 
-  networking.interfaces.enp34s0.useDHCP = true;
-
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "FiraCode";
@@ -57,7 +55,7 @@
       "XDG_SESSION_DESKTOP"
     ];
   };
-
+powerManagement.cpuFreqGovernor = "performance";
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
@@ -113,7 +111,7 @@
     nixfmt
   ];
 
-  environment.variables = { WLR_NO_HARDWARE_CURSORS = "1"; };
+  environment.variables = { WLR_NO_HARDWARE_CURSORS = "1"; NIXOS_OZONE_WL = "1"; };
 
   fonts.packages = with pkgs; [
     noto-fonts

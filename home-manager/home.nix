@@ -33,6 +33,7 @@ in
     wofi # launcher
     wl-clipboard # copy/paste cli
     neofetch # i mean, c'mon :)
+    monado # xr? :D
 
     vlc # video player
     spotify # music player
