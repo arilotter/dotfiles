@@ -28,23 +28,32 @@
       url = "github:scorpion-26/gBar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    firefox = {
+      url = "github:colemickens/flake-firefox-nightly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vscode-ext = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
-    # `nixos-rebuild --flake .#luna`
+  outputs = { nixpkgs, home-manager, nix-colors, ... }@inputs: {
+    # `sudo nixos-rebuild switch --flake .#luna`
     nixosConfigurations = {
       # desktop ~
       "luna" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [ ./nixos/luna/configuration.nix ];
       };
     };
 
-    # `home-manager --flake .#ari@luna`
+    # `home-manager switch --flake .#ari@luna`
     homeConfigurations = {
       "ari@luna" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
           inputs.hyprland.homeManagerModules.default
           inputs.nix-colors.homeManagerModules.default
