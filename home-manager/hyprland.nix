@@ -45,10 +45,11 @@
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
       rounding = 24
       multisample_edges = true
-      blur = yes
-      blur_size = 5
-      blur_passes = 5
-      blur_new_optimizations = on
+      blur {
+        enabled = true
+        size = 5
+        passes = 1
+      }
 
       shadow_range=20
       shadow_render_power=2
@@ -62,7 +63,6 @@
       blurls=indicator0
       blurls=indicator1
       blurls=wofi
-      blurls=rofi
       blurls=notifications
       blurls=notificationsCenter
       blurls=gtk-layer-shell
@@ -98,7 +98,7 @@
 
 
 
-  layerrule=ignorealpha[0.99],rofi
+  layerrule=ignorealpha[0.99],wofi
   layerrule=ignorealpha[0.99],waybar
   layerrule=ignorealpha[0.99],quicksettings
   layerrule=ignorealpha[0.99],notificationsCenter
@@ -112,7 +112,7 @@
   bind = $mod, Return, exec, wezterm
   bind = $mod, R, togglesplit
   bind = $mod, F, fullscreen
-  bind = $mod, D, exec, rofi -show drun
+  bind = $mod, D, exec, wofi --show drun --allow-images
   bind = $mod Shift, Q, killactive
 
   bind = $mod, Tab, workspace, previous
