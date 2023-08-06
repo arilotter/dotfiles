@@ -38,6 +38,7 @@
     disable_splash_rendering = true
     mouse_move_enables_dpms = true
     layers_hog_keyboard_focus = true
+    vfr = false
   }
 
 
