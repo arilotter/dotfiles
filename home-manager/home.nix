@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
@@ -49,6 +49,7 @@ in
 
     # command-line utils
     thefuck
+    killall
     file # file type identification
     graphviz # graph visualization
     toilet # text to ascii art
@@ -77,7 +78,7 @@ in
         vsc-ext.tamasfe.even-better-toml
         # vsc-ext.jolaleye.horizon-theme-vscode
         vsc-ext.esbenp.prettier-vscode
-        vsc-ext.rvest.vs-code-prettier-eslint
+        vsc-ext.dbaeumer.vscode-eslint
       ];
     })
 
@@ -91,6 +92,7 @@ in
     awscli # aws cli
     ansible # ansible devops bullshit
     wabt # wasm binary toolkit
+    nil #nix lang server
 
     # programming languages
     go
@@ -130,7 +132,7 @@ in
       xwayland =
         { enable = true; hidpi = true; };
       nvidiaPatches = true;
-      extraConfig = import ./hyprland.nix pkgs;
+      extraConfig = import ./hyprland.nix pkgs ;
     };
   programs.gBar = {
     enable = true;

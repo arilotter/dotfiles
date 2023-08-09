@@ -1,7 +1,6 @@
-{ pkgs, ... }: ''
+{ pkgs, config, ... }: ''
   # Startup 
   exec-once = hyprpaper
-  exec-once = ags
   exec-once = gBar bar 0
   # todo lockscreen
 
@@ -27,9 +26,9 @@
   general {
     gaps_in = 6
     gaps_out = 12
-    border_size = 1
-    col.inactive_border = rgba(8c919850)
-    col.active_border = rgba(8c919850)
+    border_size = 8
+    col.inactive_border = rgba(bbbbdd55)
+    col.active_border = rgba(bb3355ff)
     layout = dwindle
   }
   
@@ -44,10 +43,11 @@
 
   decoration {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
-      rounding = 24
+      rounding = 4
       multisample_edges = true
+
       blur {
-        enabled = true
+        enabled = false
         size = 5
         passes = 1
       }
@@ -96,6 +96,9 @@
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
       workspace_swipe = yes
   }
+
+  monitor=HDMI-A-1,3840x2160@60,2160x200,1
+  monitor=DP-3,2160x3840@60,0x0,1,transform,3
 
 
 
