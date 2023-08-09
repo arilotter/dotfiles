@@ -59,7 +59,6 @@ powerManagement.cpuFreqGovernor = "performance";
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
-    powerManagement.enable = false;
     nvidiaSettings = true;
   };
   hardware.opengl = {
