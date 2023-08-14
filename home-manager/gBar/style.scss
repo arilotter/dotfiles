@@ -1,19 +1,4 @@
-// colorscheme(dracula)
-// See https://github.com/dracula/dracula-theme/blob/master/LICENSE or dracula/LICENSE for the license
-$bg: #282a36;
-$fg: #f8f8f2;
-$inactive: #44475a;
-$darkblue: #6272a4;
-$cyan: #8be9fd;
-$green: #50fa7b;
-$orange: #ffb86c;
-$pink: #ff79c6;
-$purple: #bd93f9;
-$red: #ff5555;
-$yellow: #f1fa8c;
-
-
-$btblue: #1793D1;
+@import "colors.scss";
 
 $textsize: 16px;
 
@@ -386,8 +371,8 @@ highlight {
     color: $red;
     background-color: $inactive;
     border-radius: 16px;
-	padding: 0px 8px 0px 7px;
-	margin: 0px 0px 0px 8px;
+    padding: 0px 8px 0px 7px;
+    margin: 0px 0px 0px 8px;
 }
 .bt-scan {
     &.active {
@@ -406,6 +391,6 @@ highlight {
     background-color: $inactive;
     border-radius: 16px;
     padding: 2px 11px 0px 7px;
-	margin: 0px 0px 0px 10px;
+    margin: 0px 0px 0px 10px;
     font-size: 18px;
 }

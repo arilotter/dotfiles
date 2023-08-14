@@ -113,7 +113,7 @@
 
   # Keybinds! 
   $mod = SUPER
-  bind = $mod, Return, exec, wezterm
+  bind = $mod, Return, exec, ${pkgs.kitty}/bin/kitty
   bind = $mod, R, togglesplit
   bind = $mod, F, fullscreen
   bind = $mod, D, exec, wofi --show drun --allow-images

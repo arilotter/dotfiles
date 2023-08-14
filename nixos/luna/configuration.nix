@@ -126,8 +126,8 @@ powerManagement.cpuFreqGovernor = "performance";
 
   services.openssh.enable = false;
 
-  networking.firewall.allowedTCPPorts = [ 24800 ];
-  networking.firewall.allowedUDPPorts = [ 24800 ];
+  networking.firewall.allowedTCPPorts = [ 24800 34563 ];
+  networking.firewall.allowedUDPPorts = [ 24800 34563];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "21.11";

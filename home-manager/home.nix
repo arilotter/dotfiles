@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 let
   vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
@@ -27,13 +27,14 @@ in
     pamixer # audio control shell for gbar
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast # screenshot tool
     upower # battery
-    wezterm # terminal emulator
+    kitty # terminal emulator
     pavucontrol # audio control
     blueman # bluetooth manager
     wofi # launcher
     wl-clipboard # copy/paste cli
     neofetch # i mean, c'mon :)
     monado # xr? :D
+    sass # for gbar
 
     vlc # video player
     spotify # music player
@@ -92,7 +93,7 @@ in
     awscli # aws cli
     ansible # ansible devops bullshit
     wabt # wasm binary toolkit
-    nil #nix lang server
+    nixd #nix lang server
 
     # programming languages
     go
@@ -121,9 +122,13 @@ in
       preload = /home/ari/dotfiles/wallpapers/future_funk_4k.jpg
       wallpaper = ,/home/ari/dotfiles/wallpapers/future_funk_4k.jpg
     '';
-    ".config/gBar/style.css".source = ./gBar/style.css;
-    ".config/gBar/style.scss".source = ./gBar/style.scss;
+    ".config/gBar/style.css".source = import ./compileSass.nix {
+      pkgs = pkgs;
+      inputFile = ./gBar/style.scss;
+      otherFiles = "${pkgs.writeTextDir "colors.scss" (import ./gBar/colors.scss.nix config)}/colors.scss";
+    };
   };
+
   home.sessionVariables = { };
 
   wayland.windowManager.hyprland =
@@ -132,7 +137,7 @@ in
       xwayland =
         { enable = true; hidpi = true; };
       nvidiaPatches = true;
-      extraConfig = import ./hyprland.nix pkgs ;
+      extraConfig = import ./hyprland.nix pkgs;
     };
   programs.gBar = {
     enable = true;
