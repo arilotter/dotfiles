@@ -33,7 +33,7 @@
       url = "github:colemickens/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     vscode-ext = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,27 +41,47 @@
   };
 
   outputs = { nixpkgs, home-manager, nix-colors, ... }@inputs: {
-    # `sudo nixos-rebuild switch --flake .#luna`
     nixosConfigurations = {
       # desktop ~
+      # `sudo nixos-rebuild switch --flake .#luna`
       "luna" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
-        modules = [ ./nixos/luna/configuration.nix ];
-      };
-    };
-
-    # `home-manager switch --flake .#ari@luna`
-    homeConfigurations = {
-      "ari@luna" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
-          inputs.hyprland.homeManagerModules.default
-          inputs.nix-colors.homeManagerModules.default
-          inputs.gBar.homeManagerModules.x86_64-linux.default
-          ./home-manager/home.nix
+          ./nixos/common-configuration.nix
+          ./nixos/luna/hardware-configuration.nix
+          ./nixos/luna/configuration.nix
+        ];
+      };
+
+      # linux lappy
+      # `sudo nixos-rebuild switch --flake .#sol`
+      "sol" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; inherit nix-colors; };
+        modules = [
+          ./nixos/common-configuration.nix
+          ./nixos/sol/hardware-configuration.nix
+          ./nixos/sol/configuration.nix
         ];
       };
     };
+
+    # `home-manager switch --flake .#ari`
+    homeConfigurations =
+      let
+        arisHome = home-manager.lib.homeManagerConfiguration
+          {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+            extraSpecialArgs = { inherit inputs; inherit nix-colors; };
+            modules = [
+              inputs.hyprland.homeManagerModules.default
+              inputs.nix-colors.homeManagerModules.default
+              inputs.gBar.homeManagerModules.x86_64-linux.default
+              ./home-manager/home.nix
+            ];
+          };
+      in
+      {
+        "ari" = arisHome;
+      };
   };
 }

@@ -127,6 +127,10 @@ in
       inputFile = ./gBar/style.scss;
       otherFiles = "${pkgs.writeTextDir "colors.scss" (import ./gBar/colors.scss.nix config)}/colors.scss";
     };
+    ".cargo/config.toml".text = ''    
+[net]
+git-fetch-with-cli = true   # use the `git` executable for git operations
+'';
   };
 
   home.sessionVariables = { };
@@ -134,9 +138,8 @@ in
   wayland.windowManager.hyprland =
     {
       enable = true;
-      xwayland =
-        { enable = true; hidpi = true; };
-      nvidiaPatches = true;
+      xwayland.enable = true;
+      enableNvidiaPatches = true;
       extraConfig = import ./hyprland.nix pkgs;
     };
   programs.gBar = {
@@ -183,7 +186,7 @@ in
     shellInit = ''
       starship init fish | source
       source ~/dotfiles/secrets
-      
+      alias code codium
 
       set -gx GDK_BACKEND wayland
       set -gx MOZ_ENABLE_WAYLAND 1
@@ -209,7 +212,7 @@ in
     enable = true;
     userEmail = "arilotter@gmail.com";
     userName = "Ari Lotter";
-    extraConfig.core.editor = "code --wait";
+    extraConfig.core.editor = "codium --wait";
     extraConfig.pull.rebase = true;
     extraConfig.rebase.autoStash = true;
     extraConfig.diff.tool = "default-difftool";

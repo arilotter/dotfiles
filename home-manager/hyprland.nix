@@ -2,6 +2,7 @@
   # Startup 
   exec-once = hyprpaper
   exec-once = gBar bar 0
+  exec-once = ${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon --daemonize --components=secrets
   # todo lockscreen
 
   input {
