@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  hardware.opengl.enable = false;
+
   networking.hostName = "kronos";
 
   hardware = {
@@ -16,4 +18,6 @@
 
   networking.firewall.allowedTCPPortRanges = [
   ];
+
+  services.printing.enable = false;
 }
