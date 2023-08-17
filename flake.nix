@@ -80,14 +80,17 @@
       # `nix build '.#kronos.config.system.build.sdImage'`
       "kronos" = nixpkgs.lib.nixosSystem
         {
-          crossSystem.system = "aarch64-linux"
-            # system = "aarch64-linux";
-            modules = [
-          inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-          ./nixos/common-configuration.nix
-          ./nixos/kronos/hardware-configuration.nix
-          ./nixos/kronos/drivers.nix
-          ./nixos/kronos/configuration.nix
+          system = "aarch64-linux";
+          modules = [
+            ({ lib }: {
+              nixpkgs.crossSystem =
+                lib.systems.examples.aarch64-multiplatform;
+            })
+            inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+            ./nixos/common-configuration.nix
+            ./nixos/kronos/hardware-configuration.nix
+            ./nixos/kronos/drivers.nix
+            ./nixos/kronos/configuration.nix
           ];
         };
     };
