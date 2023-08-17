@@ -60,7 +60,6 @@
     unzip
     fish
     nano
-    nixfmt
   ];
 
   fonts.packages = with pkgs; [
@@ -78,10 +77,6 @@
       enable = true;
       nssmdns = true;
     };
-  };
-
-  networking = {
-    networkmanager.enable = true;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

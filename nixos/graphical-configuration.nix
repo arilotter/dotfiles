@@ -41,5 +41,13 @@
       drivers = with pkgs; [ gutenprint gutenprintBin brlaser ];
     };
   };
+
+  networking = {
+    networkmanager.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    nixfmt
+  ];
 }
 
