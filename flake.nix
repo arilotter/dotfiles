@@ -80,9 +80,10 @@
       # `nix build '.#kronos.config.system.build.sdImage'`
       "kronos" = nixpkgs.lib.nixosSystem
         {
-          system = "aarch64-darwin";
           modules = [
-            ({ lib }: {
+            ({ lib, ... }: {
+  nixpkgs.hostPlatform = "x64_64-linux";
+
               nixpkgs.crossSystem =
                 lib.systems.examples.aarch64-multiplatform;
             })

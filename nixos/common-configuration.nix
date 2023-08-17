@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   nixpkgs = {
     overlays = [ ];
@@ -13,7 +13,7 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
     plymouth.enable = true;
   };
