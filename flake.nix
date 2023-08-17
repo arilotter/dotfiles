@@ -1,6 +1,13 @@
 {
   description = "ari's nice lil nix config :3";
 
+  nixConfig = {
+    extra-substituters = [ "https://raspberry-pi-nix.cachix.org" ];
+    extra-trusted-public-keys = [
+      "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -38,6 +45,10 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    raspberry-pi-nix = {
+      url = "github:tstat/raspberry-pi-nix/9f536c07d1e9e007a61668c52cdfacea1f5ab349";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, nix-colors, ... }@inputs: {
@@ -63,8 +74,22 @@
           ./nixos/sol/configuration.nix
         ];
       };
-    };
 
+      # beeper - kronos = saturn = cuz it rings ;)
+      # `sudo nixos-rebuild switch --flake .#kronos`
+      # `nix build '.#kronos.config.system.build.sdImage'`
+      "kronos" = nixpkgs.lib.nixosSystem
+        {
+          system = "aarch64-linux";
+          modules = [
+            inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+            ./nixos/common-configuration.nix
+            ./nixos/kronos/hardware-configuration.nix
+            ./nixos/kronos/drivers.nix
+            ./nixos/kronos/configuration.nix
+          ];
+        };
+    };
     # `home-manager switch --flake .#ari`
     homeConfigurations =
       let

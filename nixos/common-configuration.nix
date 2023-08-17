@@ -49,6 +49,7 @@
       xdg-desktop-portal-gtk
     ];
   };
+
   virtualisation.docker.enable = true;
   sound.enable = false;
   services.pipewire = {
