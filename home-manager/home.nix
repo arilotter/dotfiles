@@ -21,6 +21,8 @@ in
     starship # prompt
     exa # ls replacement
 
+    binaryen # wasm bullshit for skyweaver
+
     # desktop env
     hyprpaper # wallpaper manager
     gnome3.nautilus # file manager
