@@ -55,7 +55,7 @@
 
       videoDrivers = [ "nvidia" ];
       displayManager = {
-        lemurs.enable = true;
+        sddm.enable = true;
         importedVariables = [
           "XDG_SESSION_TYPE"
           "XDG_CURRENT_DESKTOP"
