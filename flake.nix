@@ -46,7 +46,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     raspberry-pi-nix = {
-      url = "github:tstat/raspberry-pi-nix/9f536c07d1e9e007a61668c52cdfacea1f5ab349";
+      url = "github:tstat/raspberry-pi-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -58,7 +58,8 @@
       "luna" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
-          ./nixos/common-configuration.nix
+          ./nixos/all-systems-configuration.nix
+          ./nixos/graphical-configuration.nix
           ./nixos/luna/hardware-configuration.nix
           ./nixos/luna/configuration.nix
         ];
@@ -69,7 +70,8 @@
       "sol" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
-          ./nixos/common-configuration.nix
+          ./nixos/all-systems-configuration.nix
+          ./nixos/graphical-configuration.nix
           ./nixos/sol/hardware-configuration.nix
           ./nixos/sol/configuration.nix
         ];
@@ -77,18 +79,17 @@
 
       # beeper - kronos = saturn = cuz it rings ;)
       # `sudo nixos-rebuild switch --flake .#kronos`
-      # `nix build '.#kronos.config.system.build.sdImage'`
+      # `sudo nix build '.#nixosConfigurations.kronos.config.system.build.sdImage'`
       "kronos" = nixpkgs.lib.nixosSystem
         {
+          system = "x86_64-linux";
           modules = [
             ({ lib, ... }: {
-  nixpkgs.hostPlatform = "x64_64-linux";
-
               nixpkgs.crossSystem =
                 lib.systems.examples.aarch64-multiplatform;
             })
             inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-            ./nixos/common-configuration.nix
+            ./nixos/all-systems-configuration.nix
             ./nixos/kronos/hardware-configuration.nix
             ./nixos/kronos/drivers.nix
             ./nixos/kronos/configuration.nix
