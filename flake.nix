@@ -98,6 +98,7 @@
             ./nixos/kronos/hardware-configuration.nix
             ./nixos/kronos/drivers.nix
             ./nixos/kronos/configuration.nix
+            ./nixos/wifiNetworks.nix
           ];
         };
     };
