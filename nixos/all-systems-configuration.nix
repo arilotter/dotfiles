@@ -50,6 +50,7 @@
       ];
       shell = pkgs.fish;
       hashedPassword = import ./hashedPassword.nix;
+      openssh.authorizedKeys.keys = import ./physicalSSHKeys.nix;
     };
   };
 
