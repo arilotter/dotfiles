@@ -11,6 +11,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+  inputs.disko ={
+    url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+  };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,18 +82,18 @@
         ];
       };
 
-      # beeper - kronos = saturn = cuz it rings ;)
+      # kronos = saturn = cuz it rings ;)
       # `sudo nixos-rebuild switch --flake .#kronos`
-      # `sudo nix build '.#nixosConfigurations.kronos.config.system.build.sdImage'`
-      "kronos" = nixpkgs.lib.nixosSystem
-        {
-          system = "x86_64-linux";
+
+      # To create a bootable SD from an ARM mac, you need to install the darwin linux builder:
+      # https://nixos.org/manual/nixpkgs/unstable/#sec-darwin-builder
+      # then, you can run the following command to build the image:
+      # `nix build '.#nixosConfigurations.kronos.config.system.build.sdImage'`
+      "kronos" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; inherit nix-colors; };
           modules = [
-            ({ lib, ... }: {
-              nixpkgs.crossSystem =
-                lib.systems.examples.aarch64-multiplatform;
-            })
             inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+            inputs.disko.nixosModules.disko
             ./nixos/all-systems-configuration.nix
             ./nixos/kronos/hardware-configuration.nix
             ./nixos/kronos/drivers.nix
