@@ -1,4 +1,6 @@
 {
+  nixpkgs.hostPlatform = "aarch64-linux";
+
   hardware.raspberry-pi.config.all = {
     base-dt-params = {
       # enable autoprobing of bluetooth driver

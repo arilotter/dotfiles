@@ -1,3 +1,4 @@
 nixpkgs/*/source
 nixpkgs/*/result
 secrets
+wifiNetworks.nix

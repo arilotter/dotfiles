@@ -22,4 +22,6 @@
     userControlled.enable = true;
     networks = { }; # TODO
   };
+  
+  services.openssh.enable = true;
 }
