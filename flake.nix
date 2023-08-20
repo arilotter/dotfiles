@@ -11,11 +11,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-  inputs.disko ={
-    url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-  };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -93,7 +88,6 @@
         specialArgs = { inherit inputs; inherit nix-colors; };
           modules = [
             inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-            inputs.disko.nixosModules.disko
             ./nixos/all-systems-configuration.nix
             ./nixos/kronos/hardware-configuration.nix
             ./nixos/kronos/drivers.nix
