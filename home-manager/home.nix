@@ -82,6 +82,7 @@ in
         # vsc-ext.jolaleye.horizon-theme-vscode
         vsc-ext.esbenp.prettier-vscode
         vsc-ext.dbaeumer.vscode-eslint
+        vsc-ext.gruntfuggly.todo-tree
       ];
     })
 

@@ -109,6 +109,7 @@ in
   sdImage = {
     populateFirmwareCommands = ''
       mkdir -p firmware/overlays/
+      chmod -R 777 firmware/overlays
       cp ${sharpOverlay}/sharp.dtbo firmware/overlays/
       cp ${keyboardDriver}/boot/overlays/i2c-bbqX0kbd.dtbo firmware/overlays/
       cp ${cmdline} firmware/cmdline.txt
