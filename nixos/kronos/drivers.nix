@@ -86,7 +86,7 @@ in
       mkdir -p firmware/overlays/
       chmod -R 777 firmware/overlays
       ls -laR ${keyboardDriver}
-      cp ${sharpOverlay}/sharp.dtbo firmware/overlays/
+      cp ${sharpOverlay}/sharp-drm.dtbo firmware/overlays/
       cp ${keyboardDriver}/boot/overlays/* firmware/overlays/
       cp ${cmdline} firmware/cmdline.txt
     '';
