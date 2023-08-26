@@ -37,12 +37,12 @@ let
     mkdir $out
     ${pkgs.dtc}/bin/dtc -@ -I dts -O dtb -o $out/sharp.dtbo ${lcpDriver}/sharp.dts
   '';
-  # https://github.com/w4ilun/bbqX0kbd_driver/
-  bbqX0kbdSrc = pkgs.fetchFromGitHub {
-    owner = "w4ilun";
-    repo = "bbqX0kbd_driver";
-    rev = "a54d036d08911f3a7bce457b739f51f12b652303";
-    sha256 = "sha256-H+lnOXiphHX9GWpEZXM1VcZBPNSk4p4mKvKly8tu8x4=";
+  # https://github.com/ardangelo/beepberry-keyboard-driver
+  beepy-kbd-src = pkgs.fetchFromGitHub {
+    owner = "ardangelo";
+    repo = "beepberry-keyboard-driver";
+    rev = "9a755c0c4f1ac2d025a7f879d9132335420d235f";
+    sha256 = "sha256-Hriw9tPOi2ZF/z56ySdXLBHFCeAqs0GMjuyAMswJrK0=";
   };
   keyboardDriver =
     let
@@ -55,41 +55,41 @@ let
       i2cAddress = "0x1F";
     in
     pkgs.stdenv.mkDerivation rec {
-      name = "bbqX0kbd_driver";
-      version = "0.0.1-${kernel.version}";
-      src = bbqX0kbdSrc;
+      pname = "beepy-kbd-driver";
+      version = "2023-08-25-${kernel.version}";
+      src = beepy-kbd-src;
 
       hardeningDisable = [ "pic" "format" ];
       nativeBuildInputs = kernel.moduleBuildDependencies ++ [ pkgs.dtc ];
 
-      KROOT = "${kernel.dev}/lib/modules/${kernel.version}/build";
+      LINUX_DIR = "${kernel.dev}/lib/modules/${kernel.version}/build";
       KDIR = "${kernel.dev}/lib/modules/${kernel.version}/build";
       postPatch = ''
-        sed -i  "s/BBQX0KBD_TYPE BBQ.*/BBQX0KBD_TYPE ${type}/g" source/mod_src/config.h
-        sed -i  "s/BBQ20KBD_TRACKPAD_USE BBQ20KBD_TRACKPAD_AS.*/BBQ20KBD_TRACKPAD_USE ${trackpad}/g" source/mod_src/config.h
-        sed -i  "s/BBQX0KBD_INT BBQ.*/BBQX0KBD_INT ${int}/g" source/mod_src/config.h
-        sed -i  "s/BBQX0KBD_INT_PIN .*/BBQX0KBD_INT_PIN ${intPin}/g" source/mod_src/config.h
-        sed -i  "s/BBQX0KBD_POLL_PERIOD .*/BBQX0KBD_POLL_PERIOD ${pollPeriod}/g" source/mod_src/config.h
-        sed -i  "s/BBQX0KBD_ASSIGNED_I2C_ADDRESS .*/BBQX0KBD_ASSIGNED_I2C_ADDRESS ${assignedI2cAddress}/g" source/mod_src/config.h
-        cp source/dts_src/i2c-bbqX0kbd-int.dts source/dts_src/i2c-bbqX0kbd.dts
+        sed -i  "s/BBQX0KBD_TYPE BBQ.*/BBQX0KBD_TYPE ${type}/g" src/config.h
+        sed -i  "s/BBQ20KBD_TRACKPAD_USE BBQ20KBD_TRACKPAD_AS.*/BBQ20KBD_TRACKPAD_USE ${trackpad}/g" src/config.h
+        sed -i  "s/BBQX0KBD_INT BBQ.*/BBQX0KBD_INT ${int}/g" src/config.h
+        sed -i  "s/BBQX0KBD_INT_PIN .*/BBQX0KBD_INT_PIN ${intPin}/g" src/config.h
+        sed -i  "s/BBQX0KBD_POLL_PERIOD .*/BBQX0KBD_POLL_PERIOD ${pollPeriod}/g" src/config.h
+        sed -i  "s/BBQX0KBD_ASSIGNED_I2C_ADDRESS .*/BBQX0KBD_ASSIGNED_I2C_ADDRESS ${assignedI2cAddress}/g" src/config.h
       '';
       buildPhase = ''
         runHook preBuild
         make
-        make dtbo
         runHook postBuild
       '';
 
       installPhase = ''
         runHook preInstall
-        mkdir -p $out/lib/modules/${kernel.version}/kernel/drivers/i2c/
-        cp bbqX0kbd.ko $out/lib/modules/${kernel.version}/kernel/drivers/i2c/
+        INSTALL_MOD_PATH=$out make -C '${LINUX_DIR}' M='$(shell pwd)' modules_install
+
+        # Install keymap
         mkdir -p $out/share/keymaps/
-        echo 'include "${pkgs.kbd}/share/keymaps/i386/qwerty/us.map.gz"' > $out/share/keymaps/bbqX0kbd
-        cat ./source/mod_src/bbqX0kbd.map >> $out/share/keymaps/bbqX0kbd
-      
+        cp ./beepy-kbd.map $out/share/keymaps
+
+        # Install device tree overlay
         mkdir -p $out/boot/overlays/
-        cp i2c-bbqX0kbd.dtbo $out/boot/overlays/i2c-bbqX0kbd.dtbo
+        cp ./beepy-kbd.dtbo $out/boot/overlays
+
         runHook postInstall
       '';
     };
@@ -98,7 +98,7 @@ in
   boot.extraModulePackages = [ sharpDriver keyboardDriver ];
   boot.kernelModules = [ "i2c-dev" ];
   console.packages = [ keyboardDriver ];
-  console.keyMap = "bbqX0kbd";
+  console.keyMap = "beepy-kbd";
   console.earlySetup = true;
 
   # fix for wifi rpi 3 and light 2
@@ -107,11 +107,13 @@ in
   '';
 
   sdImage = {
+    compressImage = false;
     populateFirmwareCommands = ''
       mkdir -p firmware/overlays/
       chmod -R 777 firmware/overlays
+      ls -laR ${keyboardDriver}
       cp ${sharpOverlay}/sharp.dtbo firmware/overlays/
-      cp ${keyboardDriver}/boot/overlays/i2c-bbqX0kbd.dtbo firmware/overlays/
+      cp ${keyboardDriver}/boot/overlays/* firmware/overlays/
       cp ${cmdline} firmware/cmdline.txt
     '';
   };

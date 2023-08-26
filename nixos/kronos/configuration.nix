@@ -17,7 +17,5 @@
   networking.firewall.allowedTCPPortRanges = [
   ];
 
-  networking.wireless.enable = true;
-
   services.openssh.enable = true;
 }
