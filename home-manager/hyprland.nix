@@ -58,7 +58,6 @@
       col.shadow= 0x4D000000
       col.shadow_inactive=0x4D000000
 
-      blurls=waybar
       blurls=bar0
       blurls=bar1
       blurls=quicksettings
@@ -104,7 +103,6 @@
 
 
   layerrule=ignorealpha[0.99],wofi
-  layerrule=ignorealpha[0.99],waybar
   layerrule=ignorealpha[0.99],quicksettings
   layerrule=ignorealpha[0.99],notificationsCenter
   layerrule=ignorealpha[0.99],indicator0
