@@ -72,4 +72,7 @@
     };
     usbmuxd.enable = true;
   };
+  nix.settings.secret-key-files = [
+    "/home/ari/nix-secret-key"
+  ];
 }
