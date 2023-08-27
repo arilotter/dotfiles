@@ -1,8 +1,5 @@
 { lib, config, pkgs, inputs, ... }:
 
-let
-  vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
-in
 {
   home = {
     username = "ari";
@@ -12,9 +9,6 @@ in
 
   programs.home-manager.enable = true;
 
-  # systemd.user.startServices = "sd-switch";
-
-  colorScheme = inputs.nix-colors.colorSchemes.paraiso;
 
   home.packages = with pkgs; [
     # shell config
@@ -23,27 +17,9 @@ in
 
     binaryen # wasm bullshit for skyweaver
 
-    # desktop env
-    hyprpaper # wallpaper manager
-    gnome3.nautilus # file manager
-    pamixer # audio control shell for gbar
-    inputs.hypr-contrib.packages.${pkgs.system}.grimblast # screenshot tool
+    # "desktop" env
     upower # battery
-    kitty # terminal emulator
-    pavucontrol # audio control
-    blueman # bluetooth manager
-    wofi # launcher
-    wl-clipboard # copy/paste cli
     neofetch # i mean, c'mon :)
-    monado # xr? :D
-    sass # for gbar
-
-    vlc # video player
-    spotify # music player
-    inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin # web browser
-    google-chrome # web browser
-    discord
-    slack
 
     # TUI tools
     bottom # system manager, like htop
@@ -61,32 +37,6 @@ in
     tokei # code LoC
     imagemagickBig
 
-
-    (vscode-with-extensions.override {
-      vscode = vscodium;
-      vscodeExtensions = [
-        vsc-ext.ms-python.python
-        vsc-ext.vadimcn.vscode-lldb
-        vsc-ext.ms-vsliveshare.vsliveshare
-        vsc-ext.golang.go
-        vsc-ext.rust-lang.rust-analyzer
-        vsc-ext.ms-azuretools.vscode-docker
-        vsc-ext.dbaeumer.vscode-eslint
-        vsc-ext.svelte.svelte-vscode
-        vsc-ext.usernamehw.errorlens
-        vsc-ext.github.copilot
-        vsc-ext.ms-vscode.cpptools
-        vsc-ext.jnoortheen.nix-ide
-        # (import ./skyweaver-vscode)
-        vsc-ext.tamasfe.even-better-toml
-        # vsc-ext.jolaleye.horizon-theme-vscode
-        vsc-ext.esbenp.prettier-vscode
-        vsc-ext.dbaeumer.vscode-eslint
-        vsc-ext.gruntfuggly.todo-tree
-      ];
-    })
-
-
     # programming tools
     jdk11 # java
     nixpkgs-fmt # nix formatting tool
@@ -95,7 +45,6 @@ in
     google-cloud-sdk # google cloud sdk
     awscli # aws cli
     ansible # ansible devops bullshit
-    wabt # wasm binary toolkit
     nixd #nix lang server
 
     # programming languages
@@ -121,58 +70,22 @@ in
   ];
 
   home.file = {
-    ".config/hypr/hyprpaper.conf".text = ''
-      preload = /home/ari/dotfiles/wallpapers/future_funk_4k.jpg
-      wallpaper = ,/home/ari/dotfiles/wallpapers/future_funk_4k.jpg
-    '';
-    ".config/gBar/style.css".source = import ./compileSass.nix {
-      pkgs = pkgs;
-      inputFile = ./gBar/style.scss;
-      otherFiles = "${pkgs.writeTextDir "colors.scss" (import ./gBar/colors.scss.nix config)}/colors.scss";
-    };
     ".cargo/config.toml".text = ''    
-[net]
-git-fetch-with-cli = true   # use the `git` executable for git operations
-'';
+      [net]
+      git-fetch-with-cli = true   # use the `git` executable for git operations
+      '';
   };
 
   home.sessionVariables = { };
 
-  wayland.windowManager.hyprland =
-    {
-      enable = true;
-      xwayland.enable = true;
-      enableNvidiaPatches = true;
-      extraConfig = import ./hyprland.nix pkgs;
-    };
-  programs.gBar = {
-    enable = true;
-    config = {
-      Location = "B";
-      EnableSNI = true;
-      SNIIconSize = {
-        Discord = 26;
-        OBS = 23;
-      };
-      WorkspaceSymbols = [ " " " " ];
-    };
-  };
   programs.direnv.enable = true;
-  services =
-    {
-      dunst = import ./dunst.nix pkgs;
-      network-manager-applet.enable = true;
-    };
+
   programs.fish = {
     enable = true;
     shellAliases = {
       gcp = "git cherry-pick";
-      pbpaste = "wl-paste";
-      pbcopy = "wl-copy";
       netcopy = ''nc -q 0 tcp.st 7777 | grep URL | cut -d " " -f 2 | pbcopy'';
       reload-fish = "exec fish";
-      fix-bluetooth-audio = ''
-        pacmd set-card-profile (pacmd list-sinks | sed -n "s/card: \([0-9]*\) <bluez.*/\1/p" | xargs) a2dp_sink'';
       gs = "git status";
       gp = "git pull";
       gc = "git commit -m";
@@ -186,16 +99,10 @@ git-fetch-with-cli = true   # use the `git` executable for git operations
       gco = "git checkout";
       p = "pnpm";
     };
+
     shellInit = ''
       starship init fish | source
       source ~/dotfiles/secrets
-      alias code codium
-
-      set -gx GDK_BACKEND wayland
-      set -gx MOZ_ENABLE_WAYLAND 1
-
-      set -gx SUDO_EDITOR code
-      set -gx VISUAL code
 
       set -gx ANDROID_HOME $HOME/Android/Sdk
       set -gx PATH $PATH ~/.yarn/bin ~/.npm/bin ~/bin ~/go/bin ~/.cargo/bin $ANDROID_HOME/emulator $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/platform-tools
