@@ -32,7 +32,7 @@ let
   };
 
   cmdline = pkgs.writeText "cmdline.txt" ''
-    dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=font:VGA8x8 fbcon=map:10
+    dwc_otg.lpm_enable=0 console=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait console=tty2 fbcon=font:VGA8x8 fbcon=map:10
   '';
   sharpOverlay = pkgs.runCommand "sharp-overlay" { } ''
     mkdir $out
@@ -90,7 +90,7 @@ in
 {
   # setup the Sharp display & BB keyboard
   boot.extraModulePackages = [ sharpDriver keyboardDriver ];
-  boot.kernelModules = [ "i2c-dev" ];
+  boot.kernelModules = [ "i2c-dev" "sharp-drm" "beepy-kbd" ];
   console.packages = [ keyboardDriver ];
   console.keyMap = "beepy-kbd";
   console.earlySetup = true;
