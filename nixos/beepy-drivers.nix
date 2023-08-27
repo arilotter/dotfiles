@@ -16,7 +16,6 @@ let
 
     LINUX_DIR = "${kernel.dev}/lib/modules/${kernel.version}/build";
 
-
     installPhase = ''
       runHook preInstall
       mkdir -p $out/lib/modules/${kernel.version}/extra
@@ -26,7 +25,7 @@ let
   };
 
   cmdline = pkgs.writeText "cmdline.txt" ''
-    dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=map:10
+    dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=font:VGA8x8 fbcon=map:10
   '';
   sharpOverlay = pkgs.runCommand "sharp-overlay" { } ''
     mkdir $out
@@ -69,11 +68,51 @@ let
     };
 in
 {
+  # setup the Sharp display & BB keyboard
   boot.extraModulePackages = [ sharpDriver keyboardDriver ];
   boot.kernelModules = [ "i2c-dev" ];
   console.packages = [ keyboardDriver ];
   console.keyMap = "beepy-kbd";
   console.earlySetup = true;
+  hardware.raspberry-pi.config.all = {
+    dt-overlays = {
+      sharp-drm = {
+        enable = true;
+        params = { };
+      };
+      beepy-kbd = {
+        enable = true;
+        params = {
+          irq_pin = {
+            enable = true;
+            value = "4";
+          };
+        };
+      };
+    };
+
+    base-dt-params = {
+      i2c_arm = {
+        enable = true;
+        value = "on";
+      };
+      spi = {
+        enable = true;
+        value = "on";
+      };
+    };
+
+    options = {
+      framebuffer_width = {
+        enable = true;
+        value = "400";
+      };
+      framebuffer_height = {
+        enable = true;
+        value = "240";
+      };
+    };
+  };
 
   # fix for wifi rpi 3 and light 2
   boot.extraModprobeConfig = ''
