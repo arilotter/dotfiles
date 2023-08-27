@@ -4,7 +4,7 @@
   # raspberry pi doesn't do so hot without swap.
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 16 * 1024;
+    size = 8 * 1024;
   }];
 
   # enable autoprobing of bluetooth driver
