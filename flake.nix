@@ -88,7 +88,7 @@
           inputs.raspberry-pi-nix.nixosModules.raspberry-pi
           ./nixos/all-systems-configuration.nix
           ./nixos/kronos/hardware-configuration.nix
-          ./nixos/kronos/drivers.nix
+          ./nixos/beepy-drivers.nix
           ./nixos/kronos/configuration.nix
           ./nixos/wifiNetworks.nix
         ];
