@@ -79,12 +79,9 @@
       };
 
       # kronos = saturn = cuz it rings ;)
-      # `sudo nixos-rebuild switch --flake .#kronos`
-
-      # To create a bootable SD from an ARM mac, you need to install the darwin linux builder:
-      # https://nixos.org/manual/nixpkgs/unstable/#sec-darwin-builder
-      # then, you can run the following command to build the image:
-      # `nix build '.#kronos-sd'`
+      # locally: `sudo nixos-rebuild switch --flake .#kronos`
+      # sd image: `nix build '.#kronos-sd'`
+      # from `sol`: `NIX_SSHOPTS="-t" nixos-rebuild boot --flake .#kronos -L --target-host ari@192.168.2.204 --use-remote-sudo`
       "kronos" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
