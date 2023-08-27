@@ -61,7 +61,7 @@
     unzip
     fish
     nano
-    kitty-terminfo
+    kitty # even on non-graphical systems, this installs terminfo.
   ];
 
   fonts.packages = with pkgs; [
