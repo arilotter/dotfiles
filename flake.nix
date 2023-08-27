@@ -27,10 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-colors.url = "github:misterio77/nix-colors";
 
     gBar = {
       url = "github:scorpion-26/gBar";
@@ -46,10 +43,8 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    raspberry-pi-nix = {
-      url = "github:tstat/raspberry-pi-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
   };
 
   outputs = { nixpkgs, home-manager, nix-colors, ... }@inputs: rec {
