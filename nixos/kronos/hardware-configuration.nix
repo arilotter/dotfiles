@@ -1,6 +1,13 @@
 {
   nixpkgs.hostPlatform = "aarch64-linux";
 
+  # raspberry pi doesn't do so hot without swap.
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 16 * 1024;
+  }];
+
+
   hardware.raspberry-pi.config.all = {
     base-dt-params = {
       # enable autoprobing of bluetooth driver
