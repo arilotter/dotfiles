@@ -98,7 +98,7 @@
     # `home-manager switch --flake .#ari`
     homeConfigurations =
       let
-        arisHome = home-manager.lib.homeManagerConfiguration
+        graphics = home-manager.lib.homeManagerConfiguration
           {
             pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
             extraSpecialArgs = { inherit inputs; inherit nix-colors; };
@@ -107,11 +107,21 @@
               inputs.nix-colors.homeManagerModules.default
               inputs.gBar.homeManagerModules.x86_64-linux.default
               ./home-manager/home.nix
+              ./home-manager/home-graphical.nix
+            ];
+          };
+        nographics = home-manager.lib.homeManagerConfiguration
+          {
+            pkgs = nixpkgs.legacyPackages.aarch64-linux;
+            extraSpecialArgs = { inherit inputs; };
+            modules = [
+              ./home-manager/home.nix
             ];
           };
       in
       {
-        "ari" = arisHome;
+        "ari" = graphics;
+        "ari-tty" = nographics;
       };
   };
 }
