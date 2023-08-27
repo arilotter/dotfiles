@@ -61,6 +61,7 @@
     unzip
     fish
     nano
+    kitty-terminfo
   ];
 
   fonts.packages = with pkgs; [
