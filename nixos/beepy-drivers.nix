@@ -12,14 +12,21 @@ let
     version = "0.0.1-${kernel.version}";
     src = sharp-drm-src;
     hardeningDisable = [ "pic" "format" ];
+    buildInputs = [ pkgs.nukeReferences ];
     nativeBuildInputs = kernel.moduleBuildDependencies;
 
     LINUX_DIR = "${kernel.dev}/lib/modules/${kernel.version}/build";
 
     installPhase = ''
       runHook preInstall
-      mkdir -p $out/lib/modules/${kernel.version}/extra
-      INSTALL_MOD_PATH=$out make -C '${LINUX_DIR}' M='$(shell pwd)' modules_install
+    
+      # Install built modules
+      mkdir -p $out/lib/modules/${kernel.version}/misc
+      for x in $(find . -name '*.ko'); do
+        nuke-refs $x
+        cp $x $out/lib/modules/${kernel.version}/misc/
+      done
+
       runHook postInstall
     '';
   };
@@ -45,13 +52,26 @@ let
       src = beepy-kbd-src;
 
       hardeningDisable = [ "pic" "format" ];
+      buildInputs = [ pkgs.nukeReferences ];
       nativeBuildInputs = kernel.moduleBuildDependencies ++ [ pkgs.dtc ];
 
       LINUX_DIR = "${kernel.dev}/lib/modules/${kernel.version}/build";
 
+      buildPhase = ''
+        runHook preBuild
+        make
+        ls -R .
+        runHook postBuild
+      '';
       installPhase = ''
         runHook preInstall
-        INSTALL_MOD_PATH=$out make -C '${LINUX_DIR}' M='$(shell pwd)' modules_install
+
+        # Install built modules
+        mkdir -p $out/lib/modules/${kernel.version}/misc
+        for x in $(find . -name '*.ko'); do
+          nuke-refs $x
+          cp $x $out/lib/modules/${kernel.version}/misc/
+        done
 
         # Install keymap
         mkdir -p $out/share/keymaps/
