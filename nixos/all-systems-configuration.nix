@@ -62,15 +62,7 @@
     fish
     nano
     kitty # even on non-graphical systems, this installs terminfo.
-  ];
-
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nixfmt
   ];
 
   services = {

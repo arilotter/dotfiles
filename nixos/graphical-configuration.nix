@@ -46,8 +46,13 @@
     networkmanager.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    nixfmt
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 }
 
