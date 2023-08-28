@@ -76,7 +76,7 @@
       # kronos = saturn = cuz it rings ;)
       # locally: `sudo nixos-rebuild switch --flake .#kronos`
       # sd image: `nix build '.#kronos-sd'`
-      # from `sol`: `NIX_SSHOPTS="-t" nixos-rebuild boot --flake .#kronos -L --target-host ari@192.168.2.204 --use-remote-sudo`
+      # from `sol`: `NIX_SSHOPTS="-t" nixos-rebuild boot --flake .#kronos -L --target-host ari@kronos.local --use-remote-sudo`
       "kronos" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
