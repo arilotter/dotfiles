@@ -97,7 +97,7 @@
       workspace_swipe = yes
   }
 
-  monitor=HDMI-A-1,3840x2160@60,2160x200,1
+  monitor=DP-1,3840x2160@60,2160x200,1
   monitor=DP-3,2160x3840@60,0x0,1,transform,3
 
 
@@ -131,10 +131,12 @@
   binde = , XF86AudioRaiseVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +3%
   binde = , XF86AudioLowerVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -3%
   bind = , XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
-  bind = SHIFT, Print, exec, grimblast copysave area # screenshot area
   
-  bind = SUPER_SHIFT,S,movetoworkspace,special
-  bind = SUPER,S,togglespecialworkspace
+  # screenshot area
+  bind = SUPER_SHIFT,S, exec, grimblast copysave area
+
+  bind = SUPER_SHIFT,A,movetoworkspace,special
+  bind = SUPER,A,togglespecialworkspace
 
 
   # Move focus with mod + arrow keys
