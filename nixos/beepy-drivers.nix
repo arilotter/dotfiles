@@ -1,14 +1,6 @@
 { pkgs, ... }:
 let
-  extraKeymap =
-    pkgs.writeText "beepy-map.inc" ''
-      include "qwerty-layout"
-      keycode  1  = Escape
-      keycode  14 = BackSpace BackSpace BackSpace BackSpace       BackSpace
-      keycode  15 = Tab       Tab       Tab       Tab             Tab
-      keycode  28 = Return    Return    Return    Return          Return
-      keycode  57 = space     space     space     nobreakspace    nobreakspace
-    '';
+  keymap = ./beepy-kbd.map;
   kernel = pkgs.rpi-kernels.latest.kernel;
   sharp-drm-src = pkgs.fetchFromGitHub {
     owner = "ardangelo";
@@ -84,9 +76,10 @@ let
 
         # Install keymap
         mkdir -p $out/share/keymaps/
-        cp ./beepy-kbd.map $out/share/keymaps
+        ## The offical ardangelo keymap doesn't include a-z, enter, esc, backspace, etc. WTF?
+        # cp ./beepy-kbd.map $out/share/keymaps
 
-        cat ${extraKeymap} >> $out/share/keymaps/beepy-kbd.map
+        cat ${keymap} > $out/share/keymaps/beepy-kbd.map
 
         # Install device tree overlay
         mkdir -p $out/boot/overlays/
