@@ -21,6 +21,8 @@ in
     monado # xr? :D
     sass # for gbar
 
+    easyeffects # mic settings
+
     vlc # video player
     spotify # music player
     inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin # web browser
@@ -50,6 +52,8 @@ in
         vsc-ext.esbenp.prettier-vscode
         vsc-ext.dbaeumer.vscode-eslint
         vsc-ext.gruntfuggly.todo-tree
+        vsc-ext.wallabyjs.quokka-vscode
+        vsc-ext.eamodio.gitlens
       ];
     })
   ];
