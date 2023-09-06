@@ -44,7 +44,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
+    beepy = {
+      url = "github:arilotter/nixos-beepy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, nix-colors, ... }@inputs: rec {
@@ -80,10 +83,9 @@
       "kronos" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
-          inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+          inputs.beepy.nixosModule
           ./nixos/all-systems-configuration.nix
           ./nixos/kronos/hardware-configuration.nix
-          ./nixos/beepy-drivers.nix
           ./nixos/kronos/configuration.nix
           ./nixos/wifiNetworks.nix
         ];
