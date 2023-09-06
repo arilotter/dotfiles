@@ -27,6 +27,14 @@
       efi.canTouchEfiVariables = true;
     };
     kernelParams = [ "ec_sys.write_support=1" ];
+    extraModprobeConfig = ''
+      # allows changing other nvidia kernel params
+      options nvidia NVreg_RegistryDwords="OverrideMaxPerf=0x1"
+
+      # Fixes broken sleep on wayland
+      # https://github.com/hyprwm/Hyprland/issues/1728#issuecomment-1571852169
+      options nvidia NVreg_PreserveVideoMemoryAllocations=1
+    '';
   };
 
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
