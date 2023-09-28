@@ -31,6 +31,7 @@
 
   programs.fish.enable = true;
   programs.adb.enable = true;
+  programs.dconf.enable = true;
   users = {
     mutableUsers = false;
     users.ari = {
