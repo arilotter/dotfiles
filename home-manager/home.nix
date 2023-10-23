@@ -13,7 +13,7 @@
   home.packages = with pkgs; [
     # shell config
     starship # prompt
-    exa # ls replacement
+    eza # ls replacement
 
     binaryen # wasm bullshit for skyweaver
 
@@ -92,7 +92,7 @@
       gca = "git commit --amend";
       gl = "git log";
       gf = "git fetch -p";
-      ls = "exa";
+      ls = "eza";
       lg = "lazygit";
       ld = "lazydocker";
       gcm = "git checkout master";
