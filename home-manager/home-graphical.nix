@@ -74,7 +74,6 @@ in
     {
       enable = true;
       xwayland.enable = true;
-      enableNvidiaPatches = true;
       extraConfig = import ./hyprland.nix pkgs;
     };
 
