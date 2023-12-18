@@ -7,7 +7,6 @@
   };
 
   console = {
-    font = "FiraCode";
     keyMap = "us";
   };
 

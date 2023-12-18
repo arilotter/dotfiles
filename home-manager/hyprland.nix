@@ -45,7 +45,6 @@
   decoration {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
       rounding = 4
-      multisample_edges = true
 
       blur {
         enabled = false
