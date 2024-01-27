@@ -12,6 +12,9 @@
     };
   };
 
+  # disable modules that conflict w/ smart card reader.
+  boot.blacklistedKernelModules = [ "nfc" "pn533" "pn533_usb" ];
+
   time.timeZone = "America/Toronto";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -28,6 +31,7 @@
     pulse.enable = true;
     socketActivation = true;
   };
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   programs.fish.enable = true;
   programs.adb.enable = true;
@@ -67,10 +71,14 @@
   ];
 
   services = {
-    pcscd.enable = true; # yubikey
+    pcscd =
+      {
+        enable = true; # yubikey
+        plugins = [ pkgs.acsccid ];
+      };
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       ipv4 = true;
       ipv6 = true;
       publish = {
@@ -79,6 +87,20 @@
         workstation = true;
       };
     };
+    udev.extraRules = ''
+      # udev rules for ACS CCID devices - NFC card reader.
+
+      # If not adding the device, go away
+      ACTION!="add", GOTO="pcscd_acsccid_rules_end"
+      SUBSYSTEM!="usb", GOTO="pcscd_acsccid_rules_end"
+      ENV{DEVTYPE}!="usb_device", GOTO="pcscd_acsccid_rules_end"
+
+      # set USB power management to auto.
+      ENV{ID_USB_INTERFACES}==":0b0000:", TEST=="power/control", ATTR{power/control}="auto"
+
+      # All done
+      LABEL="pcscd_acsccid_rules_end"
+    '';
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -2,13 +2,8 @@
 {
   networking.hostName = "luna";
 
-
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    blacklistedKernelModules = [ "snd_hda_codec_hdmi" ];
   };
 
   services.xserver = {
@@ -27,5 +22,7 @@
   };
 
   programs.steam.enable = true;
+
+  services.fido2-hid-bridge.enable = true;
 }
 

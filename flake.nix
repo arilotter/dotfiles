@@ -11,14 +11,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,6 +28,7 @@
     gBar = {
       url = "github:scorpion-26/gBar";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "nixpkgs";
     };
 
     firefox = {
@@ -42,10 +39,16 @@
     vscode-ext = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "nixpkgs";
     };
 
     beepy = {
       url = "github:arilotter/nixos-beepy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    fido2-hid-bridge = {
+      url = "github:arilotter/fido2-hid-bridge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -57,6 +60,7 @@
       "luna" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
+          inputs.fido2-hid-bridge.nixosModule
           ./nixos/all-systems-configuration.nix
           ./nixos/graphical-configuration.nix
           ./nixos/luna/hardware-configuration.nix
@@ -100,7 +104,6 @@
             pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
             extraSpecialArgs = { inherit inputs; inherit nix-colors; };
             modules = [
-              inputs.hyprland.homeManagerModules.default
               inputs.nix-colors.homeManagerModules.default
               inputs.gBar.homeManagerModules.x86_64-linux.default
               ./home-manager/home.nix
