@@ -33,27 +33,29 @@ in
     # VS code setup!
     (vscode-with-extensions.override {
       vscode = vscodium;
-      vscodeExtensions = [
-        vsc-ext.ms-python.python
-        vsc-ext.vadimcn.vscode-lldb
-        vsc-ext.ms-vsliveshare.vsliveshare
-        vsc-ext.golang.go
-        vsc-ext.rust-lang.rust-analyzer
-        vsc-ext.ms-azuretools.vscode-docker
-        vsc-ext.dbaeumer.vscode-eslint
-        vsc-ext.svelte.svelte-vscode
-        vsc-ext.usernamehw.errorlens
-        vsc-ext.github.copilot
-        vsc-ext.ms-vscode.cpptools
-        vsc-ext.jnoortheen.nix-ide
+      vscodeExtensions = with vsc-ext; [
+        ms-python.python
+        vadimcn.vscode-lldb
+        ms-vsliveshare.vsliveshare
+        golang.go
+        rust-lang.rust-analyzer
+        ms-azuretools.vscode-docker
+        dbaeumer.vscode-eslint
+        usernamehw.errorlens
+        github.copilot
+        ms-vscode.cpptools
+        jnoortheen.nix-ide
         # (import ./skyweaver-vscode)
-        vsc-ext.tamasfe.even-better-toml
-        # vsc-ext.jolaleye.horizon-theme-vscode
-        vsc-ext.esbenp.prettier-vscode
-        vsc-ext.dbaeumer.vscode-eslint
-        vsc-ext.gruntfuggly.todo-tree
-        vsc-ext.wallabyjs.quokka-vscode
-        vsc-ext.eamodio.gitlens
+        tamasfe.even-better-toml
+        # jolaleye.horizon-theme-vscode
+        esbenp.prettier-vscode
+        dbaeumer.vscode-eslint
+        gruntfuggly.todo-tree
+        wallabyjs.quokka-vscode
+        eamodio.gitlens
+        biomejs.biome
+        yoavbls.pretty-ts-errors
+
       ];
     })
   ];

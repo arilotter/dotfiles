@@ -29,6 +29,8 @@
     ];
   };
 
+  programs.hyprland.enable = true;
+
   virtualisation.docker.enable = true;
 
   environment.variables = { WLR_NO_HARDWARE_CURSORS = "1"; NIXOS_OZONE_WL = "1"; };
