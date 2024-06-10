@@ -27,7 +27,7 @@ in
     spotify # music player
     inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin # web browser
     google-chrome # web browser
-    discord
+    discord-screenaudio
     slack
 
     # VS code setup!
