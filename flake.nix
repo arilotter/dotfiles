@@ -11,7 +11,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -28,7 +27,6 @@
     gBar = {
       url = "github:scorpion-26/gBar";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "nixpkgs";
     };
 
     firefox = {
@@ -39,7 +37,6 @@
     vscode-ext = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "nixpkgs";
     };
 
     beepy = {

@@ -6,14 +6,9 @@
     plymouth.enable = true;
   };
 
-  console = {
-    keyMap = "us";
-  };
+  console.keyMap = "us";
 
-  services.xserver = {
-    layout = "us";
-    xkbOptions = "caps:super";
-  };
+  services.xserver.xkb.layout = "us";
 
   hardware.opengl = {
     enable = true;
@@ -24,14 +19,16 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
   };
 
   programs.hyprland.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableNvidia = true;
+  };
 
   environment.variables = { WLR_NO_HARDWARE_CURSORS = "1"; NIXOS_OZONE_WL = "1"; };
 
