@@ -99,6 +99,8 @@
       gcm = "git checkout master";
       gco = "git checkout";
       p = "pnpm";
+      # open a link on the connected android phone
+      phone = "adb shell am start --user 0 -a android.intent.action.VIEW -d";
     };
 
     shellInit = ''
