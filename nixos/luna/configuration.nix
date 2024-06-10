@@ -23,6 +23,11 @@
 
   programs.steam.enable = true;
 
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
   services.fido2-hid-bridge.enable = true;
+  services.usbmuxd.enable = true;
 }
 
