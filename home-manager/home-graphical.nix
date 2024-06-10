@@ -82,16 +82,102 @@ in
       extraConfig = import ./hyprland.nix pkgs;
     };
 
-  programs.gBar = {
+  programs.waybar = {
     enable = true;
-    config = {
-      Location = "B";
-      EnableSNI = true;
-      SNIIconSize = {
-        Discord = 26;
-        OBS = 23;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "right";
+        width = 20;
+        margin = "8";
+        spacing = 16;
+        output = "DP-2";
+        reload_style_on_change = true;
+        modules-left = [
+          "hyprland/workspaces"
+        ];
+        modules-right = [
+          "tray"
+          "idle_inhibitor"
+          "disk"
+          "memory"
+          "cpu"
+          "temperature"
+          "clock"
+        ];
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "󰛊 ";
+            deactivated = "󰾫 ";
+          };
+        };
+        disk = {
+          intervel = 30;
+          format = "󰋊 {percentage_used}%";
+          tooltip-format = "{used} used out of {total} on \"{path}\" ({percentage_used}%)";
+        };
+        memory = {
+          interval = 10;
+          format = " {used}";
+          tooltip-format = "{used}GiB used of {total}GiB ({percentage}%)";
+        };
+        cpu = {
+          interval = 10;
+          format = " {usage}%";
+        };
+        temperature = {
+          interval = 10;
+        };
+        clock = {
+          interval = 1;
+          format = "{:%H:%M:%S}";
+        };
+        "hyprland/workspaces" = {
+          show-special = true;
+          persistent-workspaces = {
+            "*" = [
+              1
+              2
+              3
+              4
+              5
+              6
+              7
+              8
+              9
+              10
+            ];
+          };
+          format = "{icon}";
+          format-icons = {
+            active = "";
+            empty = "";
+            default = "";
+            urgent = "";
+            special = "󰠱";
+          };
+          # "format-window-separator ="|";
+          # "window-rewrite-default ="";
+          # "window-rewrite ={
+          #   "title<.*youtube.*> =" ", # Windows whose titles contain "youtube"
+          #   "class<firefox> =" ", # Windows whose classes are "firefox"
+          #   "class<firefox> title<.*github.*> =" ", # Windows whose class is "firefox" and title contains "github". Note that "class" always comes first.
+          #   "class<alacritty> ="", # Windows that contain "foot" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
+          #   "code ="󰨞"
+          #   }
+        };
+        "hyprland/window" = {
+          icon = true;
+          icon-size = 22;
+          rewrite = {
+            "(.*) — Mozilla Firefox" = "$1 - 🦊";
+            "(.*) - Visual Studio Code" = "$1 - 󰨞 ";
+            "(.*) - Discord" = "$1 - 󰙯 ";
+            "^$" = "👾";
+          };
+        };
       };
-      WorkspaceSymbols = [ " " " " ];
     };
   };
 
