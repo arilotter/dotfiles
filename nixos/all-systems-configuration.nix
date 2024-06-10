@@ -32,6 +32,7 @@
     socketActivation = true;
   };
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.enableRedistributableFirmware = true;
 
   programs.fish.enable = true;
   programs.adb.enable = true;

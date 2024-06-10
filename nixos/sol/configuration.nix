@@ -17,7 +17,6 @@
     bluetooth.enable = true;
     bluetooth.powerOnBoot = false;
     cpu.intel.updateMicrocode = true;
-    enableRedistributableFirmware = true;
   };
 
   boot = {
