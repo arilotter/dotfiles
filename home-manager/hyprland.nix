@@ -1,7 +1,7 @@
-{ pkgs, config, ... }: ''
+{ pkgs, ... }: ''
   # Startup 
   exec-once = hyprpaper
-  exec-once = gBar bar 0
+  exec-once = waybar
   exec-once = ${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon --daemonize --components=secrets
   # todo lockscreen
 
@@ -25,8 +25,8 @@
   }
 
   general {
-    gaps_in = 6
-    gaps_out = 12
+    gaps_in = 8
+    gaps_out = 24
     border_size = 8
     col.inactive_border = rgba(bbbbdd55)
     col.active_border = rgba(bb3355ff)
@@ -44,7 +44,7 @@
 
   decoration {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
-      rounding = 4
+      rounding = 8
 
       blur {
         enabled = false
@@ -52,7 +52,7 @@
         passes = 1
       }
 
-      shadow_range=20
+      shadow_range=0
       shadow_render_power=2
       col.shadow= 0x4D000000
       col.shadow_inactive=0x4D000000
@@ -97,7 +97,7 @@
   }
 
   monitor=DP-2,3840x2160@60,2160x200,1
-  monitor=DP-3,2160x3840@60,0x0,1,transform,3
+  monitor=DP-1,2160x3840@60,0x0,1,transform,3
 
 
 
