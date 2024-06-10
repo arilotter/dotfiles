@@ -34,15 +34,14 @@ in
     (vscode-with-extensions.override {
       vscode = vscodium;
       vscodeExtensions = with vsc-ext; [
+        semanticdiff.semanticdiff
         ms-python.python
-        vadimcn.vscode-lldb
         ms-vsliveshare.vsliveshare
         golang.go
         rust-lang.rust-analyzer
-        ms-azuretools.vscode-docker
         dbaeumer.vscode-eslint
         usernamehw.errorlens
-        github.copilot
+        doublebot.doublebot
         ms-vscode.cpptools
         jnoortheen.nix-ide
         # (import ./skyweaver-vscode)
@@ -52,12 +51,16 @@ in
         dbaeumer.vscode-eslint
         gruntfuggly.todo-tree
         wallabyjs.quokka-vscode
-        eamodio.gitlens
         biomejs.biome
         yoavbls.pretty-ts-errors
-
+        slevesque.shader
+        xaver.clang-format
+        ms-playwright.playwright
       ];
     })
+
+    #clang format needs..
+    clang-tools
   ];
 
   home.file = {
