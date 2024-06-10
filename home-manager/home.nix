@@ -38,6 +38,7 @@
     imagemagickBig
 
     # programming tools
+    devenv
     jdk11 # java
     nixpkgs-fmt # nix formatting tool
     trickle # limit bandwidth artificially
