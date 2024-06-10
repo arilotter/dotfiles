@@ -7,6 +7,7 @@
 
   nix = {
     settings = {
+      trusted-users = [ "root" "ari" ];
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
@@ -30,7 +31,9 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     socketActivation = true;
+    wireplumber.enable = true;
   };
+
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.enableRedistributableFirmware = true;
 
@@ -53,6 +56,7 @@
         "docker"
         "dialout"
         "video"
+        "wireshark"
       ];
       shell = pkgs.fish;
       hashedPassword = import ./hashedPassword.nix;
@@ -68,7 +72,7 @@
     fish
     nano
     kitty # even on non-graphical systems, this installs terminfo.
-    nixfmt
+    nixfmt-rfc-style
   ];
 
   services = {
