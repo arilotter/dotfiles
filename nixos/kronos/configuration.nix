@@ -5,7 +5,6 @@
   hardware = {
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
-    enableRedistributableFirmware = true;
   };
 
   environment.systemPackages = with pkgs; [
