@@ -13,6 +13,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     
+    nur.url = "github:nix-community/NUR";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,11 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    firefox = {
-      url = "github:colemickens/flake-firefox-nightly";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     vscode-ext = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,15 +46,21 @@
       url = "github:arilotter/fido2-hid-bridge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    fw-inputmodule = {
+      url = "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nix-colors, ... }@inputs: rec {
+  outputs = { nur, nixpkgs, home-manager, nix-colors, ... }@inputs: rec {
     nixosConfigurations = {
       # desktop ~
       # `sudo nixos-rebuild switch --flake .#luna`
       "luna" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
+          nur.nixosModules.nur
           inputs.fido2-hid-bridge.nixosModule
           ./nixos/all-systems-configuration.nix
           ./nixos/graphical-configuration.nix
@@ -71,6 +74,7 @@
       "hermes" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
+          nur.nixosModules.nur
           inputs.nixos-hardware.nixosModules.framework-16-7040-amd
           inputs.fido2-hid-bridge.nixosModule
           ./nixos/all-systems-configuration.nix

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   networking.hostName = "hermes";
 
@@ -12,6 +12,10 @@
   };
 
   networking.firewall.allowedTCPPortRanges = [ ];
+
+  environment.systemPackages = [
+    inputs.fw-inputmodule.packages.${pkgs.system}.default
+  ];
 
   services = {
     libinput.enable = true;

@@ -1,4 +1,4 @@
-{ lib, config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
@@ -6,6 +6,21 @@ in
 {
 
   colorScheme = inputs.nix-colors.colorSchemes.paraiso;
+
+  programs.firefox = {
+    enable = true;
+    profiles = {
+      default = {
+        isDefault = true;
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          bitwarden
+          sponsorblock
+          refined-github
+        ];
+      };
+    };
+  };
 
   home.packages = with pkgs; [
     # desktop env
@@ -25,7 +40,6 @@ in
 
     vlc # video player
     spotify # music player
-    inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin # web browser
     google-chrome # web browser
     vesktop
     slack

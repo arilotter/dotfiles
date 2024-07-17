@@ -27,7 +27,6 @@
     enable = true;
     package = pkgs.wireshark;
   };
-  services.fido2-hid-bridge.enable = true;
   services.usbmuxd.enable = true;
 }
 

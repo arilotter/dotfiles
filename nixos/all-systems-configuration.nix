@@ -73,9 +73,11 @@
     nano
     kitty # even on non-graphical systems, this installs terminfo.
     nixfmt-rfc-style
+    nil
   ];
 
   services = {
+    fido2-hid-bridge.enable = true;
     pcscd =
       {
         enable = true; # yubikey

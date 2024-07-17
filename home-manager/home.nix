@@ -1,4 +1,4 @@
-{ lib, config, pkgs, inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   home = {
@@ -137,6 +137,7 @@
   };
 
   nixpkgs = {
+    overlays = [inputs.nur.overlay];
     # workaround for https://github.com/nix-community/home-manager/issues/2942
     config.allowUnfreePredicate = (pkg: true);
   };
