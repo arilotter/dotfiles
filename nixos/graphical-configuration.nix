@@ -10,10 +10,9 @@
 
   services.xserver.xkb.layout = "us";
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   xdg.portal = {
@@ -28,6 +27,7 @@
   virtualisation.docker = {
     enable = true;
     enableNvidia = true;
+    # extraOptions = "--default-runtime=nvidia";
   };
 
   environment.variables = { WLR_NO_HARDWARE_CURSORS = "1"; NIXOS_OZONE_WL = "1"; };

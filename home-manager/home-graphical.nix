@@ -27,21 +27,22 @@ in
     spotify # music player
     inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin # web browser
     google-chrome # web browser
-    discord-screenaudio
+    vesktop
     slack
 
     # VS code setup!
     (vscode-with-extensions.override {
-      vscode = vscodium;
       vscodeExtensions = with vsc-ext; [
+        ms-vscode-remote.remote-containers
         semanticdiff.semanticdiff
         ms-python.python
+        ms-python.vscode-pylance
+        ms-python.black-formatter
         ms-vsliveshare.vsliveshare
         golang.go
         rust-lang.rust-analyzer
         dbaeumer.vscode-eslint
         usernamehw.errorlens
-        doublebot.doublebot
         ms-vscode.cpptools
         jnoortheen.nix-ide
         # (import ./skyweaver-vscode)
@@ -192,7 +193,6 @@ in
       pbcopy = "wl-copy";
     };
     shellInit = ''
-      alias code codium
 
       set -gx GDK_BACKEND wayland
       set -gx MOZ_ENABLE_WAYLAND 1

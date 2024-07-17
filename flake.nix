@@ -11,7 +11,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,15 +66,17 @@
         ];
       };
 
-      # linux lappy
-      # `sudo nixos-rebuild switch --flake .#sol`
-      "sol" = nixpkgs.lib.nixosSystem {
+      # framework laptop
+      # `sudo nixos-rebuild switch --flake .#hermes`
+      "hermes" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
+          inputs.nixos-hardware.nixosModules.framework-16-7040-amd
+          inputs.fido2-hid-bridge.nixosModule
           ./nixos/all-systems-configuration.nix
           ./nixos/graphical-configuration.nix
-          ./nixos/sol/hardware-configuration.nix
-          ./nixos/sol/configuration.nix
+          ./nixos/hermes/hardware-configuration.nix
+          ./nixos/hermes/configuration.nix
         ];
       };
 

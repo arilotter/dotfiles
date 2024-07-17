@@ -125,7 +125,7 @@
     enable = true;
     userEmail = "arilotter@gmail.com";
     userName = "Ari Lotter";
-    extraConfig.core.editor = "codium --wait";
+    extraConfig.core.editor = "code --wait";
     extraConfig.pull.rebase = true;
     extraConfig.rebase.autoStash = true;
     extraConfig.diff.tool = "default-difftool";
