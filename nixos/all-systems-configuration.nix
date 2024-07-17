@@ -24,7 +24,6 @@
     polkit.enable = true;
   };
 
-  sound.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -78,6 +77,7 @@
 
   services = {
     fido2-hid-bridge.enable = true;
+
     pcscd =
       {
         enable = true; # yubikey
