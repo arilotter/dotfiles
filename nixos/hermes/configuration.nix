@@ -20,7 +20,4 @@
       videoDrivers = [ "amdgpu" ];
     };
   };
-  nix.extraOptions = ''
-    secret-key-files = /home/ari/nix-secret-key
-  '';
 }
