@@ -35,6 +35,7 @@ in
 
     (vscode-with-extensions.override {
       vscodeExtensions = with vsc-ext; [
+        supermaven.supermaven
         ms-vscode-remote.remote-containers
         semanticdiff.semanticdiff
         ms-python.python
