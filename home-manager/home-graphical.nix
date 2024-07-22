@@ -4,7 +4,7 @@ let
   vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
 in
 {
-  colorScheme = inputs.nix-colors.colorSchemes."3024";
+  colorScheme = inputs.nix-colors.colorSchemes."solarized-light";
 
   imports = [
     ./hyprland.nix
