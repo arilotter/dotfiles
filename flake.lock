@@ -115,24 +115,6 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1694529238,
-        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_4": {
-      "inputs": {
-        "systems": "systems_5"
-      },
-      "locked": {
         "lastModified": 1710146030,
         "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
@@ -166,27 +148,6 @@
         "dir": "flakes/inputmodule-rs",
         "owner": "caffineehacker",
         "repo": "nix",
-        "type": "github"
-      }
-    },
-    "gBar": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1715363899,
-        "narHash": "sha256-ag4zwO6TahtZukTB/1gN2jVLRupg5+Z6jvicnqxJIVk=",
-        "owner": "scorpion-26",
-        "repo": "gBar",
-        "rev": "81b97f94b6a72d70d4e85f7c24dddefa04213772",
-        "type": "github"
-      },
-      "original": {
-        "owner": "scorpion-26",
-        "repo": "gBar",
         "type": "github"
       }
     },
@@ -403,7 +364,6 @@
         "beepy": "beepy",
         "fido2-hid-bridge": "fido2-hid-bridge",
         "fw-inputmodule": "fw-inputmodule",
-        "gBar": "gBar",
         "home-manager": "home-manager",
         "hypr-contrib": "hypr-contrib",
         "nix-colors": "nix-colors",
@@ -560,21 +520,6 @@
         "type": "github"
       }
     },
-    "systems_5": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -612,7 +557,7 @@
     "vscode-ext": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "nixpkgs"
         ]

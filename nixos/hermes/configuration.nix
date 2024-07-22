@@ -1,8 +1,10 @@
-{ inputs, pkgs, ... }:
+{ lib, inputs, pkgs, ... }:
 {
   networking.hostName = "hermes";
 
   boot = {
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    supportedFilesystems = [ "ntfs" ];
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     loader = {
       systemd-boot.enable = true;

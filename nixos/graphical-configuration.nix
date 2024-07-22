@@ -1,10 +1,8 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
-  boot = {
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
-    plymouth.enable = true;
-  };
+  imports = [ ./tuigreet.nix ];
+
+  boot.plymouth.enable = true;
 
   console.keyMap = "us";
 
@@ -17,12 +15,10 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
     ];
   };
-
-  programs.hyprland.enable = true;
 
   virtualisation.docker = {
     enable = true;

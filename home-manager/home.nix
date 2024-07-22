@@ -125,7 +125,6 @@
     enable = true;
     userEmail = "arilotter@gmail.com";
     userName = "Ari Lotter";
-    extraConfig.core.editor = "code --wait";
     extraConfig.pull.rebase = true;
     extraConfig.rebase.autoStash = true;
     extraConfig.diff.tool = "default-difftool";
@@ -137,7 +136,7 @@
   };
 
   nixpkgs = {
-    overlays = [inputs.nur.overlay];
+    overlays = [ inputs.nur.overlay ];
     # workaround for https://github.com/nix-community/home-manager/issues/2942
     config.allowUnfreePredicate = (pkg: true);
   };

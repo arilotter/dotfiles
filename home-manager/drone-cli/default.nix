@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+with import <nixpkgs> { };
 buildGoPackage rec {
   pname = "drone-cli";
   version = "1.2.0";

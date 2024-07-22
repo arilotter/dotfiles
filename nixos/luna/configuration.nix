@@ -2,10 +2,6 @@
 {
   networking.hostName = "luna";
 
-  boot = {
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
-  };
-
   services.xserver = {
     videoDrivers = [ "nvidia" ];
     displayManager.importedVariables = [

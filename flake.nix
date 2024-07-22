@@ -12,7 +12,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    
+
     nur.url = "github:nix-community/NUR";
 
     home-manager = {
@@ -26,11 +26,6 @@
     };
 
     nix-colors.url = "github:misterio77/nix-colors";
-
-    gBar = {
-      url = "github:scorpion-26/gBar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     vscode-ext = {
       url = "github:nix-community/nix-vscode-extensions";
@@ -109,7 +104,6 @@
             extraSpecialArgs = { inherit inputs; inherit nix-colors; };
             modules = [
               inputs.nix-colors.homeManagerModules.default
-              inputs.gBar.homeManagerModules.x86_64-linux.default
               ./home-manager/home.nix
               ./home-manager/home-graphical.nix
             ];
