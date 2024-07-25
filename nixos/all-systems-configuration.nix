@@ -17,8 +17,13 @@
     };
   };
 
-  # disable modules that conflict w/ smart card reader.
-  boot.blacklistedKernelModules = [ "nfc" "pn533" "pn533_usb" ];
+  boot = {
+    # disable modules that conflict w/ smart card reader.
+    blacklistedKernelModules = [ "nfc" "pn533" "pn533_usb" ];
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    supportedFilesystems = [ "ntfs" ];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+  };
 
   time.timeZone = "America/Toronto";
 
@@ -116,13 +121,13 @@
     '';
   };
 
-    security.wrappers."mount.cifs" = {
-      program = "mount.cifs";
-      source = "${lib.getBin pkgs.cifs-utils}/bin/mount.cifs";
-      owner = "root";
-      group = "root";
-      setuid = true;
-    };
+  security.wrappers."mount.cifs" = {
+    program = "mount.cifs";
+    source = "${lib.getBin pkgs.cifs-utils}/bin/mount.cifs";
+    owner = "root";
+    group = "root";
+    setuid = true;
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";

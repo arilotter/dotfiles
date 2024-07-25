@@ -1,4 +1,4 @@
-{ lib, inputs, pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ../mount-sol-samba-share.nix
@@ -6,9 +6,6 @@
   networking.hostName = "hermes";
 
   boot = {
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;

@@ -2,6 +2,7 @@
 {
   imports = [
     ./samba.nix
+    ./navidrome.nix
   ];
 
   networking = {
