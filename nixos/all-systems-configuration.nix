@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 {
   imports = [
     inputs.fido2-hid-bridge.nixosModule
@@ -115,6 +115,14 @@
       LABEL="pcscd_acsccid_rules_end"
     '';
   };
+
+    security.wrappers."mount.cifs" = {
+      program = "mount.cifs";
+      source = "${lib.getBin pkgs.cifs-utils}/bin/mount.cifs";
+      owner = "root";
+      group = "root";
+      setuid = true;
+    };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";

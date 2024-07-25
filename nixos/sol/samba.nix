@@ -10,18 +10,17 @@
       server string = sol
       server role = standalone server
       map to guest = Bad User
-      guest account = ari
+      guest account = nobody
     '';
     shares = {
       "storage" = {
         path = "/mnt/storage";
-        browseable = "yes";
+        "browseable" = "yes";
+        "public" = "yes";
+        "guest only" = "yes";
         "read only" = "no";
-        "guest ok" = "yes";
         "create mask" = "0644";
         "directory mask" = "0755";
-        "force user" = "ari";
-        "force group" = "ari";
       };
     };
   };
