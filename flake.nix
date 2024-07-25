@@ -51,12 +51,10 @@
   outputs = { nur, nixpkgs, home-manager, nix-colors, ... }@inputs: rec {
     nixosConfigurations = {
       # desktop ~
-      # `sudo nixos-rebuild switch --flake .#luna`
       "luna" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
           nur.nixosModules.nur
-          inputs.fido2-hid-bridge.nixosModule
           ./nixos/all-systems-configuration.nix
           ./nixos/graphical-configuration.nix
           ./nixos/luna/hardware-configuration.nix
@@ -65,13 +63,11 @@
       };
 
       # framework laptop
-      # `sudo nixos-rebuild switch --flake .#hermes`
       "hermes" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
           nur.nixosModules.nur
           inputs.nixos-hardware.nixosModules.framework-16-7040-amd
-          inputs.fido2-hid-bridge.nixosModule
           ./nixos/all-systems-configuration.nix
           ./nixos/graphical-configuration.nix
           ./nixos/hermes/hardware-configuration.nix
@@ -80,9 +76,8 @@
       };
 
       # kronos = saturn = cuz it rings ;)
-      # locally: `sudo nixos-rebuild switch --flake .#kronos`
       # sd image: `nix build '.#kronos-sd'`
-      # from `sol`: `NIX_SSHOPTS="-t" nixos-rebuild boot --flake .#kronos -L --target-host ari@kronos.local --use-remote-sudo`
+      # from another pc: `NIX_SSHOPTS="-t" nixos-rebuild boot --flake .#kronos -L --target-host ari@kronos.local --use-remote-sudo`
       "kronos" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; inherit nix-colors; };
         modules = [
@@ -91,6 +86,19 @@
           ./nixos/kronos/hardware-configuration.nix
           ./nixos/kronos/configuration.nix
           ./nixos/wifiNetworks.nix
+        ];
+      };
+
+      # server = sol
+      # locally: `sudo nixos-rebuild switch --flake .`
+      # from `another pc: `NIX_SSHOPTS="-t" nixos-rebuild switch --flake .#sol -L --target-host ari@sol.local --use-remote-sudo`
+      "sol" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; inherit nix-colors; };
+        modules = [
+          inputs.nixos-hardware.nixosModules.hardkernel-odroid-h3
+          ./nixos/all-systems-configuration.nix
+          ./nixos/sol/hardware-configuration.nix
+          ./nixos/sol/configuration.nix
         ];
       };
     };

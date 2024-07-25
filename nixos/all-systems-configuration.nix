@@ -1,5 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  imports = [
+    inputs.fido2-hid-bridge.nixosModule
+  ];
+
   nixpkgs = {
     overlays = [ ];
     config.allowUnfree = true;
@@ -7,7 +11,7 @@
 
   nix = {
     settings = {
-      trusted-users = [ "root" "ari" ];
+      trusted-users = [ "root" "@wheel" ];
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
@@ -78,11 +82,10 @@
   services = {
     fido2-hid-bridge.enable = true;
 
-    pcscd =
-      {
-        enable = true; # yubikey
-        plugins = [ pkgs.acsccid ];
-      };
+    pcscd = {
+      enable = true; # yubikey / hand
+      plugins = [ pkgs.acsccid ];
+    };
     avahi = {
       enable = true;
       nssmdns4 = true;
@@ -92,6 +95,9 @@
         enable = true;
         addresses = true;
         workstation = true;
+        userServices = true;
+        hinfo = true;
+        domain = true;
       };
     };
     udev.extraRules = ''
