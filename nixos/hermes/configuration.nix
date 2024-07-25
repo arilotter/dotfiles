@@ -1,5 +1,8 @@
 { lib, inputs, pkgs, ... }:
 {
+  imports = [
+    ../mount-sol-samba-share.nix
+  ];
   networking.hostName = "hermes";
 
   boot = {

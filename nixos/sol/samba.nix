@@ -11,6 +11,8 @@
       server role = standalone server
       map to guest = Bad User
       guest account = ari
+      create mask = 0644
+      directory mask = 0755
     '';
     shares = {
       "storage" = {
