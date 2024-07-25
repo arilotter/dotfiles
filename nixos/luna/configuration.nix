@@ -3,7 +3,7 @@
   imports = [
     ../mount-sol-samba-share.nix
   ];
-  
+
   networking.hostName = "luna";
 
   services.xserver = {

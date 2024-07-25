@@ -11,15 +11,18 @@
       server role = standalone server
       map to guest = Bad User
       guest account = ari
-      create mask = 0644
-      directory mask = 0755
     '';
     shares = {
       "storage" = {
         path = "/mnt/storage";
         writable = true;
         public = true;
+        browseable = "yes";
         "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+
       };
     };
   };

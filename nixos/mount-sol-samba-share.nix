@@ -3,6 +3,6 @@
   fileSystems."/mnt/storage" = {
     device = "//sol.local/storage";
     fsType = "cifs";
-    options = [ "users" "rw" "nofail" "dir_mode=0777" "file_mode=0777"];
+    options = [ "users" "rw" "nofail" "dir_mode=0777" "file_mode=0777" ];
   };
 }
