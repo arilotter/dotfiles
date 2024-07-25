@@ -21,6 +21,8 @@
         "read only" = "no";
         "create mask" = "0644";
         "directory mask" = "0755";
+        "force create mode" = "0644";
+        "force directory mode" = "0755";
       };
     };
   };
