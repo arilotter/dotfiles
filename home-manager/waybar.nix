@@ -37,7 +37,7 @@ let c = config.colorScheme.palette; in
 
         network = {
           format-wifi = "  {signalStrength}%";
-          format-ethernet = "  {ifname}: {ipaddr}/{cidr}";
+          format-ethernet = "  {ifname}";
           format-disconnected = "󰤫";
         };
 
