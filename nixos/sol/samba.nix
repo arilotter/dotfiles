@@ -19,6 +19,7 @@
         path = "/mnt/storage";
         writable = true;
         public = true;
+        "read only" = "no";
       };
     };
   };
