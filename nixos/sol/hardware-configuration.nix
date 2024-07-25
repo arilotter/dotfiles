@@ -27,6 +27,7 @@
   fileSystems."/mnt/storage" = {
     device = "/dev/disk/by-uuid/D4B0-B27D";
     fsType = "exfat";
+    options = [ "users" "rw" "nofail" "dir_mode=0777" "file_mode=0777" ];
   };
 
   networking.useDHCP = lib.mkDefault true;
