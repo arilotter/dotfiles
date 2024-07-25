@@ -17,9 +17,9 @@ let c = config.colorScheme.palette; in
           "hyprland/workspaces"
         ];
         modules-right = [
+          "tray"
           "backlight"
           "network"
-          "tray"
           "battery"
           "pulseaudio"
           "idle_inhibitor"
@@ -28,6 +28,7 @@ let c = config.colorScheme.palette; in
           "cpu"
           "temperature"
           "clock"
+          "clock#calendar"
         ];
 
         battery = {
@@ -91,9 +92,14 @@ let c = config.colorScheme.palette; in
         temperature = {
           interval = 10;
         };
+
         clock = {
           interval = 1;
           format = "{:%H:%M:%S}";
+        };
+
+        "clock#calendar" = {
+          format = "{:%a %b %d}";
         };
 
         "hyprland/workspaces" = {
@@ -148,14 +154,17 @@ let c = config.colorScheme.palette; in
         border-radius: 0;
         border: 2px solid #${c.base05};
         border-right: 0;
+      }
+
+      #workspaces {
         margin-top: 8px;
-        margin-bottom: 8px;
       }
 
       #workspaces button {
         color: #${c.base05};
         background: transparent;
       }
+
       #workspaces button.focused {
         background: #${c.base01};
       }
@@ -168,7 +177,8 @@ let c = config.colorScheme.palette; in
       }
 
       #idle_inhibitor.activated {
-        background: #${c.base04};
+        background: #${c.base05};
+        color: #${c.base00};
       }
     '';
   };
