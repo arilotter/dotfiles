@@ -7,7 +7,11 @@
     ./slskd.nix
     # TODO pihole
     # TODO music UI
+<<<<<<< HEAD
     ./wireguard.nix
+=======
+    # ./wireguard.nix
+>>>>>>> d8d80f2 (slskd :))
     # TODO vaultwarden
   ];
 
@@ -27,6 +31,7 @@
         443 # https
         445 # smb
         139 # netbios
+        5030 # slskd
       ];
       allowedUDPPortRanges = [
         {

@@ -16,6 +16,5 @@
       global.upload.slots = 5;
       directories.downloads = "/mnt/storage/music-new-downloads";
     };
-    openFirewall = true;
   };
 }
