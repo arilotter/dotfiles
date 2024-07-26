@@ -3,12 +3,18 @@
   imports = [
     ./samba.nix
     ./navidrome.nix
-    ./digitalocean-dynamic-dns.nix
+    ./digitalocean-dynamic-dns.nix # todo make it work...
+    ./slskd.nix
     # TODO pihole
     # TODO music UI
-    # TODO wireguard ?
+    # ./wireguard.nix
     # TODO vaultwarden
   ];
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "arilotter@gmail.com";
+  };
 
   networking = {
     hostName = "sol";
