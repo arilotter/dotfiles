@@ -3,6 +3,7 @@
   imports = [
     ./samba.nix
     ./navidrome.nix
+    ./digitalocean-dynamic-dns.nix
     # TODO pihole
     # TODO music UI
     # TODO wireguard ?

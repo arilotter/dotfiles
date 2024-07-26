@@ -4,6 +4,7 @@ let
 in
 {
   systemd.user.services.ddns = {
+    enable = true;
     description = "Dynamic DNS Updater";
     serviceConfig = {
       Type = "simple";
