@@ -1,8 +1,6 @@
 { inputs, pkgs, ... }:
 {
-  imports = [
-    ../mount-sol-samba-share.nix
-  ];
+  imports = [ ../mount-sol-samba-share.nix ];
   networking.hostName = "hermes";
 
   boot = {
@@ -15,9 +13,7 @@
 
   networking.firewall.allowedTCPPortRanges = [ ];
 
-  environment.systemPackages = [
-    inputs.fw-inputmodule.packages.${pkgs.system}.default
-  ];
+  environment.systemPackages = [ inputs.fw-inputmodule.packages.${pkgs.system}.default ];
 
   services = {
     libinput.enable = true;

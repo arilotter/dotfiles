@@ -1,1 +1,3 @@
-[ "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBC/eiZRO5hRdUlGFUEKnpgpACqPtzoBYVCDt0T0tJH3XSmoHj9GdFCANVS3oZVhGggwskYLvkzU0O1fluLMow10AAAAEc3NoOg== arilotter@gmail.com" ]
+[
+  "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBC/eiZRO5hRdUlGFUEKnpgpACqPtzoBYVCDt0T0tJH3XSmoHj9GdFCANVS3oZVhGggwskYLvkzU0O1fluLMow10AAAAEc3NoOg== arilotter@gmail.com"
+]

@@ -11,5 +11,12 @@ stdenv.mkDerivation {
   patches = [ ./Makefile.patch ];
   patchFlags = [ "-p0" ];
   makeFlags = [ "PREFIX=$(out)" ];
-  buildInputs = [ git gawk gnused coreutils gnugrep utillinux ];
+  buildInputs = [
+    git
+    gawk
+    gnused
+    coreutils
+    gnugrep
+    utillinux
+  ];
 }

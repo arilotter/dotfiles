@@ -1,13 +1,15 @@
 { config, pkgs, ... }:
-let c = config.colorScheme.palette; in
+let
+  c = config.colorScheme.palette;
+in
 {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
     terminal = "${pkgs.kitty}/bin/kitty";
     font = "FiraCode Nerd Font 18";
-    theme = builtins.toPath (pkgs.writeText "theme.rasi"
-      ''
+    theme = builtins.toPath (
+      pkgs.writeText "theme.rasi" ''
         * {
           active-background: #${c.base02};
           active-foreground: @foreground;
@@ -179,6 +181,7 @@ let c = config.colorScheme.palette; in
         element-icon {
             background-color: inherit;
         }
-      '');
+      ''
+    );
   };
 }

@@ -1,8 +1,8 @@
-{  ... }:
+{ ... }:
 {
-    networking.wireless = {
+  networking.wireless = {
     networks = {
-  
+
     };
-    };
+  };
 }

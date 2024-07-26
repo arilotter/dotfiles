@@ -1,7 +1,4 @@
-{ config
-, pkgs
-, ...
-}:
+{ config, pkgs, ... }:
 let
   c = config.colorScheme.palette;
 in
@@ -52,14 +49,13 @@ in
           passes = 3;
           popups = true;
           contrast = 1;
-          noise = 0.01;
+          noise = 1.0e-2;
           brightness = 0.92;
         };
         drop_shadow = true;
         shadow_range = 3;
         shadow_render_power = 3;
       };
-
 
       animations = {
         enabled = true;
@@ -103,9 +99,7 @@ in
         };
       };
 
-      layerrule = [
-        "blur,waybar"
-      ];
+      layerrule = [ "blur,waybar" ];
 
       bindm = [
         # Move/resize windows with mod + LMB/RMB and dragging
@@ -113,9 +107,7 @@ in
         "$mod, mouse:273, resizewindow"
       ];
 
-      bindl = [
-        ",switch:on:Lid Switch,exec,systemctl suspend"
-      ];
+      bindl = [ ",switch:on:Lid Switch,exec,systemctl suspend" ];
 
       binde = [
         ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5+"
@@ -125,65 +117,65 @@ in
 
       ];
 
-      bind = [
-        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
-        "$mod, R, togglesplit"
-        "$mod, F, fullscreen"
-        "$mod, D, exec, rofi -show drun -show-icons"
-        "$mod Shift, Q, killactive"
+      bind =
+        [
+          "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+          "$mod, R, togglesplit"
+          "$mod, F, fullscreen"
+          "$mod, D, exec, rofi -show drun -show-icons"
+          "$mod Shift, Q, killactive"
 
-        "$mod, Tab, workspace, previous"
-        "ALT, Tab, cyclenext"
-        "ALT, Tab, bringactivetotop"
-        "$mod, Space, togglefloating"
-        "$mod Shift, Space, pseudo"
-        "$mod, C, exec, ags toggle-window notificationsCenter"
-        "$mod, N, exec, ags toggle-window quicksettings"
-        ", Print, exec, grimblast copysave output # screenshot"
-        ", XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          "$mod, Tab, workspace, previous"
+          "ALT, Tab, cyclenext"
+          "ALT, Tab, bringactivetotop"
+          "$mod, Space, togglefloating"
+          "$mod Shift, Space, pseudo"
+          "$mod, C, exec, ags toggle-window notificationsCenter"
+          "$mod, N, exec, ags toggle-window quicksettings"
+          ", Print, exec, grimblast copysave output # screenshot"
+          ", XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
-        # screenshot area
-        "SUPER_SHIFT,S, exec, grimblast copysave area"
+          # screenshot area
+          "SUPER_SHIFT,S, exec, grimblast copysave area"
 
-        "SUPER_SHIFT,A,movetoworkspace,special"
-        "SUPER,A,togglespecialworkspace"
+          "SUPER_SHIFT,A,movetoworkspace,special"
+          "SUPER,A,togglespecialworkspace"
 
+          # Move focus with mod + arrow keys
+          "$mod, Left, movefocus, l"
+          "$mod, Right, movefocus, r"
+          "$mod, Up, movefocus, u"
+          "$mod, Down, movefocus, d"
 
-        # Move focus with mod + arrow keys
-        "$mod, Left, movefocus, l"
-        "$mod, Right, movefocus, r"
-        "$mod, Up, movefocus, u"
-        "$mod, Down, movefocus, d"
-
-
-        # Move windows with mod + arrow keys
-        "$mod Shift, Left, movewindow, l"
-        "$mod Shift, Right, movewindow, r"
-        "$mod Shift, Up, movewindow, u"
-        "$mod Shift, Down, movewindow, d"
-        # Scroll through existing workspaces with mod + scroll
-        "$mod, mouse_down, workspace, e+1"
-        "$mod, mouse_up, workspace, e-1"
-      ] ++ (
-        # workspaces
-        # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-        builtins.concatLists (builtins.genList
-          (
-            x:
-            let
-              ws =
-                let
-                  c = (x + 1) / 10;
-                in
-                builtins.toString (x + 1 - (c * 10));
-            in
-            [
-              "$mod, ${ws}, workspace, ${toString (x + 1)}"
-              "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-            ]
+          # Move windows with mod + arrow keys
+          "$mod Shift, Left, movewindow, l"
+          "$mod Shift, Right, movewindow, r"
+          "$mod Shift, Up, movewindow, u"
+          "$mod Shift, Down, movewindow, d"
+          # Scroll through existing workspaces with mod + scroll
+          "$mod, mouse_down, workspace, e+1"
+          "$mod, mouse_up, workspace, e-1"
+        ]
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+          builtins.concatLists (
+            builtins.genList (
+              x:
+              let
+                ws =
+                  let
+                    c = (x + 1) / 10;
+                  in
+                  builtins.toString (x + 1 - (c * 10));
+              in
+              [
+                "$mod, ${ws}, workspace, ${toString (x + 1)}"
+                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+              ]
+            ) 10
           )
-          10)
-      );
+        );
 
       windowrulev2 = [
         "float,class:^(pavucontrol)$"

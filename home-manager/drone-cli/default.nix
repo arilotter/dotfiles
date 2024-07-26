@@ -14,7 +14,7 @@ buildGoPackage rec {
 
   meta = with stdenv.lib; {
     description = "Drone CLI";
-    homepage = https://github.com/drone/drone-cli;
+    homepage = "https://github.com/drone/drone-cli";
     platforms = platforms.unix;
   };
 }

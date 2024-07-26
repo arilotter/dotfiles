@@ -13,8 +13,7 @@
     i2c-tools
   ];
 
-  networking.firewall.allowedTCPPortRanges = [
-  ];
+  networking.firewall.allowedTCPPortRanges = [ ];
 
   services.openssh.enable = true;
 }

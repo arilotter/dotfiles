@@ -15,9 +15,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   virtualisation.docker = {
@@ -26,13 +24,20 @@
     # extraOptions = "--default-runtime=nvidia";
   };
 
-  environment.variables = { WLR_NO_HARDWARE_CURSORS = "1"; NIXOS_OZONE_WL = "1"; };
+  environment.variables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
   services = {
     fwupd.enable = true;
     printing = {
       enable = true;
-      drivers = with pkgs; [ gutenprint gutenprintBin brlaser ];
+      drivers = with pkgs; [
+        gutenprint
+        gutenprintBin
+        brlaser
+      ];
     };
   };
 
@@ -49,4 +54,3 @@
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 }
-

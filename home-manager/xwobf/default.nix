@@ -10,5 +10,9 @@ stdenv.mkDerivation {
   };
   patches = [ ./xwobf.c.patch ];
   makeFlags = [ "PREFIX=$(out)" ];
-  buildInputs = [ pkgconfig imagemagick xorg.libxcb.dev ];
+  buildInputs = [
+    pkgconfig
+    imagemagick
+    xorg.libxcb.dev
+  ];
 }

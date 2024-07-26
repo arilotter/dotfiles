@@ -9,7 +9,6 @@
 
   programs.home-manager.enable = true;
 
-
   home.packages = with pkgs; [
     # shell config
     starship # prompt
@@ -40,13 +39,12 @@
     # programming tools
     devenv
     jdk11 # java
-    nixpkgs-fmt # nix formatting tool
     trickle # limit bandwidth artificially
     wabt # webassembly binary tools
     google-cloud-sdk # google cloud sdk
     awscli # aws cli
     ansible # ansible devops bullshit
-    nixd #nix lang server
+    nixd # nix lang server
 
     # programming languages
     go
@@ -71,10 +69,10 @@
   ];
 
   home.file = {
-    ".cargo/config.toml".text = ''    
+    ".cargo/config.toml".text = ''
       [net]
       git-fetch-with-cli = true   # use the `git` executable for git operations
-      '';
+    '';
   };
 
   home.sessionVariables = { };

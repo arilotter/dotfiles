@@ -1,8 +1,11 @@
-{ pkgs, inputs, lib, ... }:
 {
-  imports = [
-    inputs.fido2-hid-bridge.nixosModule
-  ];
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
+  imports = [ inputs.fido2-hid-bridge.nixosModule ];
 
   nixpkgs = {
     overlays = [ ];
@@ -11,7 +14,10 @@
 
   nix = {
     settings = {
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
@@ -19,7 +25,11 @@
 
   boot = {
     # disable modules that conflict w/ smart card reader.
-    blacklistedKernelModules = [ "nfc" "pn533" "pn533_usb" ];
+    blacklistedKernelModules = [
+      "nfc"
+      "pn533"
+      "pn533_usb"
+    ];
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
     binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -132,4 +142,3 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
 }
-

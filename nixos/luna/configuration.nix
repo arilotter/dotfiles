@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    ../mount-sol-samba-share.nix
-  ];
+  imports = [ ../mount-sol-samba-share.nix ];
 
   networking.hostName = "luna";
 
@@ -29,4 +27,3 @@
   };
   services.usbmuxd.enable = true;
 }
-

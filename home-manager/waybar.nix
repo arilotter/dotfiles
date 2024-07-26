@@ -1,6 +1,6 @@
 { config, ... }:
-let c = config.colorScheme.palette; in
-{
+let c = config.colorScheme.palette;
+in {
   programs.waybar = {
     enable = true;
     settings = {
@@ -13,9 +13,7 @@ let c = config.colorScheme.palette; in
         spacing = 0;
         output = [ "DP-2" "eDP-1" ];
         reload_style_on_change = true;
-        modules-left = [
-          "hyprland/workspaces"
-        ];
+        modules-left = [ "hyprland/workspaces" ];
         modules-right = [
           "tray"
           "backlight"
@@ -32,7 +30,8 @@ let c = config.colorScheme.palette; in
         ];
 
         battery = {
-          # format = "{icon} {percent}%";
+          format = "{icon} {percent}%";
+          format-icons = [ "" "" "" "" "" ];
         };
 
         network = {
@@ -40,8 +39,6 @@ let c = config.colorScheme.palette; in
           format-ethernet = "  {ifname}";
           format-disconnected = "󰤫";
         };
-
-
         pulseaudio = {
           scroll-step = 1;
           format = "{icon}  {volume}%";
@@ -78,7 +75,8 @@ let c = config.colorScheme.palette; in
         disk = {
           interval = 30;
           format = "󰋊 {percentage_used}%";
-          tooltip-format = "{used} used out of {total} on \"{path}\" ({percentage_used}%)";
+          tooltip-format =
+            ''{used} used out of {total} on "{path}" ({percentage_used}%)'';
         };
         memory = {
           interval = 10;
@@ -89,35 +87,18 @@ let c = config.colorScheme.palette; in
           interval = 10;
           format = " {usage}%";
         };
-        temperature = {
-          interval = 10;
-        };
+        temperature = { interval = 10; };
 
         clock = {
           interval = 1;
           format = "{:%H:%M:%S}";
         };
 
-        "clock#calendar" = {
-          format = "{:%a %b %d}";
-        };
+        "clock#calendar" = { format = "{:%a %b %d}"; };
 
         "hyprland/workspaces" = {
           show-special = true;
-          persistent-workspaces = {
-            "*" = [
-              1
-              2
-              3
-              4
-              5
-              6
-              7
-              8
-              9
-              10
-            ];
-          };
+          persistent-workspaces = { "*" = [ 1 2 3 4 5 6 7 8 9 10 ]; };
           format = "{icon}";
           format-icons = {
             active = "";

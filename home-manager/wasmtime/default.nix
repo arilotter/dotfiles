@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 with pkgs;
 rustPlatform.buildRustPackage {
   name = "wasmtime";
@@ -9,7 +11,11 @@ rustPlatform.buildRustPackage {
     sha256 = "1i2ig6fbp1bnhghh27xgnscp8pc2rmmhp4glq3j0r6xg7k85k3fp";
     fetchSubmodules = true;
   };
-  nativeBuildInputs = [ python cmake clang ];
+  nativeBuildInputs = [
+    python
+    cmake
+    clang
+  ];
   buildInputs = [ llvmPackages.libclang ];
   LIBCLANG_PATH = "${llvmPackages.libclang}/lib";
   cargoPatches = [ ./Cargo.lock.patch ];

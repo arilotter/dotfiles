@@ -48,86 +48,107 @@
     };
   };
 
-  outputs = { nur, nixpkgs, home-manager, nix-colors, ... }@inputs: rec {
-    nixosConfigurations = {
-      # desktop ~
-      "luna" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; inherit nix-colors; };
-        modules = [
-          nur.nixosModules.nur
-          ./nixos/all-systems-configuration.nix
-          ./nixos/graphical-configuration.nix
-          ./nixos/luna/hardware-configuration.nix
-          ./nixos/luna/configuration.nix
-        ];
-      };
+  outputs =
+    {
+      nur,
+      nixpkgs,
+      home-manager,
+      nix-colors,
+      ...
+    }@inputs:
+    rec {
+      nixosConfigurations = {
+        # desktop ~
+        "luna" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            inherit nix-colors;
+          };
+          modules = [
+            nur.nixosModules.nur
+            ./nixos/all-systems-configuration.nix
+            ./nixos/graphical-configuration.nix
+            ./nixos/luna/hardware-configuration.nix
+            ./nixos/luna/configuration.nix
+          ];
+        };
 
-      # framework laptop
-      "hermes" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; inherit nix-colors; };
-        modules = [
-          nur.nixosModules.nur
-          inputs.nixos-hardware.nixosModules.framework-16-7040-amd
-          ./nixos/all-systems-configuration.nix
-          ./nixos/graphical-configuration.nix
-          ./nixos/hermes/hardware-configuration.nix
-          ./nixos/hermes/configuration.nix
-        ];
-      };
+        # framework laptop
+        "hermes" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            inherit nix-colors;
+          };
+          modules = [
+            nur.nixosModules.nur
+            inputs.nixos-hardware.nixosModules.framework-16-7040-amd
+            ./nixos/all-systems-configuration.nix
+            ./nixos/graphical-configuration.nix
+            ./nixos/hermes/hardware-configuration.nix
+            ./nixos/hermes/configuration.nix
+          ];
+        };
 
-      # kronos = saturn = cuz it rings ;)
-      # sd image: `nix build '.#kronos-sd'`
-      # from another pc: `NIX_SSHOPTS="-t" nixos-rebuild boot --flake .#kronos -L --target-host ari@kronos.local --use-remote-sudo`
-      "kronos" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; inherit nix-colors; };
-        modules = [
-          inputs.beepy.nixosModule
-          ./nixos/all-systems-configuration.nix
-          ./nixos/kronos/hardware-configuration.nix
-          ./nixos/kronos/configuration.nix
-          ./nixos/wifiNetworks.nix
-        ];
-      };
+        # kronos = saturn = cuz it rings ;)
+        # sd image: `nix build '.#kronos-sd'`
+        # from another pc: `NIX_SSHOPTS="-t" nixos-rebuild boot --flake .#kronos -L --target-host ari@kronos.local --use-remote-sudo`
+        "kronos" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            inherit nix-colors;
+          };
+          modules = [
+            inputs.beepy.nixosModule
+            ./nixos/all-systems-configuration.nix
+            ./nixos/kronos/hardware-configuration.nix
+            ./nixos/kronos/configuration.nix
+            ./nixos/wifiNetworks.nix
+          ];
+        };
 
-      # server = sol
-      # locally: `sudo nixos-rebuild switch --flake .`
-      # from `another pc: `NIX_SSHOPTS="-t" nixos-rebuild switch --flake .#sol -L --target-host ari@sol.local --use-remote-sudo`
-      "sol" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; inherit nix-colors; };
-        modules = [
-          inputs.nixos-hardware.nixosModules.hardkernel-odroid-h3
-          ./nixos/all-systems-configuration.nix
-          ./nixos/sol/hardware-configuration.nix
-          ./nixos/sol/configuration.nix
-        ];
+        # server = sol
+        # locally: `sudo nixos-rebuild switch --flake .`
+        # from `another pc: `NIX_SSHOPTS="-t" nixos-rebuild switch --flake .#sol -L --target-host ari@sol.local --use-remote-sudo`
+        "sol" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            inherit nix-colors;
+          };
+          modules = [
+            inputs.nixos-hardware.nixosModules.hardkernel-odroid-h3
+            ./nixos/all-systems-configuration.nix
+            ./nixos/sol/hardware-configuration.nix
+            ./nixos/sol/configuration.nix
+          ];
+        };
       };
-    };
-    kronos-sd = nixosConfigurations.kronos.config.system.build.sdImage;
-    # `home-manager switch --flake .#ari`
-    homeConfigurations =
-      let
-        graphics = home-manager.lib.homeManagerConfiguration
-          {
+      kronos-sd = nixosConfigurations.kronos.config.system.build.sdImage;
+      # `home-manager switch --flake .#ari`
+      homeConfigurations =
+        let
+          graphics = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-            extraSpecialArgs = { inherit inputs; inherit nix-colors; };
+            extraSpecialArgs = {
+              inherit inputs;
+              inherit nix-colors;
+            };
             modules = [
               inputs.nix-colors.homeManagerModules.default
               ./home-manager/home.nix
               ./home-manager/home-graphical.nix
             ];
           };
-        nographics = home-manager.lib.homeManagerConfiguration
-          {
+          nographics = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.aarch64-linux;
-            extraSpecialArgs = { inherit inputs; };
-            modules = [
-              ./home-manager/home.nix
-            ];
+            extraSpecialArgs = {
+              inherit inputs;
+            };
+            modules = [ ./home-manager/home.nix ];
           };
-      in
-      {
-        "ari" = graphics;
-        "ari-tty" = nographics;
-      };
-  };
+        in
+        {
+          "ari" = graphics;
+          "ari-tty" = nographics;
+        };
+    };
 }

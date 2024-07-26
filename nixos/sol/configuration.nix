@@ -3,6 +3,10 @@
   imports = [
     ./samba.nix
     ./navidrome.nix
+    # TODO pihole
+    # TODO music UI
+    # TODO wireguard ?
+    # TODO vaultwarden
   ];
 
   networking = {
@@ -18,15 +22,20 @@
         139 # netbios
       ];
       allowedUDPPortRanges = [
-        { from = 137; to = 139; } # netbios
+        {
+          from = 137;
+          to = 139;
+        }
+        # netbios
       ];
     };
   };
 
-
   services.openssh.enable = true;
 
-  users.users.ari.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIL+5IDeIKvYpQllVsU/soRu27KyPTA5FXvZM5Z8+ms7 arilotter@gmail.com" ];
+  users.users.ari.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIL+5IDeIKvYpQllVsU/soRu27KyPTA5FXvZM5Z8+ms7 arilotter@gmail.com"
+  ];
 
   systemd.targets = {
     sleep.enable = false;
