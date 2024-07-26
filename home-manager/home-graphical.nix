@@ -31,7 +31,6 @@ in
     easyeffects # mic settings
 
     vlc # video player
-    spotify # music player
     google-chrome # web browser
     slack
 
