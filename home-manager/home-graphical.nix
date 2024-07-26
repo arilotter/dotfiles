@@ -13,6 +13,9 @@ in
     ./firefox.nix
     ./rofi.nix
     ./waybar.nix
+    ./discord.nix
+    ./supersonic.nix
+    ./colors.nix
   ];
 
   home.packages = with pkgs; [
@@ -30,7 +33,6 @@ in
     vlc # video player
     spotify # music player
     google-chrome # web browser
-    vesktop
     slack
 
     (vscode-with-extensions.override {
