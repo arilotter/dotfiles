@@ -1,6 +1,8 @@
 { config, ... }:
-let c = config.colorScheme.palette;
-in {
+let
+  c = config.colorScheme.palette;
+in
+{
   programs.waybar = {
     enable = true;
     settings = {
@@ -11,7 +13,10 @@ in {
         margin = "16";
         margin-right = 0;
         spacing = 0;
-        output = [ "DP-2" "eDP-1" ];
+        output = [
+          "DP-2"
+          "eDP-1"
+        ];
         reload_style_on_change = true;
         modules-left = [ "hyprland/workspaces" ];
         modules-right = [
@@ -30,8 +35,8 @@ in {
         ];
 
         battery = {
-          format = "{icon} {percent}%";
-          format-icons = [ "" "" "" "" "" ];
+          format = "{percent}%";
+          # format-icons = [ "" "" "" "" "" ];
         };
 
         network = {
@@ -52,7 +57,11 @@ in {
             phone = "";
             portable = "";
             car = "";
-            default = [ "" "" "" ];
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           rotate = 0;
           on-click = "pavucontrol";
@@ -61,7 +70,19 @@ in {
         backlight = {
           device = "amdgpu_bl1";
           format = "{icon} {percent}%";
-          format-icons = [ "󰛩" "󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󱩔" "󱩕" "󱩖" "󰛨" ];
+          format-icons = [
+            "󰛩"
+            "󱩎"
+            "󱩏"
+            "󱩐"
+            "󱩑"
+            "󱩒"
+            "󱩓"
+            "󱩔"
+            "󱩕"
+            "󱩖"
+            "󰛨"
+          ];
         };
 
         idle_inhibitor = {
@@ -75,8 +96,7 @@ in {
         disk = {
           interval = 30;
           format = "󰋊 {percentage_used}%";
-          tooltip-format =
-            ''{used} used out of {total} on "{path}" ({percentage_used}%)'';
+          tooltip-format = ''{used} used out of {total} on "{path}" ({percentage_used}%)'';
         };
         memory = {
           interval = 10;
@@ -87,18 +107,35 @@ in {
           interval = 10;
           format = " {usage}%";
         };
-        temperature = { interval = 10; };
+        temperature = {
+          interval = 10;
+        };
 
         clock = {
           interval = 1;
           format = "{:%H:%M:%S}";
         };
 
-        "clock#calendar" = { format = "{:%a %b %d}"; };
+        "clock#calendar" = {
+          format = "{:%a %b %d}";
+        };
 
         "hyprland/workspaces" = {
           show-special = true;
-          persistent-workspaces = { "*" = [ 1 2 3 4 5 6 7 8 9 10 ]; };
+          persistent-workspaces = {
+            "*" = [
+              1
+              2
+              3
+              4
+              5
+              6
+              7
+              8
+              9
+              10
+            ];
+          };
           format = "{icon}";
           format-icons = {
             active = "";
@@ -150,7 +187,7 @@ in {
         background: #${c.base01};
       }
 
-      #idle_inhibitor, #disk, #temperature, #cpu, #memory, #network, #pulseaudio, #clock, #battery, #tray {
+      #tray, #idle_inhibitor, #disk, #temperature, #cpu, #memory, #network, #pulseaudio, #clock, #battery, #tray {
         background: transparent;
         margin: 0;
         padding: 8px;
