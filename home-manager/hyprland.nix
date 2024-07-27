@@ -21,6 +21,7 @@ in
       "$mod" = "SUPER";
 
       exec-once = [
+        "hyprpaper"
         "systemctl --user enable xdg-desktop-portal-hyprland"
         "waybar"
       ];
