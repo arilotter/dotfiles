@@ -35,8 +35,8 @@ in
         ];
 
         battery = {
-          format = "{percent}%";
-          # format-icons = [ "" "" "" "" "" ];
+          format = "{icon}  {capacity}%";
+          format-icons = [ "" "" "" "" "" ];
         };
 
         network = {
