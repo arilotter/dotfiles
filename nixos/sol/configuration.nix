@@ -7,11 +7,7 @@
     ./slskd.nix
     # TODO pihole
     # TODO music UI
-<<<<<<< HEAD
-    ./wireguard.nix
-=======
     # ./wireguard.nix
->>>>>>> d8d80f2 (slskd :))
     # TODO vaultwarden
   ];
 
