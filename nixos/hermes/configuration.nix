@@ -14,6 +14,7 @@
   networking.firewall.allowedTCPPortRanges = [ ];
 
   environment.systemPackages = [ inputs.fw-inputmodule.packages.${pkgs.system}.default ];
+  programs.steam.enable = true;
 
   services = {
     libinput.enable = true;
