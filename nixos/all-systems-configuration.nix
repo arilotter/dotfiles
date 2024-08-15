@@ -83,6 +83,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    cachix
     wget
     git
     zip
