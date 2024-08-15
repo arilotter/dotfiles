@@ -26,4 +26,9 @@
     package = pkgs.wireshark;
   };
   services.usbmuxd.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+    openFirewall = true;
+  };
 }
