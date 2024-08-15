@@ -10,6 +10,7 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
+    (pkgs.callPackage ./runpod {}) 
     # shell config
     starship # prompt
     eza # ls replacement
