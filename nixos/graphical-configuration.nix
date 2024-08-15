@@ -52,5 +52,6 @@
     liberation_ttf
     fira-code
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    tex-gyre.heros
   ];
 }
