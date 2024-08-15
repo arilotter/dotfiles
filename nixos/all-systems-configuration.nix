@@ -101,6 +101,9 @@
       enable = true; # yubikey / hand
       plugins = [ pkgs.acsccid ];
     };
+
+    gnome.gnome-keyring.enable = true;
+
     avahi = {
       enable = true;
       nssmdns4 = true;

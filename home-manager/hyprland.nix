@@ -24,6 +24,7 @@ in
         "hyprpaper"
         "systemctl --user enable xdg-desktop-portal-hyprland"
         "waybar"
+        "gnome-keyring-daemon --start --components=secrets"
       ];
 
       monitor = [
