@@ -18,6 +18,13 @@ in
     ./colors.nix
   ];
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    name = "Nordzy-cursors";
+    size = 48;
+    package = pkgs.nordzy-cursor-theme;
+  };
   home.packages = with pkgs; [
     # desktop env
     hyprpaper # wallpaper manager

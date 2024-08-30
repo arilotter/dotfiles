@@ -10,6 +10,8 @@ in
     QT_QPA_PLATFORM = "wayland";
     QT_QPA_PLATFORM_THEME = "qt6ct";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    HYPRCURSOR_THEME = config.home.pointerCursor.name;
+    HYPRCURSOR_SIZE = config.home.pointerCursor.size;
   };
 
   wayland.windowManager.hyprland = {
