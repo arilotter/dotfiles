@@ -111,7 +111,12 @@ in
         "$mod, mouse:273, resizewindow"
       ];
 
-      bindl = [ ",switch:on:Lid Switch,exec,systemctl suspend" ];
+      bindl = [
+        ",switch:on:Lid Switch,exec,systemctl suspend"
+        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+        ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+      ];
 
       binde = [
         ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5+"
