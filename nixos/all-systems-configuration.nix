@@ -3,12 +3,11 @@
   inputs,
   lib,
   ...
-}:
-{
-  imports = [ inputs.fido2-hid-bridge.nixosModule ];
+}: {
+  imports = [inputs.fido2-hid-bridge.nixosModule];
 
   nixpkgs = {
-    overlays = [ ];
+    overlays = [];
     config.allowUnfree = true;
   };
 
@@ -31,8 +30,8 @@
       "pn533_usb"
     ];
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    supportedFilesystems = ["ntfs"];
+    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
   time.timeZone = "America/Toronto";
@@ -91,7 +90,7 @@
     fish
     nano
     kitty # even on non-graphical systems, this installs terminfo.
-    nixfmt-rfc-style
+    alejandra # nix fmtter
     nil
   ];
 
@@ -100,7 +99,7 @@
 
     pcscd = {
       enable = true; # yubikey / hand
-      plugins = [ pkgs.acsccid ];
+      plugins = [pkgs.acsccid];
     };
 
     gnome.gnome-keyring.enable = true;

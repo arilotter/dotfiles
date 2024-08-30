@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   ddns = pkgs.writeShellScriptBin "ddns" (builtins.readFile ./ddns.sh);
-in
-{
+in {
   systemd.services.ddns = {
     enable = true;
     description = "Dynamic DNS Updater";

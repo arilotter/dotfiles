@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./samba.nix
     ./navidrome.nix

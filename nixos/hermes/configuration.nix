@@ -1,6 +1,9 @@
-{ inputs, pkgs, ... }:
 {
-  imports = [ ../mount-sol-samba-share.nix ];
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [../mount-sol-samba-share.nix];
   networking.hostName = "hermes";
 
   boot = {
@@ -8,19 +11,19 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelParams = [ "ec_sys.write_support=1" ];
+    kernelParams = ["ec_sys.write_support=1"];
   };
 
-  networking.firewall.allowedTCPPortRanges = [ ];
+  networking.firewall.allowedTCPPortRanges = [];
 
-  environment.systemPackages = [ inputs.fw-inputmodule.packages.${pkgs.system}.default ];
+  environment.systemPackages = [inputs.fw-inputmodule.packages.${pkgs.system}.default];
   programs.steam.enable = true;
 
   services = {
     libinput.enable = true;
 
     xserver = {
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = ["amdgpu"];
     };
   };
 }

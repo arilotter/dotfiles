@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-  imports = [ ./tuigreet.nix ];
+{pkgs, ...}: {
+  imports = [./tuigreet.nix];
 
   boot.plymouth.enable = true;
 
@@ -15,12 +14,13 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config = {
+    };
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   virtualisation.docker = {
     enable = true;
-    enableNvidia = true;
     # extraOptions = "--default-runtime=nvidia";
   };
 
@@ -51,7 +51,7 @@
     noto-fonts-emoji
     liberation_ttf
     fira-code
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override {fonts = ["FiraCode"];})
     tex-gyre.heros
   ];
 }

@@ -1,8 +1,6 @@
-{ ... }:
-{
+{...}: {
   networking.wireless = {
     networks = {
-
     };
   };
 }

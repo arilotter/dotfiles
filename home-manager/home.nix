@@ -1,6 +1,8 @@
-{ inputs, pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   home = {
     username = "ari";
     homeDirectory = "/home/ari";
@@ -10,7 +12,7 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    (pkgs.callPackage ./runpod {}) 
+    (pkgs.callPackage ./runpod {})
     # shell config
     starship # prompt
     eza # ls replacement
@@ -77,7 +79,7 @@
     '';
   };
 
-  home.sessionVariables = { };
+  home.sessionVariables = {};
 
   programs.direnv.enable = true;
 
@@ -136,8 +138,8 @@
   };
 
   nixpkgs = {
-    overlays = [ inputs.nur.overlay ];
+    overlays = [inputs.nur.overlay];
     # workaround for https://github.com/nix-community/home-manager/issues/2942
-    config.allowUnfreePredicate = (pkg: true);
+    config.allowUnfreePredicate = pkg: true;
   };
 }

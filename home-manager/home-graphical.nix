@@ -1,9 +1,10 @@
-{ pkgs, inputs, ... }:
-
-let
-  vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
-in
 {
+  pkgs,
+  inputs,
+  ...
+}: let
+  vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
+in {
   colorScheme = inputs.nix-colors.colorSchemes."solarized-light";
 
   imports = [

@@ -3,8 +3,7 @@
   pkgs,
   config,
   ...
-}:
-{
+}: {
   nixpkgs.hostPlatform = "x86_64-linux";
 
   boot.initrd.availableKernelModules = [
@@ -15,9 +14,9 @@
     "sd_mod"
     "usbhid"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/2d3cdcb4-8a76-4f8c-939c-3912abc2c673";

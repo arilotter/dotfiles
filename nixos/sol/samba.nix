@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   services.samba = {
     enable = true;
     enableNmbd = true;
@@ -26,7 +25,7 @@
       };
     };
   };
-  
+
   services.samba-wsdd = {
     enable = true;
     openFirewall = true;

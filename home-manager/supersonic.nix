@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
 {
-  home.packages = [ pkgs.supersonic ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = [pkgs.supersonic];
   services.mpris-proxy.enable = true;
   xdg.configFile."supersonic/themes/nix-theme.toml".text = with config.colorScheme.palette; ''
     [SupersonicTheme]

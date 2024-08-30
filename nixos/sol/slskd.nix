@@ -1,12 +1,11 @@
-{ ... }:
-{
+{...}: {
   services.slskd = {
     enable = true;
     environmentFile = "/home/ari/slskd.env";
     domain = null;
     settings = {
       shares = {
-        directories = [ "/mnt/storage/music" ];
+        directories = ["/mnt/storage/music"];
         filters = [
           "\.ini$"
           "Thumbs.db$"

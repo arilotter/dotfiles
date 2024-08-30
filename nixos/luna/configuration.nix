@@ -1,11 +1,14 @@
-{ config, pkgs, ... }:
 {
-  imports = [ ../mount-sol-samba-share.nix ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [../mount-sol-samba-share.nix];
 
   networking.hostName = "luna";
 
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
     displayManager.importedVariables = [
       "XDG_SESSION_TYPE"
       "XDG_CURRENT_DESKTOP"

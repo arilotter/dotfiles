@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-let
-  c = config.colorScheme.palette;
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  c = config.colorScheme.palette;
+in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;

@@ -1,5 +1,8 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   nixpkgs.hostPlatform = "x86_64-linux";
 
   boot = {
@@ -11,10 +14,10 @@
       "usb_storage"
       "sd_mod"
     ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
-    kernelParams = [ "nvidia-drm.fbdev=1" ];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
+    kernelParams = ["nvidia-drm.fbdev=1"];
     blacklistedKernelModules = [
       "snd_hda_codec_hdmi"
       "nfc"

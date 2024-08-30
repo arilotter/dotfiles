@@ -1,8 +1,6 @@
-{ config, ... }:
-let
+{config, ...}: let
   c = config.colorScheme.palette;
-in
-{
+in {
   services.mako = {
     enable = true;
     icons = true;

@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = with config.colorScheme.palette; [
     (pkgs.writeShellScriptBin "colors" ''
       #!/usr/bin/env bash
