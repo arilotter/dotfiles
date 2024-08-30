@@ -21,7 +21,7 @@ in
   home.packages = with pkgs; [
     # desktop env
     hyprpaper # wallpaper manager
-    gnome3.nautilus # file manager
+    nautilus # file manager
     inputs.hypr-contrib.packages.${pkgs.system}.grimblast # screenshot tool
     pavucontrol # audio control
     blueman # bluetooth manager

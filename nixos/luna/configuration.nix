@@ -14,10 +14,12 @@
   };
   powerManagement.cpuFreqGovernor = "performance";
   hardware.nvidia = {
+    open = false;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
     nvidiaSettings = true;
   };
+  hardware.nvidia-container-toolkit.enable = true;
 
   programs.steam.enable = true;
 
