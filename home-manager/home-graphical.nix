@@ -25,6 +25,7 @@ in
     size = 48;
     package = pkgs.nordzy-cursor-theme;
   };
+
   home.packages = with pkgs; [
     # desktop env
     hyprpaper # wallpaper manager
@@ -34,6 +35,11 @@ in
     blueman # bluetooth manager
     wl-clipboard # copy/paste cli
     monado # xr? :D
+
+    #oooooooooh ai
+    lmstudio
+    # 3d pwint
+    prusa-slicer
 
     easyeffects # mic settings
 
@@ -56,7 +62,6 @@ in
         rust-lang.rust-analyzer
         dbaeumer.vscode-eslint
         usernamehw.errorlens
-        ms-vscode.cpptools
         jnoortheen.nix-ide
         # (import ./skyweaver-vscode)
         tamasfe.even-better-toml
