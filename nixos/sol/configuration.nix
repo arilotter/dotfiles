@@ -38,6 +38,12 @@
     };
   };
 
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+    openFirewall = true;
+  };
+
   services.openssh.enable = true;
 
   users.users.ari.openssh.authorizedKeys.keys = [
