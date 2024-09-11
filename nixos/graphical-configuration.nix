@@ -12,6 +12,7 @@
     enable32Bit = true;
   };
 
+  programs.hyprland.enable = true;
   xdg.portal = {
     enable = true;
     config = {
