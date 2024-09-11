@@ -92,6 +92,7 @@
     kitty # even on non-graphical systems, this installs terminfo.
     alejandra # nix fmtter
     nil
+    steam-run
   ];
 
   services = {
