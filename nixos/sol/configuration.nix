@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./samba.nix
     ./navidrome.nix
@@ -6,7 +6,6 @@
     ./slskd.nix
     # TODO pihole
     # TODO music UI
-    # ./wireguard.nix
     # TODO vaultwarden
   ];
 
@@ -27,16 +26,19 @@
         445 # smb
         139 # netbios
         5030 # slskd
+        7777 #
       ];
-      allowedUDPPortRanges = [
-        {
-          from = 137;
-          to = 139;
-        }
-        # netbios
+      allowedUDPPorts = [
+        137
+        138
+        139 # netbios
+        7777 # game server
       ];
     };
   };
+  environment.systemPackages = [
+    pkgs.steamcmd
+  ];
 
   services.tailscale = {
     enable = true;
