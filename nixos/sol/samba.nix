@@ -12,11 +12,21 @@
       guest account = nobody
     '';
     shares = {
-      "storage" = {
-        path = "/mnt/storage";
+      "public" = {
+        path = "/mnt/storage/public";
         "browseable" = "yes";
         "public" = "yes";
         "guest only" = "yes";
+        "read only" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force create mode" = "0644";
+        "force directory mode" = "0755";
+      };
+      "storage" = {
+        path = "/mnt/storage";
+        "browseable" = "yes";
+        "guest ok" = "no";
         "read only" = "no";
         "create mask" = "0644";
         "directory mask" = "0755";

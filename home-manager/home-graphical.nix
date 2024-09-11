@@ -52,7 +52,6 @@ in {
       vscodeExtensions = with vsc-ext; [
         bierner.markdown-mermaid
         supermaven.supermaven
-        arrterian.nix-env-selector
         ms-vscode-remote.remote-containers
         semanticdiff.semanticdiff
         ms-python.python
