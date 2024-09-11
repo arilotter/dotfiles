@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   services.slskd = {
     enable = true;
     environmentFile = "/home/ari/slskd.env";
@@ -16,4 +16,5 @@
       directories.downloads = "/mnt/storage/music-new-downloads";
     };
   };
+  networking.firewall.allowedTCPPorts = [config.services.slskd.settings.web.port];
 }
