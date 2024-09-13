@@ -30,6 +30,9 @@
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     supportedFilesystems = ["ntfs"];
     binfmt.emulatedSystems = ["aarch64-linux"];
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = "1048576";
+    };
   };
 
   home-manager = {
