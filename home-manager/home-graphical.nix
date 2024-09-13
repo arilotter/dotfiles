@@ -2,9 +2,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
-in {
+}: {
   colorScheme = inputs.nix-colors.colorSchemes."solarized-light";
 
   imports = [
@@ -17,6 +15,7 @@ in {
     ./waybar.nix
     ./discord.nix
     ./supersonic.nix
+    ./vscode.nix
     ./colors.nix
   ];
 
@@ -49,36 +48,6 @@ in {
     google-chrome # web browser
     slack
 
-    (vscode-with-extensions.override {
-      vscodeExtensions = with vsc-ext; [
-        bierner.markdown-mermaid
-        supermaven.supermaven
-        ms-vscode-remote.remote-containers
-        semanticdiff.semanticdiff
-        ms-python.python
-        ms-python.vscode-pylance
-        ms-python.black-formatter
-        ms-vsliveshare.vsliveshare
-        golang.go
-        rust-lang.rust-analyzer
-        dbaeumer.vscode-eslint
-        usernamehw.errorlens
-        jnoortheen.nix-ide
-        # (import ./skyweaver-vscode)
-        tamasfe.even-better-toml
-        # jolaleye.horizon-theme-vscode
-        esbenp.prettier-vscode
-        dbaeumer.vscode-eslint
-        gruntfuggly.todo-tree
-        wallabyjs.quokka-vscode
-        biomejs.biome
-        yoavbls.pretty-ts-errors
-        slevesque.shader
-        xaver.clang-format
-        ms-playwright.playwright
-      ];
-    })
-
     #clang format needs..
     clang-tools
   ];
@@ -90,20 +59,10 @@ in {
     '';
   };
 
-  programs.git.extraConfig.core.editor = "code --wait";
-
   programs.fish = {
     shellAliases = {
       pbpaste = "wl-paste";
       pbcopy = "wl-copy";
     };
-    shellInit = ''
-
-      set -gx GDK_BACKEND wayland
-      set -gx MOZ_ENABLE_WAYLAND 1
-
-      set -gx SUDO_EDITOR code
-      set -gx VISUAL code
-    '';
   };
 }
