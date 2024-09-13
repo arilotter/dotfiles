@@ -3,13 +3,15 @@
   pkgs,
   ...
 }: {
+  imports = [
+    inputs.nix-colors.homeManagerModules.default
+  ];
+
   home = {
     username = "ari";
     homeDirectory = "/home/ari";
     stateVersion = "23.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   };
-
-  programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
     (pkgs.callPackage ./runpod {})
@@ -135,11 +137,5 @@
     extraConfig.url."git@github.com:".insteadOf = "https://github.com/";
     lfs.enable = true;
     delta.enable = true;
-  };
-
-  nixpkgs = {
-    overlays = [inputs.nur.overlay];
-    # workaround for https://github.com/nix-community/home-manager/issues/2942
-    config.allowUnfreePredicate = pkg: true;
   };
 }

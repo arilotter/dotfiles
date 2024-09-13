@@ -1,13 +1,11 @@
 {
   pkgs,
-  inputs,
   lib,
+  inputs,
   ...
 }: {
-  imports = [inputs.fido2-hid-bridge.nixosModule];
-
   nixpkgs = {
-    overlays = [];
+    overlays = [inputs.nur.overlay];
     config.allowUnfree = true;
   };
 
@@ -34,13 +32,16 @@
     binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
+
   time.timeZone = "America/Toronto";
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  security = {
-    polkit.enable = true;
-  };
+  security.polkit.enable = true;
 
   services.pipewire = {
     enable = true;

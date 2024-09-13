@@ -23,7 +23,6 @@
     nvidiaSettings = true;
   };
   hardware.nvidia-container-toolkit.enable = true;
-
   programs.steam.enable = true;
 
   programs.wireshark = {

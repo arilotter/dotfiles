@@ -54,6 +54,7 @@
     home-manager,
     nix-colors,
     agenix,
+    fido2-hid-bridge,
     ...
   } @ inputs: let
     sys = {
@@ -62,12 +63,29 @@
         inherit nix-colors;
       };
     };
-    mods = [
+    base-modules = [
       agenix.nixosModules.default
       nur.nixosModules.nur
+      fido2-hid-bridge.nixosModule
+      home-manager.nixosModules.home-manager
+      {home-manager.extraSpecialArgs = {inherit inputs;};}
       ./nixos/all-systems-configuration.nix
     ];
-    graphical-mods = mods ++ [./nixos/graphical-configuration.nix];
+    tty-modules =
+      base-modules
+      ++ [
+        {
+          home-manager.users.ari = import ./home-manager/home.nix;
+        }
+      ];
+    graphical-modules =
+      base-modules
+      ++ [
+        ./nixos/graphical-configuration.nix
+        {
+          home-manager.users.ari = import ./home-manager/home-graphical.nix;
+        }
+      ];
   in rec {
     nixosConfigurations = {
       # desktop ~
@@ -75,7 +93,7 @@
         sys
         // {
           modules =
-            graphical-mods
+            graphical-modules
             ++ [
               ./nixos/luna/hardware-configuration.nix
               ./nixos/luna/configuration.nix
@@ -88,7 +106,7 @@
         sys
         // {
           modules =
-            graphical-mods
+            graphical-modules
             ++ [
               inputs.nixos-hardware.nixosModules.framework-16-7040-amd
               ./nixos/hermes/hardware-configuration.nix
@@ -104,7 +122,7 @@
         sys
         // {
           modules =
-            mods
+            tty-modules
             ++ [
               inputs.beepy.nixosModule
               ./nixos/kronos/hardware-configuration.nix
@@ -121,7 +139,7 @@
         sys
         // {
           modules =
-            mods
+            tty-modules
             ++ [
               inputs.nixos-hardware.nixosModules.hardkernel-odroid-h3
               ./nixos/sol/hardware-configuration.nix
@@ -131,30 +149,5 @@
       );
     };
     kronos-sd = nixosConfigurations.kronos.config.system.build.sdImage;
-    # `home-manager switch --flake .#ari`
-    homeConfigurations = let
-      graphics = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit nix-colors;
-        };
-        modules = [
-          inputs.nix-colors.homeManagerModules.default
-          ./home-manager/home.nix
-          ./home-manager/home-graphical.nix
-        ];
-      };
-      nographics = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = {
-          inherit inputs;
-        };
-        modules = [./home-manager/home.nix];
-      };
-    in {
-      "ari" = graphics;
-      "ari-tty" = nographics;
-    };
   };
 }

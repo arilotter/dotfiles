@@ -8,6 +8,7 @@ in {
   colorScheme = inputs.nix-colors.colorSchemes."solarized-light";
 
   imports = [
+    ./home.nix
     ./hyprland.nix
     ./kitty.nix
     ./mako.nix
