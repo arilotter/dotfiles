@@ -31,11 +31,11 @@
     lazygit # git manager
 
     # command-line utils
+    screen
     thefuck
     killall
     file # file type identification
     graphviz # graph visualization
-    toilet # text to ascii art
     jq # json processing tool
     ripgrep # grep replacement
     tokei # code LoC
