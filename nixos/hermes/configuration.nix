@@ -25,5 +25,11 @@
     xserver = {
       videoDrivers = ["amdgpu"];
     };
+
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+      openFirewall = true;
+    };
   };
 }
