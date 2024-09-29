@@ -18,10 +18,12 @@
   powerManagement.cpuFreqGovernor = "performance";
   hardware.nvidia = {
     open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
     modesetting.enable = true;
     nvidiaSettings = true;
   };
+
+  virtualisation.docker.enableNvidia = true;
   hardware.nvidia-container-toolkit.enable = true;
   programs.steam.enable = true;
 
