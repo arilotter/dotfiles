@@ -27,6 +27,7 @@
 
     # TUI tools
     bottom # system manager, like htop
+    nvtopPackages.full
     lazydocker # docker manager
     lazygit # git manager
 
