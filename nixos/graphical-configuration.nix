@@ -33,14 +33,7 @@
 
   services = {
     fwupd.enable = true;
-    printing = {
-      enable = true;
-      drivers = with pkgs; [
-        gutenprint
-        gutenprintBin
-        brlaser
-      ];
-    };
+    printing.enable = false;
   };
 
   networking = {
