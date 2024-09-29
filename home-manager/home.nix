@@ -40,6 +40,7 @@
     ripgrep # grep replacement
     tokei # code LoC
     imagemagickBig
+    ranger
 
     # programming tools
     aider-chat # ai pair programming
@@ -109,7 +110,6 @@
 
     shellInit = ''
       starship init fish | source
-      source ~/dotfiles/secrets
 
       set -gx ANDROID_HOME $HOME/Android/Sdk
       set -gx PATH $PATH ~/.yarn/bin ~/.npm/bin ~/bin ~/go/bin ~/.cargo/bin $ANDROID_HOME/emulator $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/platform-tools

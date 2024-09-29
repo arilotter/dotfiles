@@ -6,6 +6,9 @@ in {
     settings = {
       font_family = "FiraCode Nerd Font Reg";
       touch_scroll_multiplier = "10.0";
+
+      window_margin_width = 8;
+
       foreground = "#${c.base05}";
       background = "#${c.base00}";
 

@@ -18,6 +18,58 @@ in {
     HYPRCURSOR_SIZE = config.home.pointerCursor.size;
   };
 
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        before_sleep_cmd = "hyprlock";
+        ignore_dbus_inhibit = false;
+        lock_cmd = "hyprlock";
+      };
+      listener = [
+        {
+          timeout = 60;
+          on-timeout = "hyprlock";
+        }
+      ];
+    };
+  };
+
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        disable_loading_bar = true;
+        grace = 10;
+        hide_cursor = true;
+        no_fade_in = false;
+      };
+
+      background = [
+        {
+          color = "rgb(${c.base00})";
+        }
+      ];
+
+      input-field = [
+        {
+          size = "400, 50";
+          position = "0, 0";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          rounding = -1;
+          font_color = "rgb(${c.base05})";
+          inner_color = "rgb(${c.base00})";
+          outer_color = "rgb(${c.base05})";
+          outline_thickness = 2;
+          placeholder_text = "";
+          fail_text = "";
+        }
+      ];
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -41,45 +93,21 @@ in {
       ];
 
       general = {
-        gaps_in = 5;
-        gaps_out = 0;
-        border_size = 3;
-        "col.active_border" = "rgb(${c.base05})";
+        gaps_in = 4;
+        gaps_out = 4;
+        border_size = 4;
+        "col.active_border" = "rgb(${c.base0D})";
         "col.inactive_border" = "rgb(${c.base00})";
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 0;
-        blur = {
-          enabled = true;
-          size = 4;
-          passes = 3;
-          popups = true;
-          contrast = 1;
-          noise = 1.0e-2;
-          brightness = 0.92;
-        };
-        drop_shadow = true;
-        shadow_range = 3;
-        shadow_render_power = 3;
+        rounding = 9;
+        blur.enabled = false;
+        drop_shadow = false;
       };
 
-      animations = {
-        enabled = true;
-
-        bezier = [
-          "myBezier, 0.05, 0.9, 0.1, 1.05"
-          "cubic, 0.1, 0.23, 0.41, 0.9"
-        ];
-        animation = [
-          "windows, 1, 1.2, cubic, slide"
-          "border, 1, 0.1, default"
-          "borderangle, 0, 0.2, default"
-          "fade, 1, 4, default"
-          "workspaces, 1, 4, default, fade"
-        ];
-      };
+      animations.enabled = false;
 
       dwindle = {
         pseudotile = true;
@@ -198,7 +226,6 @@ in {
         disable_splash_rendering = true;
         mouse_move_enables_dpms = true;
         layers_hog_keyboard_focus = true;
-        vfr = false;
         disable_autoreload = false;
         allow_session_lock_restore = true;
       };

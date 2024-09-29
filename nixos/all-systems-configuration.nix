@@ -97,6 +97,7 @@
     alejandra # nix fmtter
     nil
     steam-run
+    inputs.agenix.packages.${pkgs.system}.default
   ];
 
   services = {

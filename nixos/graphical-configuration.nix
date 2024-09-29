@@ -7,6 +7,8 @@
 
   services.xserver.xkb.layout = "us";
 
+  security.pam.services.hyprlock = {};
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

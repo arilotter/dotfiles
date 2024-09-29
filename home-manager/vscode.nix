@@ -9,7 +9,7 @@ in {
     SUDO_EDITOR = "code";
     VISUAL = "code";
   };
-  
+
   programs.git.extraConfig.core.editor = "code --wait";
 
   home.packages = [
