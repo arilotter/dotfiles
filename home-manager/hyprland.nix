@@ -228,6 +228,7 @@ in {
         layers_hog_keyboard_focus = true;
         disable_autoreload = false;
         allow_session_lock_restore = true;
+        vrr = 2;
       };
     };
   };
