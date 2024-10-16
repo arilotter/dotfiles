@@ -95,7 +95,7 @@
     nano
     kitty # even on non-graphical systems, this installs terminfo.
     alejandra # nix fmtter
-    nil
+    nixd
     steam-run
     inputs.agenix.packages.${pkgs.system}.default
   ];
