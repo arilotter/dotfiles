@@ -44,7 +44,6 @@
     ranger
 
     # programming tools
-    aider-chat # ai pair programming
     devenv
     jdk11 # java
     trickle # limit bandwidth artificially
