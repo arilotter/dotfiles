@@ -22,7 +22,6 @@ in {
         ms-python.python
         ms-python.vscode-pylance
         ms-python.black-formatter
-        ms-vsliveshare.vsliveshare
         golang.go
         rust-lang.rust-analyzer
         dbaeumer.vscode-eslint
@@ -35,7 +34,6 @@ in {
         dbaeumer.vscode-eslint
         gruntfuggly.todo-tree
         wallabyjs.quokka-vscode
-        biomejs.biome
         yoavbls.pretty-ts-errors
         slevesque.shader
         xaver.clang-format
