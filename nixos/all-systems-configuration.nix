@@ -27,7 +27,7 @@
       "pn533"
       "pn533_usb"
     ];
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_6_10;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     supportedFilesystems = ["ntfs"];
     binfmt.emulatedSystems = ["aarch64-linux"];
     kernel.sysctl = {
