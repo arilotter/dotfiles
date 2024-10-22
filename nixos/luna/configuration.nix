@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  nvidiaProfile = builtins.readFile ./nvidia-wayland-fix.json;
+in {
   imports = [../mount-sol-samba-share.nix];
 
   networking.hostName = "luna";
@@ -21,6 +23,10 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
     modesetting.enable = true;
     nvidiaSettings = true;
+  };
+  environment.etc."nvidia/nvidia-application-profiles-rc.d/wayland-fix.json".source = pkgs.writeTextFile {
+    name = "nvidia-wayland-fix.json";
+    text = nvidiaProfile;
   };
 
   virtualisation.docker.enableNvidia = true;
