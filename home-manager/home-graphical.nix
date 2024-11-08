@@ -16,6 +16,7 @@
     ./discord.nix
     ./supersonic.nix
     ./vscode.nix
+    ./neovim.nix
     ./colors.nix
   ];
 
