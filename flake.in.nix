@@ -16,12 +16,13 @@
     };
   in {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-hardware = followsNixpkgs "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nix-colors.url = "github:misterio77/nix-colors";
+    nur.url = "github:nix-community/NUR";
+
     agenix = followsNixpkgs "github:ryantm/agenix";
-    nur = followsNixpkgs "github:nix-community/NUR";
     home-manager = followsNixpkgs "github:nix-community/home-manager";
     hypr-contrib = followsNixpkgs "github:hyprwm/contrib";
-    nix-colors = followsNixpkgs "github:misterio77/nix-colors";
     vscode-ext = followsNixpkgs "github:nix-community/nix-vscode-extensions";
     beepy = followsNixpkgs "github:arilotter/nixos-beepy";
     fido2-hid-bridge = followsNixpkgs "github:arilotter/fido2-hid-bridge";
