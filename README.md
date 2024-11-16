@@ -1,4 +1,5 @@
-put your hashed password into `hashedPassword.nix``
-you can get this with mkpasswd
+# dotfiles
 
-put wifi into wifiNetworks.nix
+euh i use `age` for secrets
+and also its got like hyperland and stuff
+:D

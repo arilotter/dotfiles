@@ -48,11 +48,6 @@
 
   services.openssh.enable = true;
 
-  users.users.ari.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIL+5IDeIKvYpQllVsU/soRu27KyPTA5FXvZM5Z8+ms7 arilotter@gmail.com" # desktop
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMKaPWTrDp1sp3NUXiM/JXKfivQQ6TLxMy7Fyaq59L7y arilotter@gmail.com" # laptop
-  ];
-
   systemd.targets = {
     sleep.enable = false;
     suspend.enable = false;

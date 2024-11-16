@@ -1,19 +1,24 @@
-{...}: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   services.samba = {
     enable = true;
-    enableNmbd = true;
-    enableWinbindd = true;
-    securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server string = sol
-      server role = standalone server
-      map to guest = Bad User
-      guest account = nobody
-    '';
-    shares = {
+    nmbd.enable = true;
+    winbindd.enable = true;
+    settings = {
+      global = {
+        security = "user";
+        workgroup = "WORKGROUP";
+        "server string" = "sol";
+        "server role" = "standalone server";
+        "map to guest" = "Bad User";
+        "guest account" = "nobody";
+      };
       "public" = {
-        path = "/mnt/storage/public";
+        "path" = "/mnt/storage/public";
         "browseable" = "yes";
         "public" = "yes";
         "guest only" = "yes";
@@ -24,7 +29,7 @@
         "force directory mode" = "0755";
       };
       "storage" = {
-        path = "/mnt/storage";
+        "path" = "/mnt/storage";
         "browseable" = "yes";
         "guest ok" = "no";
         "read only" = "no";
@@ -51,5 +56,11 @@
         <port>445</port>
       </service>
     </service-group>
+  '';
+
+  # at activation time, sub in the samba password.
+  system.activationScripts.sambaUserPassword = lib.stringAfter ["users" "groups"] ''
+    SMB_PASSWORD=$(cat ${config.age.secrets.sol-smbpasswd.path})
+    echo -e "$SMB_PASSWORD\n$SMB_PASSWORD" | ${pkgs.samba}/bin/smbpasswd -s -a ari
   '';
 }

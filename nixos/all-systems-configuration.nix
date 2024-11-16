@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }: {
   nixpkgs = {
@@ -17,6 +18,14 @@
       ];
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
+    };
+  };
+
+  age = {
+    identityPaths = ["/home/ari/.ssh/id_ed25519"];
+    secrets = {
+      ari-passwd.file = ../secrets/ari-passwd.age;
+      sol-smbpasswd.file = ../secrets/sol-smbpasswd.age;
     };
   };
 
@@ -80,8 +89,8 @@
         "wireshark"
       ];
       shell = pkgs.fish;
-      hashedPassword = import ./hashedPassword.nix;
-      openssh.authorizedKeys.keys = import ./physicalSSHKeys.nix;
+      hashedPasswordFile = config.age.secrets.ari-passwd.path;
+      openssh.authorizedKeys.keys = lib.attrValues (import ../ssh-pubkeys.nix);
     };
   };
 

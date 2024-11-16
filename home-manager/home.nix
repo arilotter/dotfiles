@@ -87,6 +87,17 @@
 
   programs.direnv.enable = true;
 
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      hgx = {
+        hostname = "216.55.186.241";
+        port = 22;
+        user = "ari";
+      };
+    };
+  };
+
   programs.fish = {
     enable = true;
     shellAliases = {

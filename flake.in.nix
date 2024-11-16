@@ -79,6 +79,7 @@
             ++ [
               ./nixos/luna/hardware-configuration.nix
               ./nixos/luna/configuration.nix
+              ./nixos/mount-sol-samba-share.nix
             ];
         }
       );
@@ -93,6 +94,7 @@
               inputs.nixos-hardware.nixosModules.framework-16-7040-amd
               ./nixos/hermes/hardware-configuration.nix
               ./nixos/hermes/configuration.nix
+              ./nixos/mount-sol-samba-share.nix
             ];
         }
       );
@@ -109,7 +111,7 @@
               inputs.beepy.nixosModule
               ./nixos/kronos/hardware-configuration.nix
               ./nixos/kronos/configuration.nix
-              ./nixos/wifiNetworks.nix
+              ./nixos/mount-sol-samba-share.nix
             ];
         }
       );
