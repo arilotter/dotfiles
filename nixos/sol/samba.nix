@@ -8,6 +8,7 @@
     enable = true;
     nmbd.enable = true;
     winbindd.enable = true;
+    openFirewall = true;
     settings = {
       global = {
         security = "user";

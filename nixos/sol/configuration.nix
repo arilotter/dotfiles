@@ -23,7 +23,6 @@
         22 # ssh
         80 # http
         443 # https
-        445 # smb
         139 # netbios
         5030 # slskd
         7777 #
@@ -36,6 +35,7 @@
       ];
     };
   };
+
   environment.systemPackages = [
     pkgs.steamcmd
   ];
