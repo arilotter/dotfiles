@@ -47,9 +47,10 @@
 
     vlc # video player
     google-chrome # web browser
-    slack
+    slack # ew
+    stremio # streaming video
 
-    #clang format needs..
+    # clang format needs..
     clang-tools
   ];
 
