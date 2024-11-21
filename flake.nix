@@ -1,4 +1,5 @@
 # Do not modify! This file is generated.
+
 {
   description = "ari's nice lil nix config :3";
   inputs = {
@@ -27,6 +28,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:hyprwm/contrib";
     };
+    lix-module = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+    };
     nix-colors.url = "github:misterio77/nix-colors";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -41,8 +46,8 @@
     };
   };
   nixConfig = {
-    extra-substituters = ["https://raspberry-pi-nix.cachix.org"];
-    extra-trusted-public-keys = ["raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o=" "ari-sol-builder-1:PBsq1rU3Xd/S+N3GatIWi82PFoeOqQdpaArZTns69aM="];
+    extra-substituters = [ "https://raspberry-pi-nix.cachix.org" ];
+    extra-trusted-public-keys = [ "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o=" "ari-sol-builder-1:PBsq1rU3Xd/S+N3GatIWi82PFoeOqQdpaArZTns69aM=" ];
   };
   outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
 }

@@ -28,6 +28,7 @@
     fido2-hid-bridge = followsNixpkgs "github:arilotter/fido2-hid-bridge";
     fw-inputmodule = followsNixpkgs "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
     nixvim = followsNixpkgs "github:nix-community/nixvim";
+    lix-module = followsNixpkgs "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
   };
 
   outputs = {
@@ -37,6 +38,7 @@
     nix-colors,
     agenix,
     fido2-hid-bridge,
+    lix-module,
     ...
   } @ inputs: let
     sys = {
@@ -46,6 +48,7 @@
       };
     };
     base-modules = [
+      lix-module.nixosModules.default
       agenix.nixosModules.default
       nur.nixosModules.nur
       fido2-hid-bridge.nixosModule
