@@ -45,17 +45,20 @@
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs.rocmPackages_5; [
-      clr.icd
-      clr
-      rocminfo
-      rocm-runtime
-    ];
+   
   };
-  # This is necesery because many programs hard-code the path to hip
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
-  ];
+
+  # this crashed the laptop
+  # hardware.opengl.extraPackages = with pkgs.rocmPackages_5; [
+  #     clr.icd
+  #     clr
+  #     rocminfo
+  #     rocm-runtime
+  #   ];
+  # # This is necesery because many programs hard-code the path to hip
+  # systemd.tmpfiles.rules = [
+  #   "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
+  # ];
 
   nix.settings.max-jobs = lib.mkDefault 16;
   # High-DPI console
