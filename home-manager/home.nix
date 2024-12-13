@@ -52,7 +52,6 @@
     google-cloud-sdk # google cloud sdk
     awscli # aws cli
     ansible # ansible devops bullshit
-    nixd # nix lang server
 
     # programming languages
     go

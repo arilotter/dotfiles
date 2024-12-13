@@ -107,7 +107,6 @@
     just
     nix-output-monitor
     nvd
-    nixd
     steam-run
     inputs.agenix.packages.${pkgs.system}.default
   ];
