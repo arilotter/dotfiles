@@ -38,6 +38,7 @@ in {
         slevesque.shader
         xaver.clang-format
         ms-playwright.playwright
+        ms-vscode-remote.remote-ssh
       ];
     })
   ];
