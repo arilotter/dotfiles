@@ -35,6 +35,7 @@
 
   networking.useDHCP = lib.mkDefault true;
 
+  # arguably useless on consumer ryzen hardware.
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware.bluetooth = {
@@ -42,10 +43,9 @@
     powerOnBoot = false;
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
-   
+    enable32Bit = true;
   };
 
   # this crashed the laptop

@@ -36,9 +36,7 @@
     printing.enable = false;
   };
 
-  networking = {
-    networkmanager.enable = true;
-  };
+  networking.networkmanager.enable = true;
 
   fonts.packages = with pkgs; [
     noto-fonts
@@ -46,7 +44,7 @@
     noto-fonts-emoji
     liberation_ttf
     fira-code
-    (nerdfonts.override {fonts = ["FiraCode"];})
+    nerd-fonts.fira-code
     tex-gyre.heros
   ];
 }
