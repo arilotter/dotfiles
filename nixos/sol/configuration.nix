@@ -6,7 +6,6 @@
     ./slskd.nix
     ./home-assistant.nix
     # TODO pihole
-    # TODO music UI
     # TODO vaultwarden
   ];
 
@@ -55,4 +54,6 @@
     hibernate.enable = false;
     hybrid-sleep.enable = false;
   };
+
+  hardware.graphics.extraPackages = [ pkgs.intel-media-driver ];
 }
