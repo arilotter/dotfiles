@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   services.home-assistant = {
     enable = true;
     openFirewall = true;
@@ -16,7 +17,7 @@
       "cast"
     ];
     config = {
-      default_config = {};
+      default_config = { };
     };
   };
 }

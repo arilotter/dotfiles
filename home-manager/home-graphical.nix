@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   colorScheme = inputs.nix-colors.colorSchemes."solarized-light";
 
   imports = [

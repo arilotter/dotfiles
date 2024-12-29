@@ -1,11 +1,12 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.slskd = {
     enable = true;
     environmentFile = "/home/ari/slskd.env";
     domain = null;
     settings = {
       shares = {
-        directories = ["/mnt/storage/music"];
+        directories = [ "/mnt/storage/music" ];
         filters = [
           "\.ini$"
           "Thumbs.db$"
@@ -16,5 +17,5 @@
       directories.downloads = "/mnt/storage/music-new-downloads";
     };
   };
-  networking.firewall.allowedTCPPorts = [config.services.slskd.settings.web.port];
+  networking.firewall.allowedTCPPorts = [ config.services.slskd.settings.web.port ];
 }

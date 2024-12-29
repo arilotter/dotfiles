@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./samba.nix
     ./navidrome.nix
@@ -25,7 +26,7 @@
         443 # https
         139 # netbios
         5030 # slskd
-        7777 #
+        7777
       ];
       allowedUDPPorts = [
         137

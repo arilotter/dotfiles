@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   nixpkgs.hostPlatform = "x86_64-linux";
 
   boot = {
@@ -14,11 +15,11 @@
         "sd_mod"
         "sdhci_pci"
       ];
-      kernelModules = [];
+      kernelModules = [ ];
     };
 
-    kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
 
     loader.systemd-boot.enable = true;
   };
@@ -52,7 +53,7 @@
 
   networking.useDHCP = lib.mkDefault true;
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

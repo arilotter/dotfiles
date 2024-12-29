@@ -2,13 +2,15 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   nvidiaProfile = builtins.readFile ./nvidia-wayland-fix.json;
-in {
+in
+{
   networking.hostName = "luna";
 
   services.xserver = {
-    videoDrivers = ["nvidia"];
+    videoDrivers = [ "nvidia" ];
     displayManager.importedVariables = [
       "XDG_SESSION_TYPE"
       "XDG_CURRENT_DESKTOP"
@@ -22,10 +24,12 @@ in {
     modesetting.enable = true;
     nvidiaSettings = true;
   };
-  environment.etc."nvidia/nvidia-application-profiles-rc.d/wayland-fix.json".source = pkgs.writeTextFile {
-    name = "nvidia-wayland-fix.json";
-    text = nvidiaProfile;
-  };
+  environment.etc."nvidia/nvidia-application-profiles-rc.d/wayland-fix.json".source =
+    pkgs.writeTextFile
+      {
+        name = "nvidia-wayland-fix.json";
+        text = nvidiaProfile;
+      };
 
   virtualisation.docker.enableNvidia = true;
   hardware.nvidia-container-toolkit.enable = true;

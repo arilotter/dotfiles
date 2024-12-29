@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   services.samba = {
     enable = true;
     nmbd.enable = true;
@@ -60,7 +61,7 @@
   '';
 
   # at activation time, sub in the samba password.
-  system.activationScripts.sambaUserPassword = lib.stringAfter ["users" "groups"] ''
+  system.activationScripts.sambaUserPassword = lib.stringAfter [ "users" "groups" ] ''
     SMB_PASSWORD=$(cat ${config.age.secrets.sol-smbpasswd.path})
     echo -e "$SMB_PASSWORD\n$SMB_PASSWORD" | ${pkgs.samba}/bin/smbpasswd -s -a ari
   '';

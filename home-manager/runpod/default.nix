@@ -20,6 +20,6 @@ buildGoModule rec {
     description = "Runpod's CLI";
     homepage = "https://github.com/runpod/runpodctl";
     license = licenses.gpl3;
-    maintainers = with maintainers; [arilotter];
+    maintainers = with maintainers; [ arilotter ];
   };
 }

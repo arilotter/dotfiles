@@ -4,7 +4,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   nixpkgs = {
     overlays = [
       inputs.nur.overlays.default
@@ -18,14 +19,14 @@
             sed -i '1i#define DLOPENLIBC "${final.stdenv.cc.libc}/lib/libc.so.6"' trickle-overload.c
           '';
 
-          env = (oldAttrs.env or {}) // {
+          env = (oldAttrs.env or { }) // {
             NIX_CFLAGS_COMPILE = toString ([
               "-I${final.libtirpc.dev}/include/tirpc"
               "-Wno-pointer-sign"
             ]);
           };
 
-          patches = (oldAttrs.patches or []) ++ [
+          patches = (oldAttrs.patches or [ ]) ++ [
             ./trickle.patch
           ];
         });
@@ -46,7 +47,7 @@
   };
 
   age = {
-    identityPaths = ["/home/ari/.ssh/id_ed25519"];
+    identityPaths = [ "/home/ari/.ssh/id_ed25519" ];
     secrets = {
       ari-passwd.file = ../secrets/ari-passwd.age;
       sol-smbpasswd.file = ../secrets/sol-smbpasswd.age;
@@ -61,8 +62,8 @@
       "pn533_usb"
     ];
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-    supportedFilesystems = ["ntfs"];
-    binfmt.emulatedSystems = ["aarch64-linux"];
+    supportedFilesystems = [ "ntfs" ];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     kernel.sysctl = {
       "fs.inotify.max_user_watches" = "1048576";
     };
@@ -127,7 +128,7 @@
     fish
     nano
     kitty # even on non-graphical systems, this installs terminfo.
-    alejandra # nix fmtter
+    nixfmt-rfc-style # nix fmtter
     just
     nix-output-monitor
     nvd
@@ -140,7 +141,7 @@
 
     pcscd = {
       enable = true; # yubikey / hand
-      plugins = [pkgs.acsccid];
+      plugins = [ pkgs.acsccid ];
     };
 
     gnome.gnome-keyring.enable = true;

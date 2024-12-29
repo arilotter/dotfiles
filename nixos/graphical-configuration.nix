@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  imports = [./tuigreet.nix];
+{ pkgs, ... }:
+{
+  imports = [ ./tuigreet.nix ];
 
   boot.plymouth.enable = true;
 
@@ -7,7 +8,7 @@
 
   services.xserver.xkb.layout = "us";
 
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   hardware.graphics = {
     enable = true;
@@ -19,7 +20,7 @@
     enable = true;
     config = {
     };
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   virtualisation.docker = {

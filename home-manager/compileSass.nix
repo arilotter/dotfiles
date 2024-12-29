@@ -2,10 +2,12 @@
   pkgs,
   inputFile,
   otherFiles ? "/dev/null",
-}: let
+}:
+let
   base = builtins.baseNameOf inputFile;
-in "${
-  pkgs.runCommand "compiledSass" {} ''
+in
+"${
+  pkgs.runCommand "compiledSass" { } ''
     mkdir src;
     cp ${inputFile} src/${base};
     cp -t ./src ${otherFiles};

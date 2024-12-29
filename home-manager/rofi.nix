@@ -2,9 +2,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   c = config.colorScheme.palette;
-in {
+in
+{
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;

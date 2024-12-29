@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.nixvim.homeManagerModules.default
@@ -15,7 +16,7 @@
   };
 
   home.packages = with pkgs; [
-    (pkgs.callPackage ./runpod {})
+    (pkgs.callPackage ./runpod { })
     # shell config
     starship # prompt
     eza # ls replacement
@@ -82,7 +83,7 @@
     '';
   };
 
-  home.sessionVariables = {};
+  home.sessionVariables = { };
 
   programs.direnv.enable = true;
 

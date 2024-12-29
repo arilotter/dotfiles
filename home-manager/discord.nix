@@ -2,8 +2,9 @@
   config,
   pkgs,
   ...
-}: {
-  home.packages = [pkgs.vesktop];
+}:
+{
+  home.packages = [ pkgs.vesktop ];
   xdg.configFile."vesktop/settings/quickCss.css".text = with config.colorScheme.palette; ''
     :root {
       --background-primary: #${base00};

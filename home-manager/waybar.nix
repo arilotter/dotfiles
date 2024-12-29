@@ -1,6 +1,8 @@
-{config, ...}: let
+{ config, ... }:
+let
   c = config.colorScheme.palette;
-in {
+in
+{
   programs.waybar = {
     enable = true;
     settings = {
@@ -16,7 +18,7 @@ in {
           "eDP-1"
         ];
         reload_style_on_change = true;
-        modules-left = ["hyprland/workspaces"];
+        modules-left = [ "hyprland/workspaces" ];
         modules-right = [
           "tray"
           "backlight"
@@ -34,7 +36,13 @@ in {
 
         battery = {
           format = "{icon}  {capacity}%";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
 
         network = {

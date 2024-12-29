@@ -22,3 +22,4 @@ clean:
   sudo nix-collect-garbage --delete-older-than 3d
 
 fmt:
+  nix fmt .

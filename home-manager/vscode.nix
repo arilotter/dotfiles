@@ -2,9 +2,11 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
-in {
+in
+{
   home.sessionVariables = {
     SUDO_EDITOR = "code";
     VISUAL = "code";
