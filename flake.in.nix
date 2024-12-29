@@ -2,10 +2,11 @@
   description = "ari's nice lil nix config :3";
 
   nixConfig = {
-    extra-substituters = ["https://raspberry-pi-nix.cachix.org"];
+    extra-substituters = ["https://raspberry-pi-nix.cachix.org" "https://cache.garnix.io"];
     extra-trusted-public-keys = [
       "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o="
       "ari-sol-builder-1:PBsq1rU3Xd/S+N3GatIWi82PFoeOqQdpaArZTns69aM="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 
@@ -50,7 +51,7 @@
     base-modules = [
       lix-module.nixosModules.default
       agenix.nixosModules.default
-      nur.nixosModules.nur
+      nur.modules.nixos.default
       fido2-hid-bridge.nixosModule
       home-manager.nixosModules.home-manager
       {home-manager.extraSpecialArgs = {inherit inputs;};}
