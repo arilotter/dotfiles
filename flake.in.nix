@@ -21,7 +21,7 @@
       };
     in
     {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
       nixos-hardware.url = "github:NixOS/nixos-hardware";
       nix-colors.url = "github:misterio77/nix-colors";
       nur.url = "github:nix-community/NUR";
