@@ -6,6 +6,7 @@
     ./digitalocean-dynamic-dns.nix # todo make it work...
     ./slskd.nix
     ./home-assistant.nix
+    ./immich.nix
     # TODO pihole
     # TODO vaultwarden
   ];
