@@ -11,5 +11,6 @@ in
     keys.luna
     keys.sol
     keys.hermes
+    keys.casey
   ];
 }
