@@ -132,6 +132,16 @@
             ];
           }
         );
+        "casey" = nixpkgs.lib.nixosSystem (
+          sys
+          // {
+            modules = tty-modules ++ [
+              inputs.nixos-hardware.nixosModules.hardkernel-odroid-h3
+              ./nixos/casey/hardware-configuration.nix
+              ./nixos/casey/configuration.nix
+            ];
+          }
+        );
       };
       kronos-sd = nixosConfigurations.kronos.config.system.build.sdImage;
     };
