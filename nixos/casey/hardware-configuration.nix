@@ -28,6 +28,18 @@
   fileSystems."/mnt/storage" =
     { device = "/dev/disk/by-uuid/069b55d5-108e-4ffd-84f9-1cadd23a926a";
       fsType = "ext4";
+          options = [
+      "users"
+      "exec"
+      "rw"
+      "suid"
+      "dev"
+      "atime"
+      "diratime"
+      "uid=1000"
+      "gid=1000"
+      "umask=000"
+    ];
     };
 
   swapDevices = [ ];
