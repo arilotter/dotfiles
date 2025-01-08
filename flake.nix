@@ -20,7 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
     };
-    ghostty-hm.url = "github:arilotter/ghostty-hm-module";
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";

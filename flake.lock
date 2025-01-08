@@ -342,21 +342,6 @@
         "type": "github"
       }
     },
-    "ghostty-hm": {
-      "locked": {
-        "lastModified": 1736357740,
-        "narHash": "sha256-Pt1XZ5mha2oXahvlLP2LA1yvmxi0ljuyGBFXQHkk5ec=",
-        "owner": "arilotter",
-        "repo": "ghostty-hm-module",
-        "rev": "43d360ddde6a49b0f223725b69b2e52e200402e4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "arilotter",
-        "repo": "ghostty-hm-module",
-        "type": "github"
-      }
-    },
     "git-hooks": {
       "inputs": {
         "flake-compat": [
@@ -817,7 +802,6 @@
         "fido2-hid-bridge": "fido2-hid-bridge",
         "flakegen": "flakegen",
         "fw-inputmodule": "fw-inputmodule",
-        "ghostty-hm": "ghostty-hm",
         "home-manager": "home-manager_2",
         "hypr-contrib": "hypr-contrib",
         "lix-module": "lix-module",
