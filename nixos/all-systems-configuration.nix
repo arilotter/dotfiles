@@ -130,7 +130,6 @@
     unzip
     fish
     nano
-    kitty # even on non-graphical systems, this installs terminfo.
     nixfmt-rfc-style # nix fmtter
     just
     nix-output-monitor

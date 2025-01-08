@@ -10,7 +10,7 @@ in
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-    terminal = "${pkgs.kitty}/bin/kitty";
+    terminal = "${pkgs.ghostty}/bin/ghostty";
     font = "FiraCode Nerd Font 18";
     theme = builtins.toPath (
       pkgs.writeText "theme.rasi" ''

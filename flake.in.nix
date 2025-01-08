@@ -35,6 +35,7 @@
       fw-inputmodule = followsNixpkgs "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
       nixvim = followsNixpkgs "github:nix-community/nixvim";
       lix-module = followsNixpkgs "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      ghostty-hm.url = "github:arilotter/ghostty-hm-module";
     };
 
   outputs =

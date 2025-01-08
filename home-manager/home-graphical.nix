@@ -9,7 +9,7 @@
   imports = [
     ./home.nix
     ./hyprland.nix
-    ./kitty.nix
+    ./ghostty.nix
     ./mako.nix
     ./firefox.nix
     ./rofi.nix

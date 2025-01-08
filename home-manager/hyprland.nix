@@ -21,7 +21,7 @@ in
   };
 
   services.hypridle = {
-    enable = true;
+    enable = false;
     settings = {
       general = {
         before_sleep_cmd = "hyprlock";
@@ -77,7 +77,7 @@ in
     xwayland.enable = true;
     systemd.enable = true;
     settings = {
-      "$terminal" = "kitty";
+      "$terminal" = "ghostty";
       "$mod" = "SUPER";
 
       exec-once = [
@@ -162,7 +162,7 @@ in
 
       bind =
         [
-          "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+          "$mod, Return, exec, $terminal"
           "$mod, R, togglesplit"
           "$mod, F, fullscreen"
           "$mod, D, exec, rofi -show drun -show-icons"

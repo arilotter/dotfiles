@@ -20,6 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
     };
+    ghostty-hm.url = "github:arilotter/ghostty-hm-module";
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
@@ -46,15 +47,8 @@
     };
   };
   nixConfig = {
-    extra-substituters = [
-      "https://raspberry-pi-nix.cachix.org"
-      "https://cache.garnix.io"
-    ];
-    extra-trusted-public-keys = [
-      "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o="
-      "ari-sol-builder-1:PBsq1rU3Xd/S+N3GatIWi82PFoeOqQdpaArZTns69aM="
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-    ];
+    extra-substituters = [ "https://raspberry-pi-nix.cachix.org" "https://cache.garnix.io" ];
+    extra-trusted-public-keys = [ "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o=" "ari-sol-builder-1:PBsq1rU3Xd/S+N3GatIWi82PFoeOqQdpaArZTns69aM=" "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   };
   outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
 }
