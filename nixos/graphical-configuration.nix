@@ -21,8 +21,6 @@
   programs.hyprland.enable = true;
   xdg.portal = {
     enable = true;
-    config = {
-    };
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
@@ -46,7 +44,6 @@
     noto-fonts
     noto-fonts-cjk-sans
     liberation_ttf
-    fira-code
     tex-gyre.heros
   ];
 }

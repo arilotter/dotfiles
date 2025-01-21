@@ -7,7 +7,7 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine-dawn.yaml";
     fonts = {
       monospace = {
-        name = "FiraCode Nerd Font Reg";
+        name = "FiraCode Nerd Font";
         package = pkgs.nerd-fonts.fira-code;
       };
       emoji = {
@@ -21,5 +21,13 @@
         terminal = 12;
       };
     };
+  };
+  fonts.fontconfig = {
+    antialias = true;
+    hinting = {
+      enable = true;
+      autohint = true;
+    };
+    subpixel.rgba = "rgb";
   };
 }
