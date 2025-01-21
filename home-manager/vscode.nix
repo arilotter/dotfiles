@@ -47,6 +47,7 @@ in
       "files.autoSave" = "afterDelay";
       "files.autoSaveDelay" = 150;
       "editor.multiCursorLimit" = 50000;
+      "window.menuBarVisibility" = "toggle";
     };
   };
 }
