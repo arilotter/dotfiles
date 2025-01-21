@@ -3,189 +3,67 @@
   pkgs,
   ...
 }:
-let
-  c = config.colorScheme.palette;
-in
 {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
     terminal = "${pkgs.ghostty}/bin/ghostty";
-    font = "FiraCode Nerd Font 18";
-    theme = builtins.toPath (
-      pkgs.writeText "theme.rasi" ''
-        * {
-          active-background: #${c.base02};
-          active-foreground: @foreground;
-          normal-background: @background;
-          normal-foreground: @foreground;
-          urgent-background: #${c.base01};
-          urgent-foreground: @foreground;
 
-          alternate-active-background: @background;
-          alternate-active-foreground: @foreground;
-          alternate-normal-background: @background;
-          alternate-normal-foreground: @foreground;
-          alternate-urgent-background: @background;
-          alternate-urgent-foreground: @foreground;
+    theme =
+      let
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in
+      {
+        "*".spacing = 2;
+        "#window" = {
+          border = 0;
+          padding = mkLiteral "2.5ch";
+        };
 
-          selected-active-background: #${c.base01};
-          selected-active-foreground: @background;
-          selected-normal-background: #${c.base02};
-          selected-normal-foreground: @background;
-          selected-urgent-background: #${c.base03};
-          selected-urgent-foreground: @background;
+        "#mainbox" = {
+          border = 0;
+          padding = 0;
+        };
 
-          background-color: @background;
-          background: #${c.base00};
-          foreground: #${c.base05};
-          border-color: @background;
-          spacing: 2;
-        }
+        "#message" = {
+          border = mkLiteral "2px 0px 0px";
+          padding = mkLiteral "1px";
+        };
 
-        #window {
-          background-color: @background;
-          text-color: @foreground;
-          border: 0;
-          padding: 2.5ch;
-        }
+        "inputbar".children = mkLiteral "[ prompt,textbox-prompt-colon,entry,case-indicator ]";
 
-        #mainbox {
-          border: 0;
-          padding: 0;
-        }
+        "textbox-prompt-colon" = {
+          expand = false;
+          str = "";
+          margin = mkLiteral "0px 0.3em 0em 0em";
+        };
 
-        #message {
-          border: 2px 0px 0px;
-          border-color: @border-color;
-          padding: 1px;
-        }
+        "#listview" = {
+          fixed-height = 0;
+          border = mkLiteral "2px 0px 0px";
+          spacing = mkLiteral "2px";
+          scrollbar = true;
+          padding = mkLiteral "2px 0px 0px";
+        };
 
-        #textbox {
-          text-color: @foreground;
-        }
+        "#element" = {
+          border = 0;
+          padding = mkLiteral "1px";
+        };
 
-        inputbar {
-          children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-        }
+        "#scrollbar" = {
+          width = mkLiteral "4px";
+          border = 0;
+          handle-width = mkLiteral "8px";
+          padding = 0;
+        };
 
-        textbox-prompt-colon {
-          expand: false;
-          str: "";
-          margin: 0px 0.3em 0em 0em;
-          text-color: @normal-foreground;
-        }
+        "#sidebar".border = mkLiteral "2px 0px 0px";
 
-        #listview {
-          fixed-height: 0;
-          border: 2px 0px 0px;
-          border-color: @border-color;
-          spacing: 2px;
-          scrollbar: true;
-          padding: 2px 0px 0px;
-        }
-
-        #element {
-          border: 0;
-          padding: 1px;
-        }
-
-        #element.normal.normal {
-          background-color: @normal-background;
-          text-color: @normal-foreground;
-        }
-
-        #element.normal.urgent {
-          background-color: @urgent-background;
-          text-color: @urgent-foreground;
-        }
-
-        #element.normal.active {
-          background-color: @active-background;
-          text-color: @active-foreground;
-        }
-
-        #element.selected.normal {
-          background-color: @selected-normal-background;
-          text-color: @selected-normal-foreground;
-        }
-
-        #element.selected.urgent {
-          background-color: @selected-urgent-background;
-          text-color: @selected-urgent-foreground;
-        }
-
-        #element.selected.active {
-          background-color: @selected-active-background;
-          text-color: @selected-active-foreground;
-        }
-
-        #element.alternate.normal {
-          background-color: @alternate-normal-background;
-          text-color: @alternate-normal-foreground;
-        }
-
-        #element.alternate.urgent {
-          background-color: @alternate-urgent-background;
-          text-color: @alternate-urgent-foreground;
-        }
-
-        #element.alternate.active {
-          background-color: @alternate-active-background;
-          text-color: @alternate-active-foreground;
-        }
-
-        #scrollbar {
-          width: 4px;
-          border: 0;
-          handle-width: 8px;
-          padding: 0;
-        }
-
-        #sidebar {
-          border: 2px 0px 0px;
-          border-color: @border-color;
-        }
-
-        #button {
-          text-color: @normal-foreground;
-        }
-
-        #button.selected {
-          background-color: @selected-normal-background;
-          text-color: @selected-normal-foreground;
-        }
-
-        #inputbar {
-          spacing: 0;
-          text-color: @normal-foreground;
-          padding: 1px;
-        }
-
-        #case-indicator {
-          spacing: 0;
-          text-color: @normal-foreground;
-        }
-
-        #entry {
-          spacing: 0;
-          text-color: @normal-foreground;
-        }
-
-        #prompt {
-          spacing: 0;
-          text-color: @normal-foreground;
-        }
-
-        element-text {
-          background-color: inherit;
-          text-color:       inherit;
-        }
-
-        element-icon {
-            background-color: inherit;
-        }
-      ''
-    );
+        "#inputbar".spacing = 0;
+        "#case-indicator".spacing = 0;
+        "#entry".spacing = 0;
+        "#prompt".spacing = 0;
+      };
   };
 }

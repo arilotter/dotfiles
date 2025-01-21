@@ -32,7 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
     };
-    nix-colors.url = "github:misterio77/nix-colors";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixvim = {
@@ -40,14 +39,18 @@
       url = "github:nix-community/nixvim";
     };
     nur.url = "github:nix-community/NUR";
+    stylix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:danth/stylix";
+    };
     vscode-ext = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-vscode-extensions";
     };
   };
   nixConfig = {
-    extra-substituters = [ "https://raspberry-pi-nix.cachix.org" "https://cache.garnix.io" ];
-    extra-trusted-public-keys = [ "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o=" "ari-sol-builder-1:PBsq1rU3Xd/S+N3GatIWi82PFoeOqQdpaArZTns69aM=" "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+    extra-substituters = [ "https://cache.garnix.io" ];
+    extra-trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   };
   outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
 }

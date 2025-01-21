@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  imports = [ ./tuigreet.nix ];
+  imports = [
+    ./tuigreet.nix
+    ./stylix.nix
+  ];
 
   boot.plymouth.enable = true;
 
@@ -42,10 +45,8 @@
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
     liberation_ttf
     fira-code
-    nerd-fonts.fira-code
     tex-gyre.heros
   ];
 }

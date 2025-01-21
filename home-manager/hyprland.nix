@@ -3,9 +3,6 @@
   pkgs,
   ...
 }:
-let
-  c = config.colorScheme.palette;
-in
 {
   home.sessionVariables = {
     XDG_SESSION_TYPE = "wayland";
@@ -47,28 +44,19 @@ in
         no_fade_in = false;
       };
 
-      background = [
-        {
-          color = "rgb(${c.base00})";
-        }
-      ];
-
-      input-field = [
-        {
-          size = "400, 50";
-          position = "0, 0";
-          monitor = "";
-          dots_center = true;
-          fade_on_empty = false;
-          rounding = -1;
-          font_color = "rgb(${c.base05})";
-          inner_color = "rgb(${c.base00})";
-          outer_color = "rgb(${c.base05})";
-          outline_thickness = 2;
-          placeholder_text = "";
-          fail_text = "";
-        }
-      ];
+      # input-field = [
+      #   {
+      #     size = "400, 50";
+      #     position = "0, 0";
+      #     monitor = "";
+      #     dots_center = true;
+      #     fade_on_empty = false;
+      #     rounding = -1;
+      #     outline_thickness = 2;
+      #     placeholder_text = "";
+      #     fail_text = "";
+      #   }
+      # ];
     };
   };
 
@@ -89,8 +77,8 @@ in
 
       monitor = [
         # uhhh how do we do this per-system? lol
-        "DP-2,3840x2160@60,2160x200,1"
-        "DP-1,2160x3840@60,0x0,1,transform,3"
+        "DP-2,3840x2160@60,1440x600,1.5"
+        "DP-1,2160x3840@60,0x0,1.5,transform,3"
         "eDP-1,2560x1600@165,0x0,1"
       ];
 
@@ -98,8 +86,6 @@ in
         gaps_in = 4;
         gaps_out = 4;
         border_size = 4;
-        "col.active_border" = "rgb(${c.base0D})";
-        "col.inactive_border" = "rgb(${c.base00})";
         layout = "dwindle";
       };
 

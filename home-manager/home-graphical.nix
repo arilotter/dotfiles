@@ -4,8 +4,6 @@
   ...
 }:
 {
-  colorScheme = inputs.nix-colors.colorSchemes."solarized-light";
-
   imports = [
     ./home.nix
     ./hyprland.nix
@@ -14,20 +12,10 @@
     ./firefox.nix
     ./rofi.nix
     ./waybar.nix
-    ./discord.nix
     ./supersonic.nix
     ./vscode.nix
     ./neovim.nix
-    ./colors.nix
   ];
-
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    name = "Nordzy-cursors";
-    size = 48;
-    package = pkgs.nordzy-cursor-theme;
-  };
 
   home.packages = with pkgs; [
     # desktop env
@@ -39,8 +27,8 @@
     wl-clipboard # copy/paste cli
     monado # xr? :D
 
-    #oooooooooh ai
-    lmstudio
+    vesktop # discord
+
     # 3d pwint
     prusa-slicer
 
@@ -53,19 +41,13 @@
 
     # clang format needs..
     clang-tools
+
+    # wine
+    wineWowPackages.waylandFull
   ];
 
-  home.file = {
-    ".config/hypr/hyprpaper.conf".text = ''
-      preload = /home/ari/dotfiles/wallpapers/future_funk_4k.jpg
-      wallpaper = ,/home/ari/dotfiles/wallpapers/future_funk_4k.jpg
-    '';
-  };
-
-  programs.fish = {
-    shellAliases = {
-      pbpaste = "wl-paste";
-      pbcopy = "wl-copy";
-    };
+  programs.fish.shellAliases = {
+    pbpaste = "wl-paste";
+    pbcopy = "wl-copy";
   };
 }

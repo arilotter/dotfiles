@@ -3,12 +3,9 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://raspberry-pi-nix.cachix.org"
       "https://cache.garnix.io"
     ];
     extra-trusted-public-keys = [
-      "raspberry-pi-nix.cachix.org-1:WmV2rdSangxW0rZjY/tBvBDSaNFQ3DyEQsVw8EvHn9o="
-      "ari-sol-builder-1:PBsq1rU3Xd/S+N3GatIWi82PFoeOqQdpaArZTns69aM="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
@@ -23,7 +20,6 @@
     {
       nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
       nixos-hardware.url = "github:NixOS/nixos-hardware";
-      nix-colors.url = "github:misterio77/nix-colors";
       nur.url = "github:nix-community/NUR";
 
       agenix = followsNixpkgs "github:ryantm/agenix";
@@ -35,6 +31,7 @@
       fw-inputmodule = followsNixpkgs "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
       nixvim = followsNixpkgs "github:nix-community/nixvim";
       lix-module = followsNixpkgs "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      stylix = followsNixpkgs "github:danth/stylix";
     };
 
   outputs =
@@ -42,7 +39,7 @@
       nur,
       nixpkgs,
       home-manager,
-      nix-colors,
+      stylix,
       agenix,
       fido2-hid-bridge,
       lix-module,
@@ -52,7 +49,6 @@
       sys = {
         specialArgs = {
           inherit inputs;
-          inherit nix-colors;
         };
       };
       base-modules = [
@@ -70,6 +66,7 @@
         }
       ];
       graphical-modules = base-modules ++ [
+        stylix.nixosModules.stylix
         ./nixos/graphical-configuration.nix
         {
           home-manager.users.ari = import ./home-manager/home-graphical.nix;

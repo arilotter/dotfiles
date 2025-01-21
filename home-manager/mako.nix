@@ -1,7 +1,4 @@
 { config, ... }:
-let
-  c = config.colorScheme.palette;
-in
 {
   services.mako = {
     enable = true;
@@ -14,9 +11,6 @@ in
     padding = "16";
     margin = "10,10,10";
     output = "HDMI-A-1";
-    backgroundColor = "#${c.base05}";
-    textColor = "#${c.base00}";
-    borderColor = "#${c.base00}";
     borderSize = 2;
     borderRadius = 6;
     defaultTimeout = 5000;

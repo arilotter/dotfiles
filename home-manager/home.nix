@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    inputs.nix-colors.homeManagerModules.default
     inputs.nixvim.homeManagerModules.default
   ];
 

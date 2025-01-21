@@ -1,7 +1,4 @@
 { config, ... }:
-let
-  c = config.colorScheme.palette;
-in
 {
   programs.waybar = {
     enable = true;
@@ -164,46 +161,5 @@ in
         };
       };
     };
-
-    style = ''
-      * {
-        font-family: "FiraCode Nerd Font";
-        font-size: 12px;
-        min-height: 0;
-        color: #${c.base05};
-      }
-
-      window#waybar {
-        background-color: #${c.base00};
-        border-radius: 0;
-        border: 2px solid #${c.base05};
-        border-right: 0;
-      }
-
-      #workspaces {
-        margin-top: 8px;
-      }
-
-      #workspaces button {
-        color: #${c.base05};
-        background: transparent;
-      }
-
-      #workspaces button.focused {
-        background: #${c.base01};
-      }
-
-      #tray, #idle_inhibitor, #disk, #temperature, #cpu, #memory, #network, #pulseaudio, #clock, #battery, #tray {
-        background: transparent;
-        margin: 0;
-        padding: 8px;
-        border-top: 1px solid #${c.base05};
-      }
-
-      #idle_inhibitor.activated {
-        background: #${c.base05};
-        color: #${c.base00};
-      }
-    '';
   };
 }
