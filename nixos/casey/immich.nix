@@ -6,5 +6,8 @@
     host = "0.0.0.0";
     mediaLocation = "/mnt/storage/immich";
   };
-  users.users.immich.extraGroups = [ "video" "render" ];
+  users.users.immich.extraGroups = [
+    "video"
+    "render"
+  ];
 }
