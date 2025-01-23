@@ -54,17 +54,7 @@
     ansible # ansible devops bullshit
 
     # programming languages
-    go
     python3Full
-    lua
-    rustup
-    nodejs_latest
-
-    # build tools
-    pkg-config
-    gnumake
-    cmake
-    clang
 
     # debuggers
     lldb
