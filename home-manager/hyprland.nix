@@ -151,7 +151,7 @@
           "$mod, Return, exec, $terminal"
           "$mod, R, togglesplit"
           "$mod, F, fullscreen"
-          "$mod, D, exec, rofi -show drun -show-icons"
+          ''$mod, D, exec, rofi -show drun -display-drun " " -show-icons''
           "$mod Shift, Q, killactive"
 
           "$mod, Tab, workspace, previous"

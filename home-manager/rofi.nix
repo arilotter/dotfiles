@@ -15,40 +15,31 @@
       in
       {
         "*".spacing = 2;
-        "#window" = {
-          border = 0;
-          padding = mkLiteral "2.5ch";
+        window = {
+          location = mkLiteral "center";
+          anchor = mkLiteral "north";
+          width = 480;
+        };
+        inputbar = {
+          spacing = mkLiteral "8px";
+          padding = mkLiteral "8px";
         };
 
-        "#mainbox" = {
-          border = 0;
-          padding = 0;
+        textbox = {
+          padding = mkLiteral "8px";
         };
 
-        "#message" = {
-          border = mkLiteral "2px 0px 0px";
-          padding = mkLiteral "1px";
-        };
-
-        "inputbar".children = mkLiteral "[ prompt,textbox-prompt-colon,entry,case-indicator ]";
-
-        "textbox-prompt-colon" = {
-          expand = false;
-          str = "";
-          margin = mkLiteral "0px 0.3em 0em 0em";
-        };
-
-        "#listview" = {
-          fixed-height = 0;
-          border = mkLiteral "2px 0px 0px";
-          spacing = mkLiteral "2px";
+        listview = {
+          fixed-height = false;
           scrollbar = true;
-          padding = mkLiteral "2px 0px 0px";
+          lines = 8;
+          columns = 1;
+          padding = mkLiteral "4px 0";
         };
 
-        "#element" = {
-          border = 0;
-          padding = mkLiteral "1px";
+        element = {
+          padding = mkLiteral "8px";
+          spacing = mkLiteral "8px";
         };
 
         "#scrollbar" = {
@@ -60,8 +51,8 @@
 
         "#sidebar".border = mkLiteral "2px 0px 0px";
 
-        "#inputbar".spacing = 0;
-        "#case-indicator".spacing = 0;
+        "#element-icon".spacing = 0;
+        "#element-text".spacing = 0;
         "#entry".spacing = 0;
         "#prompt".spacing = 0;
       };
