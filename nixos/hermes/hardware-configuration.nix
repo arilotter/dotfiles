@@ -64,4 +64,6 @@
   nix.settings.max-jobs = lib.mkDefault 16;
   # High-DPI console
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+
+  hardware.framework.enableKmod = false; # seems to be broken on kernel 6.13. https://github.com/NixOS/nixos-hardware/issues/1330
 }
