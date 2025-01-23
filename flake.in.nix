@@ -20,8 +20,8 @@
     {
       nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
       nixos-hardware.url = "github:NixOS/nixos-hardware";
-      nur.url = "github:nix-community/NUR";
 
+      nur = followsNixpkgs"github:nix-community/NUR";
       agenix = followsNixpkgs "github:ryantm/agenix";
       home-manager = followsNixpkgs "github:nix-community/home-manager";
       hypr-contrib = followsNixpkgs "github:hyprwm/contrib";
