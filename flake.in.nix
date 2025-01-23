@@ -21,7 +21,7 @@
       nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
       nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-      nur = followsNixpkgs"github:nix-community/NUR";
+      nur = followsNixpkgs "github:nix-community/NUR";
       agenix = followsNixpkgs "github:ryantm/agenix";
       home-manager = followsNixpkgs "github:nix-community/home-manager";
       hypr-contrib = followsNixpkgs "github:hyprwm/contrib";
@@ -36,6 +36,7 @@
 
   outputs =
     {
+      self,
       nur,
       nixpkgs,
       home-manager,
@@ -141,5 +142,19 @@
         );
       };
       kronos-sd = nixosConfigurations.kronos.config.system.build.sdImage;
+
+      checks.x86_64-linux.checkNixpkgsVersions =
+        let
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        in
+        pkgs.runCommand "check-nixpkgs-versions" { } ''
+          if grep -q "nixpkgs_2" ${self}/flake.lock; then
+            echo "Error: Found nixpkgs_2 in flake.lock"
+            echo "You should add followsNixpkgs to the input that uses nixpkgs_2."
+            exit 1
+          fi
+          touch $out
+        '';
     };
+
 }
