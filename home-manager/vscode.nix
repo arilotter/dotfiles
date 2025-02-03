@@ -18,7 +18,6 @@ in
     enable = true;
     extensions = with vsc-ext; [
       bierner.markdown-mermaid
-      supermaven.supermaven
       ms-vscode-remote.remote-containers
       semanticdiff.semanticdiff
       ms-python.python
