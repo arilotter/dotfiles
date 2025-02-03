@@ -18,6 +18,8 @@
         window = {
           location = mkLiteral "center";
           anchor = mkLiteral "north";
+          border = mkLiteral "8px";
+          border-radius = mkLiteral "9px";
           width = 480;
         };
         inputbar = {
