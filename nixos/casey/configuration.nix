@@ -3,6 +3,8 @@
   imports = [
     ./immich.nix
     ./home-assistant.nix
+    ./qbittorrent.nix
+    ./samba.nix
   ];
 
   networking = {
@@ -20,6 +22,12 @@
     enable = true;
     useRoutingFeatures = "both";
     openFirewall = true;
+  };
+
+  services.qbittorrent = {
+    enable = true;
+    openFirewall = true;
+    dataDir = "/mnt/storage/torrents";
   };
 
   services.openssh.enable = true;
