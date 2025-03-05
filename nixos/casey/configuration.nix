@@ -2,6 +2,7 @@
 {
   imports = [
     ./immich.nix
+    ./home-assistant.nix
   ];
 
   networking = {
