@@ -44,6 +44,8 @@
     imagemagickBig
     ranger
 
+    git-absorb
+
     # programming tools
     devenv
     jdk11 # java
@@ -75,6 +77,7 @@
   home.sessionVariables = { };
 
   programs.direnv.enable = true;
+  };
 
   programs.ssh = {
     enable = true;
@@ -130,12 +133,15 @@
     enable = true;
     userEmail = "arilotter@gmail.com";
     userName = "Ari Lotter";
-    extraConfig.pull.rebase = true;
-    extraConfig.rebase.autoStash = true;
-    extraConfig.diff.tool = "default-difftool";
-    extraConfig.push.default = "simple";
-    extraConfig.push.autoSetupRemote = true;
-    extraConfig.url."git@github.com:".insteadOf = "https://github.com/";
+    extraConfig = {
+      pull.rebase = true;
+      rebase.autoStash = true;
+      diff.tool = "default-difftool";
+      push.default = "simple";
+      push.autoSetupRemote = true;
+      url."git@github.com:".insteadOf = "https://github.com/";
+      alias.ci = "!git commit -m 'ci: empty commit' --allow-empty && git push && git reset --soft HEAD~ && git push -f";
+    };
     lfs.enable = true;
     delta.enable = true;
   };
