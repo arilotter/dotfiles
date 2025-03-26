@@ -47,7 +47,9 @@ in
       "files.autoSaveDelay" = 150;
       "editor.multiCursorLimit" = 50000;
       "window.menuBarVisibility" = "toggle";
-      "editor.inlayHints.enabled"= "offUnlessPressed";
+      "editor.inlayHints.enabled" = "offUnlessPressed";
+      "editor.formatOnSave" = true;
+      "typescript.tsserver.experimental.enableProjectDiagnostics" = true;
     };
   };
 }
