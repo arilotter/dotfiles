@@ -44,6 +44,8 @@
 
     # wine
     wineWowPackages.waylandFull
+
+    ledger-live-desktop
   ];
 
   programs.fish.shellAliases = {

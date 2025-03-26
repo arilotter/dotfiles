@@ -94,6 +94,7 @@
 
   services.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.enableRedistributableFirmware = true;
+  hardware.ledger.enable = true;
 
   programs.fish.enable = true;
   programs.adb.enable = true;
