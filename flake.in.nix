@@ -140,6 +140,19 @@
             ];
           }
         );
+
+        # AMD + big vram server
+        "hecate" = nixpkgs.lib.nixosSystem (
+          sys
+          // {
+            modules = graphical-modules ++ [
+              # todo: hardware quirks
+              ./nixos/hecate/hardware-configuration.nix
+              ./nixos/hecate/configuration.nix
+              ./nixos/mount-sol-samba-share.nix
+            ];
+          }
+        );
       };
       kronos-sd = nixosConfigurations.kronos.config.system.build.sdImage;
 
