@@ -9,6 +9,7 @@
   nixpkgs = {
     overlays = [
       inputs.nur.overlays.default
+      inputs.vscode-ext.overlays.default
       (final: prev: {
         trickle = prev.trickle.overrideAttrs (oldAttrs: {
 
@@ -140,7 +141,7 @@
   ];
 
   services = {
-    fido2-hid-bridge.enable = true;
+    # fido2-hid-bridge.enable = true;
 
     pcscd = {
       enable = true; # yubikey / hand

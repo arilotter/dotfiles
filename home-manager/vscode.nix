@@ -3,9 +3,6 @@
   inputs,
   ...
 }:
-let
-  vsc-ext = inputs.vscode-ext.extensions.${pkgs.system}.vscode-marketplace;
-in
 {
   home.sessionVariables = {
     SUDO_EDITOR = "code";
@@ -16,7 +13,12 @@ in
 
   programs.vscode = {
     enable = true;
-    extensions = with vsc-ext; [
+
+    # without this, only.. some of the extensions show up?
+    # very very strange.
+    mutableExtensionsDir = false;
+
+    extensions = with pkgs.vscode-marketplace; [
       bierner.markdown-mermaid
       ms-vscode-remote.remote-containers
       semanticdiff.semanticdiff
@@ -40,6 +42,7 @@ in
       xaver.clang-format
       ms-playwright.playwright
       ms-vscode-remote.remote-ssh
+      arrterian.nix-env-selector
     ];
 
     userSettings = {
@@ -50,6 +53,7 @@ in
       "editor.inlayHints.enabled" = "offUnlessPressed";
       "editor.formatOnSave" = true;
       "typescript.tsserver.experimental.enableProjectDiagnostics" = true;
+      "update.mode" = "none";
     };
   };
 }
