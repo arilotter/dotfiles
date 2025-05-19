@@ -45,4 +45,5 @@ in
     useRoutingFeatures = "client";
     openFirewall = true;
   };
+  services.openssh.enable = true;
 }
