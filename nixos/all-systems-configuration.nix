@@ -119,7 +119,7 @@
       ];
       shell = pkgs.fish;
       hashedPasswordFile = config.age.secrets.ari-passwd.path;
-      openssh.authorizedKeys.keys = lib.attrValues (import ../ssh-pubkeys.nix);
+      openssh.authorizedKeys.keys = let keys = (import ../ssh-pubkeys.nix); in [keys.luna keys.hermes];
     };
   };
 
