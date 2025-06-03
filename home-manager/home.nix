@@ -6,6 +6,7 @@
 {
   imports = [
     inputs.nixvim.homeManagerModules.default
+    inputs.vscode-server.homeModules.default
   ];
 
   home = {
@@ -147,4 +148,6 @@
     lfs.enable = true;
     delta.enable = true;
   };
+
+  services.vscode-server.enable = true;
 }

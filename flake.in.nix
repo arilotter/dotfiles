@@ -32,6 +32,7 @@
       nixvim = followsNixpkgs "github:nix-community/nixvim";
       lix-module = followsNixpkgs "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
       stylix = followsNixpkgs "github:danth/stylix";
+      vscode-server = followsNixpkgs "github:nix-community/nixos-vscode-server";
     };
 
   outputs =
@@ -52,7 +53,7 @@
           inherit inputs;
         };
       };
-      
+
       base-modules = [
         lix-module.nixosModules.default
         agenix.nixosModules.default
