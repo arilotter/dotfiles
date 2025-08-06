@@ -31,8 +31,11 @@ in
         text = nvidiaProfile;
       };
 
-  virtualisation.docker.enableNvidia = true;
   hardware.nvidia-container-toolkit.enable = true;
+  virtualisation.docker = {
+    daemon.settings.features.cdi = true;
+    rootless.daemon.settings.features.cdi = true;
+  };
   programs.steam.enable = true;
 
   programs.wireshark = {
