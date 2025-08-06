@@ -42,7 +42,8 @@
       xaver.clang-format
       ms-playwright.playwright
       ms-vscode-remote.remote-ssh
-      arrterian.nix-env-selector
+      charliermarsh.ruff
+      mkhl.direnv
     ];
 
     userSettings = {
@@ -54,6 +55,8 @@
       "editor.formatOnSave" = true;
       "typescript.tsserver.experimental.enableProjectDiagnostics" = true;
       "update.mode" = "none";
+      "rust-analyzer.check.command" = "clippy";
+      "python.analysis.typeCheckingMode" = "basic";
     };
   };
 }
