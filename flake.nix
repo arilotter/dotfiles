@@ -50,6 +50,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-vscode-extensions";
     };
+    vscode-server = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixos-vscode-server";
+    };
   };
   nixConfig = {
     extra-substituters = [ "https://cache.garnix.io" ];
