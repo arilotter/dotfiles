@@ -53,6 +53,7 @@
 
   networking.useDHCP = lib.mkDefault true;
 
+  zramSwap.enable = true;
   swapDevices = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";

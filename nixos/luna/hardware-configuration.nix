@@ -46,10 +46,11 @@
   networking.useDHCP = lib.mkDefault true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  zramSwap.enable = true;
   swapDevices = [
     {
-      device = "/var/lib/swapfile";
-      size = 64 * 1024;
+      device = "/var/lib/swapfile2";
+      size = 128 * 1024;
     }
   ];
 }
