@@ -13,8 +13,8 @@
     QT_QPA_PLATFORM = "wayland";
     QT_QPA_PLATFORM_THEME = "qt6ct";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    HYPRCURSOR_THEME = config.home.pointerCursor.name;
-    HYPRCURSOR_SIZE = config.home.pointerCursor.size;
+    # HYPRCURSOR_THEME = config.home.pointerCursor.name;
+    # HYPRCURSOR_SIZE = config.home.pointerCursor.size;
   };
 
   services.hypridle = {
@@ -78,7 +78,7 @@
       monitor = [
         # uhhh how do we do this per-system? lol
         "DP-2,3840x2160@60,1440x600,1.5"
-        "DP-1,2160x3840@60,0x0,1.5,transform,3"
+        "DP-1,3840x2160@60,0x0,1.5,transform,3"
         "eDP-1,2560x1600@165,0x0,1"
       ];
 
@@ -212,6 +212,19 @@
         "float,title:(Save File)$"
       ];
 
+      render = {
+        explicit_sync = 2;
+        explicit_sync_kms = 0;
+      };
+
+      opengl = {
+        nvidia_anti_flicker = 0;
+      };
+
+      debug = {
+        # damage_tracking = 0;
+      };
+
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
@@ -220,6 +233,7 @@
         disable_autoreload = false;
         allow_session_lock_restore = true;
         vrr = 2;
+        vfr = 0;
       };
     };
   };
