@@ -44,6 +44,25 @@
       ];
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
+
+      substituters = [
+        "https://cache.nixos.org/"
+        "https://cache.garnix.io"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+
+      # see https://garnix.io/docs/caching#private-caches
+      netrc-file = config.age.secrets.netrc.path;
+
+      # The narinfo-cache-positive-ttl setting by default is very high (30 days).
+      # It has to be lowered, since garnix uses presigned urls for private store paths that expire much quicker.
+      # It should be set to 3600 (i.e. 1 hour).
+      narinfo-cache-positive-ttl = 3600;
     };
   };
 
@@ -52,6 +71,7 @@
     secrets = {
       ari-passwd.file = ../secrets/ari-passwd.age;
       sol-smbpasswd.file = ../secrets/sol-smbpasswd.age;
+      netrc.file = ../secrets/netrc.age;
     };
   };
 
