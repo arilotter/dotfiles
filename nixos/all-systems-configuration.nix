@@ -138,6 +138,8 @@
         "dialout"
         "video"
         "wireshark"
+        "adbusers"
+        "vboxusers"
       ];
       shell = pkgs.fish;
       hashedPasswordFile = config.age.secrets.ari-passwd.path;
