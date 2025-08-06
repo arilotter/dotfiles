@@ -141,7 +141,16 @@
       ];
       shell = pkgs.fish;
       hashedPasswordFile = config.age.secrets.ari-passwd.path;
-      openssh.authorizedKeys.keys = let keys = (import ../ssh-pubkeys.nix); in [keys.luna keys.hermes];
+      openssh.authorizedKeys.keys =
+        let
+          keys = (import ../ssh-pubkeys.nix);
+        in
+        with keys;
+        [
+          luna
+          hermes
+          android
+        ];
     };
   };
 
