@@ -30,7 +30,7 @@
       fido2-hid-bridge = followsNixpkgs "github:arilotter/fido2-hid-bridge";
       fw-inputmodule = followsNixpkgs "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
       nixvim = followsNixpkgs "github:nix-community/nixvim";
-      lix-module = followsNixpkgs "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
+      lix-module = followsNixpkgs "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
       stylix = followsNixpkgs "github:danth/stylix";
       vscode-server = followsNixpkgs "github:nix-community/nixos-vscode-server";
     };
