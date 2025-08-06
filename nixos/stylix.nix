@@ -21,6 +21,11 @@
         terminal = 12;
       };
     };
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 24;
+    };
   };
   fonts.fontconfig = {
     antialias = true;
