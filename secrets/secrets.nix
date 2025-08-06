@@ -13,4 +13,5 @@ in
     keys.hermes
     keys.casey
   ];
+  "netrc.age".publicKeys = keys.home-devices;
 }
