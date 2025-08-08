@@ -16,9 +16,12 @@
     device = "//sol/storage";
     fsType = "cifs";
     options = [
+      "x-systemd.automount"
+      "x-systemd.requires=tailscaled.service"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.mount-timeout=30"
       "users"
       "rw"
-      "nofail"
       "credentials=/etc/smb-creds"
       "dir_mode=0777"
       "file_mode=0777"
