@@ -121,6 +121,13 @@
   programs.fish.enable = true;
   programs.adb.enable = true;
   programs.dconf.enable = true;
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/ari/dotfiles";
+  };
+
   users = {
     mutableUsers = false;
     users.ari = {
@@ -165,7 +172,6 @@
     nano
     nixfmt-rfc-style # nix fmtter
     just
-    nix-output-monitor
     nvd
     steam-run
     inputs.agenix.packages.${pkgs.system}.default
