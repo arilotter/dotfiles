@@ -54,6 +54,7 @@
     google-cloud-sdk # google cloud sdk
     awscli # aws cli
     ansible # ansible devops bullshit
+    nixd
 
     # programming languages
     python3Full

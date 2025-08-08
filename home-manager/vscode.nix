@@ -48,6 +48,7 @@
       ];
 
       userSettings = {
+        "window.titleBarStyle" = "native";
         "files.autoSave" = "afterDelay";
         "files.autoSaveDelay" = 150;
         "editor.multiCursorLimit" = 50000;
@@ -58,6 +59,8 @@
         "update.mode" = "none";
         "rust-analyzer.check.command" = "clippy";
         "python.analysis.typeCheckingMode" = "basic";
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nixd";
       };
     };
   };
