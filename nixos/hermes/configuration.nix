@@ -43,4 +43,6 @@
       openFirewall = true;
     };
   };
+
+  services.openssh.enable = true;
 }
