@@ -5,11 +5,11 @@ genflake:
   nix run .#genflake flake.nix
   
 build *args: genflake
-  sudo bash -c 'nixos-rebuild build --flake . {{args}} |& nom'
+  nh os build . {{args}}
   nvd diff /run/current-system ./result
 
 switch *args: genflake
-  sudo bash -c 'nixos-rebuild switch --flake . {{args}} |& nom'
+  nh os switch . {{args}}
 
 update:
   nix flake update
