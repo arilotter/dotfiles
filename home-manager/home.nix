@@ -146,9 +146,5 @@
     delta.enable = true;
   };
 
-  programs.jujutsu = {
-    enable = true;
-  };
-
   services.vscode-server.enable = true;
 }

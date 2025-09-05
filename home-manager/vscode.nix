@@ -23,7 +23,7 @@
         bierner.markdown-mermaid
         ms-vscode-remote.remote-containers
         semanticdiff.semanticdiff
-        # ms-python.python
+        ms-python.python
         ms-python.vscode-pylance
         ms-python.black-formatter
         golang.go
