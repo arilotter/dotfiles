@@ -5,7 +5,7 @@
 }:
 {
   imports = [
-    inputs.nixvim.homeManagerModules.default
+    inputs.nixvim.homeModules.default
     inputs.vscode-server.homeModules.default
   ];
 
@@ -95,9 +95,9 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      gcp = "git cherry-pick";
       netcopy = ''nc -q 0 tcp.st 7777 | grep URL | cut -d " " -f 2 | pbcopy'';
       reload-fish = "exec fish";
+      gcp = "git cherry-pick";
       gs = "git status";
       gp = "git pull";
       gc = "git commit -m";
