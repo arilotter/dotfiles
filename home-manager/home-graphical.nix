@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    inputs.catppuccin.homeModules.catppuccin
     ./home.nix
     ./hyprland.nix
     ./ghostty.nix
@@ -15,6 +16,7 @@
     ./supersonic.nix
     ./vscode.nix
     ./neovim.nix
+    ../nixos/catppuccin.nix
   ];
 
   home.packages = with pkgs; [
@@ -37,7 +39,6 @@
     vlc # video player
     google-chrome # web browser
     slack # ew
-    stremio # streaming video
 
     # clang format needs..
     clang-tools

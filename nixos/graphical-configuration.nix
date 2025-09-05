@@ -2,7 +2,7 @@
 {
   imports = [
     ./tuigreet.nix
-    ./stylix.nix
+    ./catppuccin.nix
   ];
 
   boot.plymouth.enable = true;
@@ -26,11 +26,11 @@
 
   virtualisation = {
     docker.enable = true;
-    virtualbox.host = {
-      enable = true;
-      enableKvm = true;
-      addNetworkInterface = false;
-    };
+    # virtualbox.host = {
+    #   enable = true;
+    #   enableKvm = true;
+    #   addNetworkInterface = false;
+    # };
   };
 
   environment.variables = {

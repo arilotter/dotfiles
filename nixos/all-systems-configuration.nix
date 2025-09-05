@@ -173,7 +173,7 @@
   ];
 
   services = {
-    # fido2-hid-bridge.enable = true;
+    fido2-hid-bridge.enable = true;
 
     pcscd = {
       enable = true; # yubikey / hand

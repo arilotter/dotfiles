@@ -16,10 +16,10 @@ buildGoModule rec {
 
   vendorHash = "sha256-OGUt+L0wP6eQkY/HWL+Ij9z9u+wsQ5OLK/IAq+1ezVA=";
 
-  meta = with lib; {
+  meta = {
     description = "Runpod's CLI";
     homepage = "https://github.com/runpod/runpodctl";
-    license = licenses.gpl3;
-    maintainers = with maintainers; [ arilotter ];
+    license = lib.licenses.gpl3;
+    maintainers = with lib.maintainers; [ arilotter ];
   };
 }

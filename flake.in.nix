@@ -18,7 +18,7 @@
       };
     in
     {
-      nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+      nixpkgs.url = "github:nixos/nixpkgs/master";
       nixos-hardware.url = "github:NixOS/nixos-hardware";
 
       nur = followsNixpkgs "github:nix-community/NUR";
@@ -30,8 +30,16 @@
       fido2-hid-bridge = followsNixpkgs "github:arilotter/fido2-hid-bridge";
       fw-inputmodule = followsNixpkgs "github:caffineehacker/nix?dir=flakes/inputmodule-rs";
       nixvim = followsNixpkgs "github:nix-community/nixvim";
-      lix-module = followsNixpkgs "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
-      stylix = followsNixpkgs "github:danth/stylix";
+      lix = {
+        url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+        flake = false;
+      };
+      lix-module = {
+        url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+        inputs.lix.follows = "lix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+      catppuccin = followsNixpkgs "github:catppuccin/nix";
       vscode-server = followsNixpkgs "github:nix-community/nixos-vscode-server";
     };
 
@@ -41,10 +49,10 @@
       nur,
       nixpkgs,
       home-manager,
-      stylix,
       agenix,
       fido2-hid-bridge,
       lix-module,
+      catppuccin,
       ...
     }@inputs:
     let
@@ -58,7 +66,7 @@
         lix-module.nixosModules.default
         agenix.nixosModules.default
         nur.modules.nixos.default
-        fido2-hid-bridge.nixosModule
+        fido2-hid-bridge.nixosModules.default
         home-manager.nixosModules.home-manager
         { home-manager.extraSpecialArgs = { inherit inputs; }; }
         ./nixos/all-systems-configuration.nix
@@ -69,7 +77,7 @@
         }
       ];
       graphical-modules = base-modules ++ [
-        stylix.nixosModules.stylix
+        catppuccin.nixosModules.catppuccin
         ./nixos/graphical-configuration.nix
         {
           home-manager.users.ari = import ./home-manager/home-graphical.nix;
