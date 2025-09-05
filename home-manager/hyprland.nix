@@ -146,76 +146,70 @@
         ", XF86AudioLowerVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -3%"
       ];
 
-      bind =
-        [
-          "$mod, Return, exec, $terminal"
-          "$mod, R, togglesplit"
-          "$mod, F, fullscreen"
-          ''$mod, D, exec, rofi -show drun -display-drun " " -show-icons''
-          "$mod Shift, Q, killactive"
+      bind = [
+        "$mod, Return, exec, $terminal"
+        "$mod, R, togglesplit"
+        "$mod, F, fullscreen"
+        ''$mod, D, exec, rofi -show drun -display-drun " " -show-icons''
+        "$mod Shift, Q, killactive"
 
-          "$mod, Tab, workspace, previous"
-          "ALT, Tab, cyclenext"
-          "ALT, Tab, bringactivetotop"
-          "$mod, Space, togglefloating"
-          "$mod Shift, Space, pseudo"
-          "$mod, C, exec, ags toggle-window notificationsCenter"
-          "$mod, N, exec, ags toggle-window quicksettings"
-          ", Print, exec, grimblast copysave output # screenshot"
-          ", XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        "$mod, Tab, workspace, previous"
+        "ALT, Tab, cyclenext"
+        "ALT, Tab, bringactivetotop"
+        "$mod, Space, togglefloating"
+        "$mod Shift, Space, pseudo"
+        "$mod, C, exec, ags toggle-window notificationsCenter"
+        "$mod, N, exec, ags toggle-window quicksettings"
+        ", Print, exec, grimblast copysave output # screenshot"
+        ", XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
-          # screenshot area
-          "SUPER_SHIFT,S, exec, grimblast copysave area"
+        # screenshot area
+        "SUPER_SHIFT,S, exec, grimblast copysave area"
 
-          "SUPER_SHIFT,A,movetoworkspace,special"
-          "SUPER,A,togglespecialworkspace"
+        "SUPER_SHIFT,A,movetoworkspace,special"
+        "SUPER,A,togglespecialworkspace"
 
-          # Move focus with mod + arrow keys
-          "$mod, Left, movefocus, l"
-          "$mod, Right, movefocus, r"
-          "$mod, Up, movefocus, u"
-          "$mod, Down, movefocus, d"
+        # Move focus with mod + arrow keys
+        "$mod, Left, movefocus, l"
+        "$mod, Right, movefocus, r"
+        "$mod, Up, movefocus, u"
+        "$mod, Down, movefocus, d"
 
-          # Move windows with mod + arrow keys
-          "$mod Shift, Left, movewindow, l"
-          "$mod Shift, Right, movewindow, r"
-          "$mod Shift, Up, movewindow, u"
-          "$mod Shift, Down, movewindow, d"
-          # Scroll through existing workspaces with mod + scroll
-          "$mod, mouse_down, workspace, e+1"
-          "$mod, mouse_up, workspace, e-1"
-        ]
-        ++ (
-          # workspaces
-          # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-          builtins.concatLists (
-            builtins.genList (
-              x:
-              let
-                ws =
-                  let
-                    c = (x + 1) / 10;
-                  in
-                  builtins.toString (x + 1 - (c * 10));
-              in
-              [
-                "$mod, ${ws}, workspace, ${toString (x + 1)}"
-                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-              ]
-            ) 10
-          )
-        );
+        # Move windows with mod + arrow keys
+        "$mod Shift, Left, movewindow, l"
+        "$mod Shift, Right, movewindow, r"
+        "$mod Shift, Up, movewindow, u"
+        "$mod Shift, Down, movewindow, d"
+        # Scroll through existing workspaces with mod + scroll
+        "$mod, mouse_down, workspace, e+1"
+        "$mod, mouse_up, workspace, e-1"
+      ]
+      ++ (
+        # workspaces
+        # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+        builtins.concatLists (
+          builtins.genList (
+            x:
+            let
+              ws =
+                let
+                  c = (x + 1) / 10;
+                in
+                builtins.toString (x + 1 - (c * 10));
+            in
+            [
+              "$mod, ${ws}, workspace, ${toString (x + 1)}"
+              "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+            ]
+          ) 10
+        )
+      );
 
       windowrulev2 = [
         "float,class:^(pavucontrol)$"
         "float,title:(Open Files)$"
         "float,title:(Save File)$"
       ];
-
-      render = {
-        explicit_sync = 2;
-        explicit_sync_kms = 0;
-      };
 
       opengl = {
         nvidia_anti_flicker = 0;
