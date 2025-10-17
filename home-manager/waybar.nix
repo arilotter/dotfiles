@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   programs.waybar = {
     enable = true;
@@ -162,5 +162,11 @@
         };
       };
     };
+    # style = ''
+    #   * {
+    #       font-family: "${fonts.${cfg.font}.name}";
+    #       font-size: ${toString fonts.sizes.desktop}pt;
+    #   }
+    # '';
   };
 }

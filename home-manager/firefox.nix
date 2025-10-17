@@ -43,6 +43,7 @@
         settings = {
           "extensions.autoDisableScopes" = 0;
           "browser.tabs.animate" = false;
+          "browser.ml.linkPreview.enabled" = false;
         };
       };
     };

@@ -58,5 +58,6 @@
     noto-fonts-cjk-sans
     liberation_ttf
     tex-gyre.heros
+    nerd-fonts.mononoki
   ];
 }
