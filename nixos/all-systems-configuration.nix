@@ -176,6 +176,7 @@
     steam-run
     inputs.agenix.packages.${pkgs.system}.default
     clinfo
+    nh
   ];
 
   services = {
