@@ -21,8 +21,6 @@
     starship # prompt
     eza # ls replacement
 
-    binaryen # wasm bullshit for skyweaver
-
     # "desktop" env
     upower # battery
     neofetch # i mean, c'mon :)
