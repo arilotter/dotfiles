@@ -29,8 +29,6 @@
     wl-clipboard # copy/paste cli
     monado # xr? :D
 
-    vesktop # discord
-
     # 3d pwint
     prusa-slicer
 
@@ -48,6 +46,8 @@
 
     ledger-live-desktop
   ];
+
+  programs.vesktop.enable = true;
 
   programs.fish.shellAliases = {
     pbpaste = "wl-paste";
