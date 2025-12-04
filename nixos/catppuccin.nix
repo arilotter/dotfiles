@@ -2,7 +2,7 @@
 {
   catppuccin = {
     enable = true;
-    flavor = "latte";
+    flavor = "frappe";
     accent = "mauve";
   };
 }
