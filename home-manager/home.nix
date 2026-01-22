@@ -17,6 +17,7 @@
 
   home.packages = with pkgs; [
     (pkgs.callPackage ./runpod { })
+    (pkgs.callPackage ./signal-desktop { })
     # shell config
     starship # prompt
     eza # ls replacement
