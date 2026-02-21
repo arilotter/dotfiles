@@ -18,6 +18,8 @@
   home.packages = with pkgs; [
     (pkgs.callPackage ./runpod { })
     (pkgs.callPackage ./signal-desktop { })
+    telegram-desktop
+    stremio
     # shell config
     starship # prompt
     eza # ls replacement
